@@ -1,0 +1,1701 @@
+R/agricultural.land.consumption.R:42:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+agricultural.land.consumption <- function(agri, buildup) {
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/agricultural.land.consumption.R:44:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    agri.b <- rasterize(agri, buildup, field = 1)
+    ^~~~~~
+R/agricultural.land.consumption.R:44:15: warning: [object_usage_linter] no visible global function definition for 'rasterize'
+    agri.b <- rasterize(agri, buildup, field = 1)
+              ^~~~~~~~~
+R/agricultural.land.consumption.R:45:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    agri.b <- one.cero(agri.b)
+    ^~~~~~
+R/agricultural.land.consumption.R:45:15: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    agri.b <- one.cero(agri.b)
+              ^~~~~~~~
+R/agricultural.land.consumption.R:47:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    agri.b <- one.cero(agri)
+    ^~~~~~
+R/agricultural.land.consumption.R:47:15: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    agri.b <- one.cero(agri)
+              ^~~~~~~~
+R/agricultural.land.consumption.R:50:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  buildup.b <- one.cero(buildup)
+  ^~~~~~~~~
+R/agricultural.land.consumption.R:50:16: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+  buildup.b <- one.cero(buildup)
+               ^~~~~~~~
+R/agricultural.land.consumption.R:52:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  agri.c <- agri.b + buildup.b
+  ^~~~~~
+R/agricultural.land.consumption.R:53:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  agri.c[agri.c != 2] <- NA
+  ^~~~~~
+R/agricultural.land.consumption.R:54:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  agri.r <- projectRaster(agri.c, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~~~
+R/agricultural.land.consumption.R:54:13: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+  agri.r <- projectRaster(agri.c, crs = sp::CRS("+init=EPSG:3857"))
+            ^~~~~~~~~~~~~
+R/agricultural.land.consumption.R:56:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  agricultural.consumption <- data.frame(
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+R/agricultural.land.consumption.R:59:21: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+                    ^~~~~~~~~
+R/agricultural.land.consumption.R:59:46: warning: [object_usage_linter] no visible global function definition for 'res'
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+                                             ^~~
+R/agricultural.land.consumption.R:59:46: warning: [object_usage_linter] no visible global function definition for 'res'
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+                                             ^~~
+R/agricultural.land.consumption.R:59:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 89 characters.
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+R/agricultural.land.consumption.R:62:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(agricultural.consumption)
+  ^~~~~~
+R/amenities.checker.R:22:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+amenities.checker <- function(..., aoi, proj = 4326) {
+^~~~~~~~~~~~~~~~~
+R/amenities.checker.R:25:12: warning: [object_usage_linter] no visible global function definition for 'st_transform'
+    aoi <- st_transform(aoi, crs = proj)
+           ^~~~~~~~~~~~
+R/amenities.checker.R:32:7: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+      return(unlist(lapply(x, flatten), recursive = FALSE))
+      ^~~~~~
+R/amenities.checker.R:41:17: warning: [object_usage_linter] no visible global function definition for 'st_centroid'
+    points.c <- st_centroid(points)
+                ^~~~~~~~~~~
+R/amenities.checker.R:42:19: warning: [object_usage_linter] no visible global function definition for 'st_coordinates'
+    points.c$X <- st_coordinates(points.c)[, 1]
+                  ^~~~~~~~~~~~~~
+R/amenities.checker.R:43:19: warning: [object_usage_linter] no visible global function definition for 'st_coordinates'
+    points.c$Y <- st_coordinates(points.c)[, 2]
+                  ^~~~~~~~~~~~~~
+R/amenities.checker.R:44:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(points.c)
+    ^~~~~~
+R/amenities.checker.R:49:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(p)
+  ^~~~~~
+R/amenities.proximity.R:56:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+amenities.proximity <- function(..., pop, parameters = NULL, save = TRUE) {
+^~~~~~~~~~~~~~~~~~~
+R/amenities.proximity.R:58:10: warning: [object_usage_linter] no visible binding for global variable 'p.distances'
+    p <- p.distances
+         ^~~~~~~~~~~
+R/amenities.proximity.R:63:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  amen.args <- list(...)
+  ^~~~~~~~~
+R/amenities.proximity.R:65:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 93 characters.
+  if (length(amen.args) == 1 && is.list(amen.args[[1]]) && !inherits(amen.args[[1]], "sf")) {
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+R/amenities.proximity.R:74:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  dist.rasters.list <- lapply(category, function(cat) {
+  ^~~~~~~~~~~~~~~~~
+R/amenities.proximity.R:75:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    amen.s <- amen[which(amen$fclass == cat), ]
+    ^~~~~~
+R/amenities.proximity.R:77:13: warning: [object_usage_linter] no visible global function definition for 'st_geometry_type'
+    if (all(st_geometry_type(amen.s) != "POINT")) {
+            ^~~~~~~~~~~~~~~~
+R/amenities.proximity.R:78:7: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      amen.p <- sf::st_centroid(amen.s)
+      ^~~~~~
+R/amenities.proximity.R:80:7: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      amen.p <- amen.s
+      ^~~~~~
+R/amenities.proximity.R:86:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.r <- raster::distanceFromPoints(pop, coords)
+    ^~~~~~
+R/amenities.proximity.R:88:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    param.row <- p[p$fclass == cat, ]
+    ^~~~~~~~~
+R/amenities.proximity.R:91:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 128 characters.
+      warning(paste("There is not a parameter for :", cat, ". Indicator will not be calculated, please adjust the parameters."))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/amenities.proximity.R:92:7: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      dist.reclass <- raster(pop)
+      ^~~~~~~~~~~~
+R/amenities.proximity.R:92:23: warning: [object_usage_linter] no visible global function definition for 'raster'
+      dist.reclass <- raster(pop)
+                      ^~~~~~
+R/amenities.proximity.R:93:7: warning: [object_usage_linter] no visible global function definition for 'values<-'
+      values(dist.reclass) <- 0
+      ^~~~~~
+R/amenities.proximity.R:93:14: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      values(dist.reclass) <- 0
+             ^~~~~~~~~~~~
+R/amenities.proximity.R:94:13: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      names(dist.reclass) <- cat
+            ^~~~~~~~~~~~
+R/amenities.proximity.R:98:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    param.value <- as.numeric(param.row$value)
+    ^~~~~~~~~~~
+R/amenities.proximity.R:100:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass <- dist.r
+    ^~~~~~~~~~~~
+R/amenities.proximity.R:101:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass[dist.reclass <= param.value] <- 1
+    ^~~~~~~~~~~~
+R/amenities.proximity.R:102:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass[dist.reclass > param.value] <- 0
+    ^~~~~~~~~~~~
+R/amenities.proximity.R:103:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass[is.na(dist.reclass)] <- 0
+    ^~~~~~~~~~~~
+R/amenities.proximity.R:105:11: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    names(dist.reclass) <- cat
+          ^~~~~~~~~~~~
+R/amenities.proximity.R:107:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 82 characters.
+      assign(paste("amenities.distances.", cat), dist.reclass, envir = .GlobalEnv)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+R/amenities.proximity.R:109:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(dist.reclass)
+    ^~~~~~
+R/amenities.proximity.R:112:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  distance.stack <- raster::stack(dist.rasters.list)
+  ^~~~~~~~~~~~~~
+R/amenities.proximity.R:114:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  r.proximity <- distance.stack * pop
+  ^~~~~~~~~~~
+R/amenities.proximity.R:115:9: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  names(r.proximity) <- category
+        ^~~~~~~~~~~
+R/amenities.proximity.R:117:21: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  proxi <- lapply(1:nlayers(r.proximity), function(i) {
+                    ^~~~~~~
+R/amenities.proximity.R:122:23: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = c(round(cellStats(r, sum, na.rm = TRUE), 0), round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+                      ^~~~~~~~~
+R/amenities.proximity.R:122:23: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = c(round(cellStats(r, sum, na.rm = TRUE), 0), round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+                      ^~~~~~~~~
+R/amenities.proximity.R:122:23: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = c(round(cellStats(r, sum, na.rm = TRUE), 0), round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+                      ^~~~~~~~~
+R/amenities.proximity.R:122:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 146 characters.
+      value = c(round(cellStats(r, sum, na.rm = TRUE), 0), round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/amenities.proximity.R:125:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(y)
+    ^~~~~~
+R/amenities.proximity.R:128:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(proximities)
+  ^~~~~~
+R/biodiversity.land.consumption.R:36:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+biodiversity.land.consumption <- function(bl, buildup) {
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/biodiversity.land.consumption.R:38:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    bl.b <- rasterize(bl, buildup, field = 1)
+    ^~~~
+R/biodiversity.land.consumption.R:38:13: warning: [object_usage_linter] no visible global function definition for 'rasterize'
+    bl.b <- rasterize(bl, buildup, field = 1)
+            ^~~~~~~~~
+R/biodiversity.land.consumption.R:39:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    bl.b <- one.cero(bl.b)
+    ^~~~
+R/biodiversity.land.consumption.R:39:13: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    bl.b <- one.cero(bl.b)
+            ^~~~~~~~
+R/biodiversity.land.consumption.R:41:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    bl.b <- one.cero(bl)
+    ^~~~
+R/biodiversity.land.consumption.R:41:13: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    bl.b <- one.cero(bl)
+            ^~~~~~~~
+R/biodiversity.land.consumption.R:44:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  buildup.b <- one.cero(buildup)
+  ^~~~~~~~~
+R/biodiversity.land.consumption.R:44:16: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+  buildup.b <- one.cero(buildup)
+               ^~~~~~~~
+R/biodiversity.land.consumption.R:46:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  bl.c <- bl.b + buildup.b
+  ^~~~
+R/biodiversity.land.consumption.R:47:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  bl.c[bl.c != 2] <- NA
+  ^~~~
+R/biodiversity.land.consumption.R:48:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  bl.r <- projectRaster(bl.c, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~
+R/biodiversity.land.consumption.R:48:11: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+  bl.r <- projectRaster(bl.c, crs = sp::CRS("+init=EPSG:3857"))
+          ^~~~~~~~~~~~~
+R/biodiversity.land.consumption.R:50:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  bl.consumption <- data.frame(
+  ^~~~~~~~~~~~~~
+R/biodiversity.land.consumption.R:54:9: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      ((cellStats(bl.c, sum) * res(bl.r)[1] * res(bl.r)[2])) / 1e6,
+        ^~~~~~~~~
+R/biodiversity.land.consumption.R:54:32: warning: [object_usage_linter] no visible global function definition for 'res'
+      ((cellStats(bl.c, sum) * res(bl.r)[1] * res(bl.r)[2])) / 1e6,
+                               ^~~
+R/biodiversity.land.consumption.R:54:32: warning: [object_usage_linter] no visible global function definition for 'res'
+      ((cellStats(bl.c, sum) * res(bl.r)[1] * res(bl.r)[2])) / 1e6,
+                               ^~~
+R/biodiversity.land.consumption.R:59:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(bl.consumption)
+  ^~~~~~
+R/cycle.proximity.R:47:10: warning: [object_usage_linter] no visible binding for global variable 'p.distances'
+    p <- p.distances
+         ^~~~~~~~~~~
+R/cycle.proximity.R:55:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.r <- rasterize(cycle, pop)
+  ^~~~~~~
+R/cycle.proximity.R:55:14: warning: [object_usage_linter] no visible global function definition for 'rasterize'
+  cycle.r <- rasterize(cycle, pop)
+             ^~~~~~~~~
+R/cycle.proximity.R:56:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.d <- distance(cycle.r)
+  ^~~~~~~
+R/cycle.proximity.R:56:14: warning: [object_usage_linter] no visible global function definition for 'distance'
+  cycle.d <- distance(cycle.r)
+             ^~~~~~~~
+R/cycle.proximity.R:57:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.d <- resample(cycle.d, pop, method = "ngb")
+  ^~~~~~~
+R/cycle.proximity.R:57:14: warning: [object_usage_linter] no visible global function definition for 'resample'
+  cycle.d <- resample(cycle.d, pop, method = "ngb")
+             ^~~~~~~~
+R/cycle.proximity.R:59:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.reclass <- cycle.d
+  ^~~~~~~~~~~~~
+R/cycle.proximity.R:60:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.reclass[cycle.reclass <= param] <- 1
+  ^~~~~~~~~~~~~
+R/cycle.proximity.R:61:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.reclass[cycle.reclass > param] <- 0
+  ^~~~~~~~~~~~~
+R/cycle.proximity.R:62:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.reclass[is.na(cycle.reclass)] <- 0
+  ^~~~~~~~~~~~~
+R/cycle.proximity.R:64:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  pop.prox.cycle <- cycle.reclass * pop
+  ^~~~~~~~~~~~~~
+R/cycle.proximity.R:67:12: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    assign("cycle.distances", cycle.reclass, envir = .GlobalEnv)
+           ^~~~~~~~~~~~~~~~~
+R/cycle.proximity.R:74:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+R/cycle.proximity.R:74:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+R/cycle.proximity.R:74:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+R/cycle.proximity.R:75:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 104 characters.
+      round((cellStats(pop.prox.cycle, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+R/cycle.proximity.R:79:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(c.proximity)
+  ^~~~~~
+R/cycle.track.density.R:33:16: warning: [object_usage_linter] no visible global function definition for 'st_length'
+  c$lengthm <- st_length(c)
+               ^~~~~~~~~
+R/cycle.track.density.R:36:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  u.footprint <- urban.footprint(footprint)$value
+  ^~~~~~~~~~~
+R/cycle.track.density.R:36:18: warning: [object_usage_linter] no visible global function definition for 'urban.footprint'
+  u.footprint <- urban.footprint(footprint)$value
+                 ^~~~~~~~~~~~~~~
+R/cycle.track.density.R:37:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  cycle.dens <- data.frame(
+  ^~~~~~~~~~
+R/cycle.track.density.R:43:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(cycle.dens)
+  ^~~~~~
+R/green.area.pcapita.R:35:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.area.pcapita <- function(ga, pop) {
+^~~~~~~~~~~~~~~~~~
+R/green.area.pcapita.R:40:27: warning: [object_usage_linter] no visible global function definition for 'tot.pop'
+      t.pop <- as.numeric(tot.pop(pop)$value)
+                          ^~~~~~~
+R/green.area.pcapita.R:45:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    green.area <- one.cero(ga)
+    ^~~~~~~~~~
+R/green.area.pcapita.R:45:19: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    green.area <- one.cero(ga)
+                  ^~~~~~~~
+R/green.area.pcapita.R:46:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    green.area.r <- projectRaster(ga, crs = sp::CRS("+init=EPSG:3857"))
+    ^~~~~~~~~~~~
+R/green.area.pcapita.R:46:21: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+    green.area.r <- projectRaster(ga, crs = sp::CRS("+init=EPSG:3857"))
+                    ^~~~~~~~~~~~~
+R/green.area.pcapita.R:47:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] * res(green.area.r)[2]
+    ^~~~~~~~~~~~
+R/green.area.pcapita.R:47:21: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] * res(green.area.r)[2]
+                    ^~~~~~~~~
+R/green.area.pcapita.R:47:42: warning: [object_usage_linter] no visible global function definition for 'res'
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] * res(green.area.r)[2]
+                                         ^~~
+R/green.area.pcapita.R:47:42: warning: [object_usage_linter] no visible global function definition for 'res'
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] * res(green.area.r)[2]
+                                         ^~~
+R/green.area.pcapita.R:47:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 84 characters.
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] * res(green.area.r)[2]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+R/green.area.pcapita.R:49:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    green.area <- st_transform(ga, crs = 3857)
+    ^~~~~~~~~~
+R/green.area.pcapita.R:49:19: warning: [object_usage_linter] no visible global function definition for 'st_transform'
+    green.area <- st_transform(ga, crs = 3857)
+                  ^~~~~~~~~~~~
+R/green.area.pcapita.R:50:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    green.area$aream <- st_area(green.area)
+    ^~~~~~~~~~
+R/green.area.pcapita.R:50:25: warning: [object_usage_linter] no visible global function definition for 'st_area'
+    green.area$aream <- st_area(green.area)
+                        ^~~~~~~
+R/green.area.pcapita.R:51:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    green.area.t <- as.numeric(sum(green.area$aream))
+    ^~~~~~~~~~~~
+R/green.area.pcapita.R:54:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  green.area.p <- data.frame(
+  ^~~~~~~~~~~~
+R/green.area.pcapita.R:60:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(green.area.p)
+  ^~~~~~
+R/green.land.consumption.R:40:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.land.consumption <- function(greenl, buildup) {
+^~~~~~~~~~~~~~~~~~~~~~
+R/green.land.consumption.R:42:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    greenl.b <- rasterize(greenl, buildup, field = 1)
+    ^~~~~~~~
+R/green.land.consumption.R:42:17: warning: [object_usage_linter] no visible global function definition for 'rasterize'
+    greenl.b <- rasterize(greenl, buildup, field = 1)
+                ^~~~~~~~~
+R/green.land.consumption.R:43:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    greenl.b <- one.cero(greenl.b)
+    ^~~~~~~~
+R/green.land.consumption.R:43:17: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    greenl.b <- one.cero(greenl.b)
+                ^~~~~~~~
+R/green.land.consumption.R:45:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    greenl.b <- one.cero(greenl)
+    ^~~~~~~~
+R/green.land.consumption.R:45:17: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    greenl.b <- one.cero(greenl)
+                ^~~~~~~~
+R/green.land.consumption.R:48:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  buildup.b <- one.cero(buildup)
+  ^~~~~~~~~
+R/green.land.consumption.R:48:16: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+  buildup.b <- one.cero(buildup)
+               ^~~~~~~~
+R/green.land.consumption.R:50:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  greenl.c <- greenl.b + buildup.b
+  ^~~~~~~~
+R/green.land.consumption.R:51:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  greenl.c[greenl.c != 2] <- NA
+  ^~~~~~~~
+R/green.land.consumption.R:52:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  greenl.r <- projectRaster(greenl.c, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~~~~~
+R/green.land.consumption.R:52:15: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+  greenl.r <- projectRaster(greenl.c, crs = sp::CRS("+init=EPSG:3857"))
+              ^~~~~~~~~~~~~
+R/green.land.consumption.R:54:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  greenl.consumption <- data.frame(
+  ^~~~~~~~~~~~~~~~~~
+R/green.land.consumption.R:57:21: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+    value = round(((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2),
+                    ^~~~~~~~~
+R/green.land.consumption.R:57:48: warning: [object_usage_linter] no visible global function definition for 'res'
+    value = round(((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2),
+                                               ^~~
+R/green.land.consumption.R:57:48: warning: [object_usage_linter] no visible global function definition for 'res'
+    value = round(((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2),
+                                               ^~~
+R/green.land.consumption.R:57:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 95 characters.
+    value = round(((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+R/green.land.consumption.R:60:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(greenl.consumption)
+  ^~~~~~
+R/infill.R:37:20: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+infill <- function(p.base, p.scenario) {
+                   ^~~~~~
+R/infill.R:37:28: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+infill <- function(p.base, p.scenario) {
+                           ^~~~~~~~~~
+R/infill.R:38:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  p.scenario <- rasterchecker(p.scenario, base = p.base)
+  ^~~~~~~~~~
+R/infill.R:38:17: warning: [object_usage_linter] no visible global function definition for 'rasterchecker'
+  p.scenario <- rasterchecker(p.scenario, base = p.base)
+                ^~~~~~~~~~~~~
+R/infill.R:43:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  area.in <- projectRaster(ue, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~~~~
+R/infill.R:43:14: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+  area.in <- projectRaster(ue, crs = sp::CRS("+init=EPSG:3857"))
+             ^~~~~~~~~~~~~
+R/infill.R:44:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+  ^~~~~~~
+R/infill.R:44:15: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+              ^~~~~~~~~
+R/infill.R:44:37: warning: [object_usage_linter] no visible global function definition for 'res'
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+                                    ^~~
+R/infill.R:44:37: warning: [object_usage_linter] no visible global function definition for 'res'
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+                                    ^~~
+R/infill.R:46:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  infill.a <- data.frame(
+  ^~~~~~~~
+R/infill.R:52:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(infill.a)
+  ^~~~~~
+R/intersection.density.R:36:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+intersection.density <- function(roads, footprint) {
+^~~~~~~~~~~~~~~~~~~~
+R/intersection.density.R:37:12: warning: [object_usage_linter] no visible global function definition for 'st_intersection'
+  inter <- st_intersection(roads)
+           ^~~~~~~~~~~~~~~
+R/intersection.density.R:39:18: warning: [object_usage_linter] no visible global function definition for '%>%'
+  inter <- inter %>%
+                 ^~~
+R/intersection.density.R:39:18: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  inter <- inter %>%
+                 ^~~
+R/intersection.density.R:40:12: warning: [object_usage_linter] no visible global function definition for 'st_is'
+    filter(st_is(geometry, c("POINT", "MULTIPOINT")))
+           ^~~~~
+R/intersection.density.R:40:18: warning: [object_usage_linter] no visible binding for global variable 'geometry'
+    filter(st_is(geometry, c("POINT", "MULTIPOINT")))
+                 ^~~~~~~~
+R/intersection.density.R:41:19: warning: [object_usage_linter] no visible global function definition for 'st_geometry'
+  inter <- unique(st_geometry(inter))
+                  ^~~~~~~~~~~
+R/intersection.density.R:43:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  n.inter <- as.numeric(length(inter))
+  ^~~~~~~
+R/intersection.density.R:45:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  u.footprint <- urban.footprint(footprint)$value
+  ^~~~~~~~~~~
+R/intersection.density.R:45:18: warning: [object_usage_linter] no visible global function definition for 'urban.footprint'
+  u.footprint <- urban.footprint(footprint)$value
+                 ^~~~~~~~~~~~~~~
+R/intersection.density.R:47:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  inter.dens <- data.frame(
+  ^~~~~~~~~~
+R/intersection.density.R:54:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(inter.dens)
+  ^~~~~~
+R/jobs.proximity.R:26:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.proximity <- function(jobs, pop) {
+^~~~~~~~~~~~~~
+R/jobs.proximity.R:29:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.mean <- cellStats(j, mean)
+  ^~~~~~
+R/jobs.proximity.R:29:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+  j.mean <- cellStats(j, mean)
+            ^~~~~~~~~
+R/jobs.proximity.R:30:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.sd <- cellStats(j, sd)
+  ^~~~
+R/jobs.proximity.R:30:11: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+  j.sd <- cellStats(j, sd)
+          ^~~~~~~~~
+R/jobs.proximity.R:31:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.value <- (2 * j.sd) + j.mean
+  ^~~~~~~
+R/jobs.proximity.R:34:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.dist <- distance(j)
+  ^~~~~~
+R/jobs.proximity.R:34:13: warning: [object_usage_linter] no visible global function definition for 'distance'
+  j.dist <- distance(j)
+            ^~~~~~~~
+R/jobs.proximity.R:35:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.dist[j.dist > 1000] <- NA
+  ^~~~~~
+R/jobs.proximity.R:36:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.dist[!is.na(j.dist)] <- 1
+  ^~~~~~
+R/jobs.proximity.R:37:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  j.prox <- j.dist * p
+  ^~~~~~
+R/jobs.proximity.R:38:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  jobs.proximity <- data.frame(
+  ^~~~~~~~~~~~~~
+R/jobs.proximity.R:41:21: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+    value = c(round(cellStats(j.prox, sum, na.rm = TRUE), 0), round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+                    ^~~~~~~~~
+R/jobs.proximity.R:41:21: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+    value = c(round(cellStats(j.prox, sum, na.rm = TRUE), 0), round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+                    ^~~~~~~~~
+R/jobs.proximity.R:41:21: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+    value = c(round(cellStats(j.prox, sum, na.rm = TRUE), 0), round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+                    ^~~~~~~~~
+R/jobs.proximity.R:41:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 154 characters.
+    value = c(round(cellStats(j.prox, sum, na.rm = TRUE), 0), round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/jobs.proximity.R:44:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(jobs.proximity)
+  ^~~~~~
+R/land.consumption.R:37:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.consumption <- function(fp.base, fp.horizon) {
+^~~~~~~~~~~~~~~~
+R/land.consumption.R:37:30: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.consumption <- function(fp.base, fp.horizon) {
+                             ^~~~~~~
+R/land.consumption.R:37:39: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.consumption <- function(fp.base, fp.horizon) {
+                                      ^~~~~~~~~~
+R/land.consumption.R:41:10: warning: [object_usage_linter] no visible global function definition for 'rasterchecker'
+    p <- rasterchecker(fp.horizon, base = fp.base)
+         ^~~~~~~~~~~~~
+R/land.consumption.R:43:19: warning: [object_usage_linter] no visible global function definition for '%>%'
+  base <- fp.base %>%
+                  ^~~
+R/land.consumption.R:43:19: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  base <- fp.base %>%
+                  ^~~
+R/land.consumption.R:44:5: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    one.cero()
+    ^~~~~~~~
+R/land.consumption.R:45:17: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  x <- lapply(1:nlayers(p), function(i) {
+                ^~~~~~~
+R/land.consumption.R:47:16: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    horizon <- one.cero(horizon)
+               ^~~~~~~~
+R/land.consumption.R:48:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    l.consumption <- horizon - base
+    ^~~~~~~~~~~~~
+R/land.consumption.R:49:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    l.consumption[l.consumption != 1] <- NA
+    ^~~~~~~~~~~~~
+R/land.consumption.R:50:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    r.consumption <- projectRaster(l.consumption, crs = sp::CRS("+init=EPSG:3857"))
+    ^~~~~~~~~~~~~
+R/land.consumption.R:50:22: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+    r.consumption <- projectRaster(l.consumption, crs = sp::CRS("+init=EPSG:3857"))
+                     ^~~~~~~~~~~~~
+R/land.consumption.R:50:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 83 characters.
+    r.consumption <- projectRaster(l.consumption, crs = sp::CRS("+init=EPSG:3857"))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+R/land.consumption.R:54:22: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = round((cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6, 2),
+                     ^~~~~~~~~
+R/land.consumption.R:54:55: warning: [object_usage_linter] no visible global function definition for 'res'
+      value = round((cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6, 2),
+                                                      ^~~
+R/land.consumption.R:54:55: warning: [object_usage_linter] no visible global function definition for 'res'
+      value = round((cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6, 2),
+                                                      ^~~
+R/land.consumption.R:54:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 112 characters.
+      value = round((cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6, 2),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/land.consumption.R:57:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 88 characters.
+    assign(paste("urban.expansion_", names(horizon)), l.consumption, envir = .GlobalEnv)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+R/land.consumption.R:58:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(y)
+    ^~~~~~
+R/land.consumption.R:59:6: warning: [object_usage_linter] no visible global function definition for '%>%'
+  }) %>% bind_rows()
+     ^~~
+R/land.consumption.R:59:6: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  }) %>% bind_rows()
+     ^~~
+R/land.consumption.R:59:10: warning: [object_usage_linter] no visible global function definition for 'bind_rows'
+  }) %>% bind_rows()
+         ^~~~~~~~~
+R/land.consumption.R:60:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(x)
+  ^~~~~~
+R/land.cover.areas.R:27:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover.areas <- function(ras, class = NULL) {
+^~~~~~~~~~~~~~~~
+R/land.cover.areas.R:29:17: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  x <- lapply(1:nlayers(ras), function(i) {
+                ^~~~~~~
+R/land.cover.areas.R:31:24: warning: [object_usage_linter] no visible global function definition for 'freq'
+    w <- as.data.frame(freq(r))
+                       ^~~~
+R/land.cover.areas.R:34:18: warning: [object_usage_linter] no visible global function definition for '%>%'
+      y <- class %>%
+                 ^~~
+R/land.cover.areas.R:34:18: warning: [object_usage_linter] no visible global function definition for '%>%'
+      y <- class %>%
+                 ^~~
+R/land.cover.areas.R:34:18: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+      y <- class %>%
+                 ^~~
+R/land.cover.areas.R:35:9: warning: [object_usage_linter] no visible global function definition for 'left_join'
+        left_join(w)
+        ^~~~~~~~~
+R/land.cover.areas.R:37:14: warning: [object_usage_linter] no visible global function definition for '%>%'
+      y <- w %>%
+             ^~~
+R/land.cover.areas.R:37:14: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+      y <- w %>%
+             ^~~
+R/land.cover.areas.R:38:9: warning: [object_usage_linter] no visible global function definition for 'mutate'
+        mutate(fclass = cat)
+        ^~~~~~
+R/land.cover.areas.R:41:10: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+    r <- projectRaster(r, crs = sp::CRS("+init=EPSG:3857"))
+         ^~~~~~~~~~~~~
+R/land.cover.areas.R:42:24: warning: [object_usage_linter] no visible global function definition for 'res'
+    y$value <- round(((res(r)[1] * res(r)[2]) * ifelse(is.na(y$count), 0, y$count) / 1e6), 2)
+                       ^~~
+R/land.cover.areas.R:42:24: warning: [object_usage_linter] no visible global function definition for 'res'
+    y$value <- round(((res(r)[1] * res(r)[2]) * ifelse(is.na(y$count), 0, y$count) / 1e6), 2)
+                       ^~~
+R/land.cover.areas.R:42:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 93 characters.
+    y$value <- round(((res(r)[1] * res(r)[2]) * ifelse(is.na(y$count), 0, y$count) / 1e6), 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+R/land.cover.areas.R:44:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(y)
+    ^~~~~~
+R/land.cover.areas.R:45:6: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  }) %>% bind_rows()
+     ^~~
+R/land.cover.areas.R:45:6: style: [pipe_continuation_linter] Put a space before `%>%` and a new line after it, unless the full pipeline fits on one line.
+  }) %>% bind_rows()
+     ^~~
+R/land.cover.areas.R:45:10: warning: [object_usage_linter] no visible global function definition for 'bind_rows'
+  }) %>% bind_rows()
+         ^~~~~~~~~
+R/land.cover.areas.R:47:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(x)
+  ^~~~~~
+R/land.cover.loss.R:44:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover.loss <- function(..., areas = NULL) {
+^~~~~~~~~~~~~~~
+R/land.cover.loss.R:49:10: warning: [object_usage_linter] no visible global function definition for 'land.cover.areas'
+    y <- land.cover.areas(ras)
+         ^~~~~~~~~~~~~~~~
+R/land.cover.loss.R:51:7: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  if (nlayers(ras) > 1) {
+      ^~~~~~~
+R/land.cover.loss.R:52:10: warning: [object_usage_linter] no visible global function definition for 'dcast'
+    y <- dcast(y, fclass ~ layer, value.var = "value")
+         ^~~~~
+R/land.cover.loss.R:53:5: warning: [object_usage_linter] local variable 'base' assigned but may not be used
+    base <- names(y)[2]
+    ^~~~
+R/land.cover.loss.R:54:15: warning: [object_usage_linter] no visible global function definition for '%>%'
+    loss <- y %>%
+              ^~~
+R/land.cover.loss.R:54:15: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+    loss <- y %>%
+              ^~~
+R/land.cover.loss.R:55:7: warning: [object_usage_linter] no visible global function definition for 'mutate'
+      mutate(across(-c(1, 2), ~ .x - y[[2]], .names = "value"))
+      ^~~~~~
+R/land.cover.loss.R:55:14: warning: [object_usage_linter] no visible global function definition for 'across'
+      mutate(across(-c(1, 2), ~ .x - y[[2]], .names = "value"))
+             ^~~~~~
+R/land.cover.loss.R:66:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(loss)
+  ^~~~~~
+R/non.cero.R:8:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+non.cero <- function(r) {
+^~~~~~~~
+R/non.cero.R:10:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(r)
+  ^~~~~~
+R/one.cero.R:8:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+one.cero <- function(r) {
+^~~~~~~~
+R/one.cero.R:11:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(r)
+  ^~~~~~
+R/one.na.R:8:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+one.na <- function(r) {
+^~~~~~
+R/one.na.R:11:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(r)
+  ^~~~~~
+R/population.density.R:45:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.density <- function(pop, fp) {
+^~~~~~~~~~~~~~~~~~
+R/population.density.R:48:7: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  if (nlayers(pop) != nlayers(fp)) {
+      ^~~~~~~
+R/population.density.R:48:7: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  if (nlayers(pop) != nlayers(fp)) {
+      ^~~~~~~
+R/population.density.R:49:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 86 characters.
+    warning("Please provide the same number of population and urban footprint layers")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+R/population.density.R:51:9: warning: [object_usage_linter] no visible global function definition for 'rasterchecker'
+  fp <- rasterchecker(fp, base = pop)
+        ^~~~~~~~~~~~~
+R/population.density.R:52:24: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  nl <- as.numeric(max(nlayers(pop), nlayers(fp)))
+                       ^~~~~~~
+R/population.density.R:52:24: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  nl <- as.numeric(max(nlayers(pop), nlayers(fp)))
+                       ^~~~~~~
+R/population.density.R:56:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    pop.tot <- as.numeric(tot.pop(p)$value)
+    ^~~~~~~
+R/population.density.R:56:27: warning: [object_usage_linter] no visible global function definition for 'tot.pop'
+    pop.tot <- as.numeric(tot.pop(p)$value)
+                          ^~~~~~~
+R/population.density.R:57:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    urban.fp <- as.numeric(urban.footprint(b)$value)
+    ^~~~~~~~
+R/population.density.R:57:28: warning: [object_usage_linter] no visible global function definition for 'urban.footprint'
+    urban.fp <- as.numeric(urban.footprint(b)$value)
+                           ^~~~~~~~~~~~~~~
+R/population.density.R:58:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    pop.dens <- round(pop.tot / urban.fp, 2)
+    ^~~~~~~~
+R/population.density.R:65:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(density)
+    ^~~~~~
+R/population.density.R:66:6: warning: [object_usage_linter] no visible global function definition for '%>%'
+  }) %>% bind_rows()
+     ^~~
+R/population.density.R:66:6: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  }) %>% bind_rows()
+     ^~~
+R/population.density.R:66:10: warning: [object_usage_linter] no visible global function definition for 'bind_rows'
+  }) %>% bind_rows()
+         ^~~~~~~~~
+R/population.density.R:67:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(r)
+  ^~~~~~
+R/population.in.risk.R:37:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.exposure <- function(r, pop) {
+^~~~~~~~~~~~~~~
+R/population.in.risk.R:40:17: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  x <- lapply(1:nlayers(h), function(i) {
+                ^~~~~~~
+R/population.in.risk.R:42:10: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    r <- one.cero(r)
+         ^~~~~~~~
+R/population.in.risk.R:43:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    r.pop <- r * p
+    ^~~~~
+R/population.in.risk.R:47:23: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = c(round(cellStats(r.pop, sum), 0), round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)),
+                      ^~~~~~~~~
+R/population.in.risk.R:47:23: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = c(round(cellStats(r.pop, sum), 0), round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)),
+                      ^~~~~~~~~
+R/population.in.risk.R:47:23: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = c(round(cellStats(r.pop, sum), 0), round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)),
+                      ^~~~~~~~~
+R/population.in.risk.R:47:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 110 characters.
+      value = c(round(cellStats(r.pop, sum), 0), round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/population.in.risk.R:50:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(y)
+    ^~~~~~
+R/population.in.risk.R:51:6: warning: [object_usage_linter] no visible global function definition for '%>%'
+  }) %>% bind_rows()
+     ^~~
+R/population.in.risk.R:51:6: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  }) %>% bind_rows()
+     ^~~
+R/population.in.risk.R:51:10: warning: [object_usage_linter] no visible global function definition for 'bind_rows'
+  }) %>% bind_rows()
+         ^~~~~~~~~
+R/population.in.risk.R:52:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(x)
+  ^~~~~~
+R/public.transport.proximity.R:50:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+public.transport.proximity <- function(..., pop, parameters = NULL) {
+^~~~~~~~~~~~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:52:10: warning: [object_usage_linter] no visible binding for global variable 'p.distances'
+    p <- p.distances
+         ^~~~~~~~~~~
+R/public.transport.proximity.R:65:11: warning: [object_usage_linter] no visible global function definition for 'st_geometry_type'
+  if (all(st_geometry_type(transport) != "POINT")) {
+          ^~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:66:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    transport.p <- sf::st_centroid(transport)
+    ^~~~~~~~~~~
+R/public.transport.proximity.R:68:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    transport.p <- transport
+    ^~~~~~~~~~~
+R/public.transport.proximity.R:72:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  dist.rasters.list <- lapply(category, function(cat) {
+  ^~~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:73:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    transport.s <- transport.p[which(transport.p$fclass == cat), ]
+    ^~~~~~~~~~~
+R/public.transport.proximity.R:77:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.r <- raster::distanceFromPoints(pop, coords)
+    ^~~~~~
+R/public.transport.proximity.R:79:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    param.row <- p[p$fclass == cat, ]
+    ^~~~~~~~~
+R/public.transport.proximity.R:82:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 128 characters.
+      warning(paste("There is not a parameter for :", cat, ". Indicator will not be calculated, please adjust the parameters."))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:83:7: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      dist.reclass <- raster(pop)
+      ^~~~~~~~~~~~
+R/public.transport.proximity.R:83:23: warning: [object_usage_linter] no visible global function definition for 'raster'
+      dist.reclass <- raster(pop)
+                      ^~~~~~
+R/public.transport.proximity.R:84:7: warning: [object_usage_linter] no visible global function definition for 'values<-'
+      values(dist.reclass) <- 0
+      ^~~~~~
+R/public.transport.proximity.R:84:14: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      values(dist.reclass) <- 0
+             ^~~~~~~~~~~~
+R/public.transport.proximity.R:85:13: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+      names(dist.reclass) <- cat
+            ^~~~~~~~~~~~
+R/public.transport.proximity.R:89:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    param.value <- as.numeric(param.row$value)
+    ^~~~~~~~~~~
+R/public.transport.proximity.R:91:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass <- dist.r
+    ^~~~~~~~~~~~
+R/public.transport.proximity.R:92:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass[dist.reclass <= param.value] <- 1
+    ^~~~~~~~~~~~
+R/public.transport.proximity.R:93:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass[dist.reclass > param.value] <- 0
+    ^~~~~~~~~~~~
+R/public.transport.proximity.R:94:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    dist.reclass[is.na(dist.reclass)] <- 0
+    ^~~~~~~~~~~~
+R/public.transport.proximity.R:96:11: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    names(dist.reclass) <- cat
+          ^~~~~~~~~~~~
+R/public.transport.proximity.R:97:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(dist.reclass)
+    ^~~~~~
+R/public.transport.proximity.R:100:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  distance.stack <- raster::stack(dist.rasters.list)
+  ^~~~~~~~~~~~~~
+R/public.transport.proximity.R:102:7: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  if (nlayers(distance.stack) > 1) {
+      ^~~~~~~
+R/public.transport.proximity.R:103:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    distance.stack <- calc(distance.stack, fun = sum, na.rm = TRUE)
+    ^~~~~~~~~~~~~~
+R/public.transport.proximity.R:103:23: warning: [object_usage_linter] no visible global function definition for 'calc'
+    distance.stack <- calc(distance.stack, fun = sum, na.rm = TRUE)
+                      ^~~~
+R/public.transport.proximity.R:104:5: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+    distance.stack <- one.cero(distance.stack)
+    ^~~~~~~~~~~~~~
+R/public.transport.proximity.R:104:23: warning: [object_usage_linter] no visible global function definition for 'one.cero'
+    distance.stack <- one.cero(distance.stack)
+                      ^~~~~~~~
+R/public.transport.proximity.R:107:10: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  assign("transport.distances", distance.stack, envir = .GlobalEnv)
+         ^~~~~~~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:108:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  pop.prox.transit <- distance.stack * pop
+  ^~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:110:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  transport.proximity <- data.frame(
+  ^~~~~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:114:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+R/public.transport.proximity.R:114:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+R/public.transport.proximity.R:114:13: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+R/public.transport.proximity.R:115:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 106 characters.
+      round((cellStats(pop.prox.transit, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+R/public.transport.proximity.R:119:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(transport.proximity)
+  ^~~~~~
+R/rasterchecker.R:29:15: style: [commented_code_linter] Remove commented code.
+  y <- base # r[[1]]
+              ^~~~~~
+R/rasterchecker.R:31:10: warning: [object_usage_linter] no visible global function definition for 'compareCRS'
+    if (!compareCRS(y, p)) {
+         ^~~~~~~~~~
+R/rasterchecker.R:32:12: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+      p <- projectRaster(p, y)
+           ^~~~~~~~~~~~~
+R/rasterchecker.R:34:10: warning: [object_usage_linter] no visible global function definition for 'extent'
+    if (!extent(p) == extent(y) ||
+         ^~~~~~
+R/rasterchecker.R:34:10: warning: [object_usage_linter] no visible global function definition for 'extent'
+    if (!extent(p) == extent(y) ||
+         ^~~~~~
+R/rasterchecker.R:35:6: style: [indentation_linter] Indentation should be 10 spaces but is 6 spaces.
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+     ^~~~~
+R/rasterchecker.R:35:7: warning: [object_usage_linter] no visible global function definition for 'res'
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+R/rasterchecker.R:35:7: warning: [object_usage_linter] no visible global function definition for 'res'
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+R/rasterchecker.R:35:7: warning: [object_usage_linter] no visible global function definition for 'res'
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+R/rasterchecker.R:35:7: warning: [object_usage_linter] no visible global function definition for 'res'
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+R/rasterchecker.R:36:12: warning: [object_usage_linter] no visible global function definition for 'resample'
+      p <- resample(p, y, method = "ngb")
+           ^~~~~~~~
+R/rasterchecker.R:38:5: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+    return(p)
+    ^~~~~~
+R/rasterchecker.R:42:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(f)
+  ^~~~~~
+R/roads.density.R:29:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+roads.density <- function(roads, footprint) {
+^~~~~~~~~~~~~
+R/roads.density.R:31:16: warning: [object_usage_linter] no visible global function definition for 'st_length'
+  r$lengthm <- st_length(r)
+               ^~~~~~~~~
+R/roads.density.R:32:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  r.length <- round(as.numeric(sum(r$lengthm)) / 1e3, 2)
+  ^~~~~~~~
+R/roads.density.R:34:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  u.footprint <- urban.footprint(footprint)$value
+  ^~~~~~~~~~~
+R/roads.density.R:34:18: warning: [object_usage_linter] no visible global function definition for 'urban.footprint'
+  u.footprint <- urban.footprint(footprint)$value
+                 ^~~~~~~~~~~~~~~
+R/roads.density.R:35:3: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+  roads.dens <- data.frame(
+  ^~~~~~~~~~
+R/roads.density.R:41:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(roads.dens)
+  ^~~~~~
+R/roads.length.R:21:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+roads.length <- function(roads) {
+^~~~~~~~~~~~
+R/roads.length.R:23:28: warning: [object_usage_linter] no visible global function definition for 'st_length'
+  r$lengthkm <- as.numeric(st_length(r)) / 1e3
+                           ^~~~~~~~~
+R/roads.length.R:28:26: warning: [object_usage_linter] no visible global function definition for '%>%'
+  r2 <- as.data.frame(r) %>%
+                         ^~~
+R/roads.length.R:28:26: warning: [object_usage_linter] no visible global function definition for '%>%'
+  r2 <- as.data.frame(r) %>%
+                         ^~~
+R/roads.length.R:28:26: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  r2 <- as.data.frame(r) %>%
+                         ^~~
+R/roads.length.R:29:5: warning: [object_usage_linter] no visible global function definition for 'group_by'
+    group_by(fclass) %>%
+    ^~~~~~~~
+R/roads.length.R:29:14: warning: [object_usage_linter] no visible binding for global variable 'fclass'
+    group_by(fclass) %>%
+             ^~~~~~
+R/roads.length.R:29:22: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+    group_by(fclass) %>%
+                     ^~~
+R/roads.length.R:30:5: warning: [object_usage_linter] no visible global function definition for 'summarize'
+    summarize(value = sum(lengthkm))
+    ^~~~~~~~~
+R/roads.length.R:30:27: warning: [object_usage_linter] no visible binding for global variable 'lengthkm'
+    summarize(value = sum(lengthkm))
+                          ^~~~~~~~
+R/roads.length.R:33:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(rl)
+  ^~~~~~
+R/tot.pop.R:15:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+tot.pop <- function(ras) {
+^~~~~~~
+R/tot.pop.R:17:19: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  pop <- lapply(1:nlayers(ras), function(i) {
+                  ^~~~~~~
+R/tot.pop.R:19:5: warning: [object_usage_linter] local variable 't' assigned but may not be used
+    t <- data.frame(
+    ^
+R/tot.pop.R:22:27: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = paste(round(cellStats(r, sum), 0)),
+                          ^~~~~~~~~
+R/tot.pop.R:25:6: warning: [object_usage_linter] no visible global function definition for '%>%'
+  }) %>% bind_rows()
+     ^~~
+R/tot.pop.R:25:6: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  }) %>% bind_rows()
+     ^~~
+R/tot.pop.R:25:10: warning: [object_usage_linter] no visible global function definition for 'bind_rows'
+  }) %>% bind_rows()
+         ^~~~~~~~~
+R/tot.pop.R:26:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(pop)
+  ^~~~~~
+R/urba.footprint.R:24:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+urban.footprint <- function(ras) {
+^~~~~~~~~~~~~~~
+R/urba.footprint.R:26:17: warning: [object_usage_linter] no visible global function definition for 'nlayers'
+  x <- lapply(1:nlayers(ras), function(i) {
+                ^~~~~~~
+R/urba.footprint.R:29:10: warning: [object_usage_linter] no visible global function definition for 'projectRaster'
+    r <- projectRaster(r, crs = sp::CRS("+init=EPSG:3857"))
+         ^~~~~~~~~~~~~
+R/urba.footprint.R:30:5: warning: [object_usage_linter] local variable 't' assigned but may not be used
+    t <- data.frame(
+    ^
+R/urba.footprint.R:33:29: warning: [object_usage_linter] no visible global function definition for 'cellStats'
+      value = paste(round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)),
+                            ^~~~~~~~~
+R/urba.footprint.R:33:50: warning: [object_usage_linter] no visible global function definition for 'res'
+      value = paste(round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)),
+                                                 ^~~
+R/urba.footprint.R:33:50: warning: [object_usage_linter] no visible global function definition for 'res'
+      value = paste(round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)),
+                                                 ^~~
+R/urba.footprint.R:33:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 85 characters.
+      value = paste(round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+R/urba.footprint.R:36:6: warning: [object_usage_linter] no visible global function definition for '%>%'
+  }) %>% bind_rows()
+     ^~~
+R/urba.footprint.R:36:6: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+  }) %>% bind_rows()
+     ^~~
+R/urba.footprint.R:36:10: warning: [object_usage_linter] no visible global function definition for 'bind_rows'
+  }) %>% bind_rows()
+         ^~~~~~~~~
+R/urba.footprint.R:37:3: style: [return_linter] Use implicit return behavior; explicit return() is not needed.
+  return(x)
+  ^~~~~~
+tests/testthat/test-agricultural_land_consumption.R:19:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 81 characters.
+  r2 <- raster(m2, xmn = 0, xmx = 10, ymn = 0, ymx = 10, crs = "+init=EPSG:3857")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+tests/testthat/test-agricultural_land_consumption.R:21:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 88 characters.
+  # Note: The bug in the function might cause an error here, but we just want it to run.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+tests/testthat/test-agricultural_land_consumption.R:25:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 82 characters.
+  # Until the bug is fixed, we just check if it returns a data frame (might fail!)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+vignettes/UPtooltest.R:23:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:23:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 81 characters.
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+vignettes/UPtooltest.R:24:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.base <- raster::raster(population.base)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:26:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:26:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 84 characters.
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+vignettes/UPtooltest.R:27:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.horizon <- raster::raster(population.horizon)
+^~~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:29:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+vignettes/UPtooltest.R:29:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 83 characters.
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+vignettes/UPtooltest.R:30:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.base <- raster::raster(buildup.base)
+^~~~~~~~~~~~
+vignettes/UPtooltest.R:32:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:32:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 86 characters.
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+vignettes/UPtooltest.R:33:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.horizon <- raster::raster(buildup.horizon)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:35:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.distribution <- system.file("extdata", "Jobs.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:36:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.distribution <- raster::raster(jobs.distribution)
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:38:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.zones <- system.file("extdata", "Hazard.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+vignettes/UPtooltest.R:39:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.zones <- raster::raster(hazard.zones)
+^~~~~~~~~~~~
+vignettes/UPtooltest.R:41:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+^~~~~~~~~~~~~
+vignettes/UPtooltest.R:41:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 86 characters.
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+vignettes/UPtooltest.R:42:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover.18 <- raster::raster(land.cover.18)
+^~~~~~~~~~~~~
+vignettes/UPtooltest.R:44:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover <- system.file("extdata", "Land_cover.tif", package = "UPtooltest")
+^~~~~~~~~~
+vignettes/UPtooltest.R:45:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover <- raster::raster(land.cover)
+^~~~~~~~~~
+vignettes/UPtooltest.R:49:24: style: [trailing_whitespace_linter] Remove trailing whitespace.
+## Verify urban extents 
+                       ^
+vignettes/UPtooltest.R:50:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.zones <- rasterchecker(hazard.zones, base = population.base)
+^~~~~~~~~~~~
+vignettes/UPtooltest.R:51:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.base <- rasterchecker(buildup.base,  base = population.base)
+^~~~~~~~~~~~
+vignettes/UPtooltest.R:52:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.horizon <- rasterchecker(buildup.horizon,  base = population.base)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:53:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.distribution <- rasterchecker(jobs.distribution,  base = population.base)
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:54:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover <- rasterchecker(land.cover,  base = population.base)
+^~~~~~~~~~
+vignettes/UPtooltest.R:61:34: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(population.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                 ^
+vignettes/UPtooltest.R:61:50: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(population.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                                 ^
+vignettes/UPtooltest.R:61:61: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(population.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                                            ^
+vignettes/UPtooltest.R:61:72: style: [trailing_whitespace_linter] Remove trailing whitespace.
+levelplot(population.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                                                       ^
+vignettes/UPtooltest.R:62:43: style: [spaces_inside_linter] Do not place spaces before parentheses.
+          main = "Population distribution" )
+                                          ^
+vignettes/UPtooltest.R:70:45: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(total_popultion, "latex", booktabs = T) %>%
+                                           ~^
+vignettes/UPtooltest.R:70:47: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(total_popultion, "latex", booktabs = T) %>%
+                                              ^~~
+vignettes/UPtooltest.R:77:45: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(urban_footprint, "latex", booktabs = T) %>%
+                                           ~^
+vignettes/UPtooltest.R:77:47: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(urban_footprint, "latex", booktabs = T) %>%
+                                              ^~~
+vignettes/UPtooltest.R:82:31: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(buildup.base, margin=FALSE, colorkey=list(space="bottom"), 
+                              ^
+vignettes/UPtooltest.R:82:47: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(buildup.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                              ^
+vignettes/UPtooltest.R:82:58: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(buildup.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                                         ^
+vignettes/UPtooltest.R:82:69: style: [trailing_whitespace_linter] Remove trailing whitespace.
+levelplot(buildup.base, margin=FALSE, colorkey=list(space="bottom"), 
+                                                                    ^
+vignettes/UPtooltest.R:83:30: style: [spaces_inside_linter] Do not place spaces before parentheses.
+          main = "Urban area" )
+                             ^
+vignettes/UPtooltest.R:86:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+pop.dens <- population.density(population.base,buildup.base)
+^~~~~~~~
+vignettes/UPtooltest.R:86:48: style: [commas_linter] Put a space after a comma.
+pop.dens <- population.density(population.base,buildup.base)
+                                               ^
+vignettes/UPtooltest.R:88:38: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(pop.dens, "latex", booktabs = T) %>%
+                                    ~^
+vignettes/UPtooltest.R:88:40: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(pop.dens, "latex", booktabs = T) %>%
+                                       ^~~
+vignettes/UPtooltest.R:93:32: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(land.cover.18, margin=FALSE, colorkey=list(space="bottom"), 
+                               ^
+vignettes/UPtooltest.R:93:48: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(land.cover.18, margin=FALSE, colorkey=list(space="bottom"), 
+                                               ^
+vignettes/UPtooltest.R:93:59: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(land.cover.18, margin=FALSE, colorkey=list(space="bottom"), 
+                                                          ^
+vignettes/UPtooltest.R:93:70: style: [trailing_whitespace_linter] Remove trailing whitespace.
+levelplot(land.cover.18, margin=FALSE, colorkey=list(space="bottom"), 
+                                                                     ^
+vignettes/UPtooltest.R:95:29: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(land.cover, margin=FALSE, colorkey=list(space="bottom"), 
+                            ^
+vignettes/UPtooltest.R:95:45: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(land.cover, margin=FALSE, colorkey=list(space="bottom"), 
+                                            ^
+vignettes/UPtooltest.R:95:56: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(land.cover, margin=FALSE, colorkey=list(space="bottom"), 
+                                                       ^
+vignettes/UPtooltest.R:95:67: style: [trailing_whitespace_linter] Remove trailing whitespace.
+levelplot(land.cover, margin=FALSE, colorkey=list(space="bottom"), 
+                                                                  ^
+vignettes/UPtooltest.R:99:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.l <- stack(land.cover.18, land.cover)
+^~~~~~
+vignettes/UPtooltest.R:100:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+lc.areas <- land.cover.areas(land.l, land.cover.classes)
+^~~~~~~~
+vignettes/UPtooltest.R:102:38: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(lc.areas, "latex", booktabs = T) %>%
+                                    ~^
+vignettes/UPtooltest.R:102:40: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(lc.areas, "latex", booktabs = T) %>%
+                                       ^~~
+vignettes/UPtooltest.R:107:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.loss <- land.cover.loss(land.l,areas = lc.areas)
+^~~~~~~~~
+vignettes/UPtooltest.R:107:37: style: [commas_linter] Put a space after a comma.
+land.loss <- land.cover.loss(land.l,areas = lc.areas)
+                                    ^
+vignettes/UPtooltest.R:109:39: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(land.loss, "latex", booktabs = T) %>%
+                                     ~^
+vignettes/UPtooltest.R:109:41: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(land.loss, "latex", booktabs = T) %>%
+                                        ^~~
+vignettes/UPtooltest.R:113:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.land <- land.cover[[1]]
+^~~~~~~~~~
+vignettes/UPtooltest.R:114:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.land[green.land !=  8]<- NA
+^~~~~~~~~~
+vignettes/UPtooltest.R:114:29: style: [infix_spaces_linter] Put spaces around all infix operators.
+green.land[green.land !=  8]<- NA
+                            ^~
+vignettes/UPtooltest.R:116:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.a.capita <- green.area.pcapita(green.land, pop =population.base)
+^~~~~~~~~~~~~~
+vignettes/UPtooltest.R:116:54: style: [infix_spaces_linter] Put spaces around all infix operators.
+green.a.capita <- green.area.pcapita(green.land, pop =population.base)
+                                                     ^
+vignettes/UPtooltest.R:118:44: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(green.a.capita, "latex", booktabs = T) %>%
+                                          ~^
+vignettes/UPtooltest.R:118:46: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(green.a.capita, "latex", booktabs = T) %>%
+                                             ^~~
+vignettes/UPtooltest.R:122:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+roads.l <- roads.length(roads.cun)
+^~~~~~~
+vignettes/UPtooltest.R:124:37: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(roads.l, "latex", booktabs = T) %>%
+                                   ~^
+vignettes/UPtooltest.R:124:39: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(roads.l, "latex", booktabs = T) %>%
+                                      ^~~
+vignettes/UPtooltest.R:128:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+roads.dens <- roads.density(roads.cun, buildup.base)
+^~~~~~~~~~
+vignettes/UPtooltest.R:130:40: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(roads.dens, "latex", booktabs = T) %>%
+                                      ~^
+vignettes/UPtooltest.R:130:42: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(roads.dens, "latex", booktabs = T) %>%
+                                         ^~~
+vignettes/UPtooltest.R:135:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+intersection.dens <- intersection.density(roads.cun, buildup.base)
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:137:47: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(intersection.dens, "latex", booktabs = T) %>%
+                                             ~^
+vignettes/UPtooltest.R:137:49: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(intersection.dens, "latex", booktabs = T) %>%
+                                                ^~~
+vignettes/UPtooltest.R:142:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+cycle.dens <- cycle_track_density(cycle.cun, buildup.base)
+^~~~~~~~~~
+vignettes/UPtooltest.R:144:40: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(cycle.dens, "latex", booktabs = T) %>%
+                                      ~^
+vignettes/UPtooltest.R:144:42: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(cycle.dens, "latex", booktabs = T) %>%
+                                         ^~~
+vignettes/UPtooltest.R:149:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+cycle.prox <- cycle_proximity(cycle.cun, population.base)
+^~~~~~~~~~
+vignettes/UPtooltest.R:151:40: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(cycle.prox, "latex", booktabs = T) %>%
+                                      ~^
+vignettes/UPtooltest.R:151:42: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(cycle.prox, "latex", booktabs = T) %>%
+                                         ^~~
+vignettes/UPtooltest.R:155:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+ptransport.prox <- public.transport.proximity(transport.cun, pop = population.base)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:155:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 83 characters.
+ptransport.prox <- public.transport.proximity(transport.cun, pop = population.base)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+vignettes/UPtooltest.R:157:45: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(ptransport.prox, "latex", booktabs = T) %>%
+                                           ~^
+vignettes/UPtooltest.R:157:47: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(ptransport.prox, "latex", booktabs = T) %>%
+                                              ^~~
+vignettes/UPtooltest.R:162:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+amenities.prox <- amenities.proximity(amenities.cun, pop = population.base, save = FALSE)
+^~~~~~~~~~~~~~
+vignettes/UPtooltest.R:162:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 89 characters.
+amenities.prox <- amenities.proximity(amenities.cun, pop = population.base, save = FALSE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+vignettes/UPtooltest.R:164:44: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(amenities.prox, "latex", booktabs = T) %>%
+                                          ~^
+vignettes/UPtooltest.R:164:46: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(amenities.prox, "latex", booktabs = T) %>%
+                                             ^~~
+vignettes/UPtooltest.R:169:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.prox <- jobs.proximity(jobs.distribution[[1]], pop = population.base)
+^~~~~~~~~
+vignettes/UPtooltest.R:171:39: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(jobs.prox, "latex", booktabs = T) %>%
+                                     ~^
+vignettes/UPtooltest.R:171:41: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(jobs.prox, "latex", booktabs = T) %>%
+                                        ^~~
+vignettes/UPtooltest.R:176:36: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(jobs.distribution, margin=FALSE, colorkey=list(space="bottom"), 
+                                   ^
+vignettes/UPtooltest.R:176:52: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(jobs.distribution, margin=FALSE, colorkey=list(space="bottom"), 
+                                                   ^
+vignettes/UPtooltest.R:176:63: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(jobs.distribution, margin=FALSE, colorkey=list(space="bottom"), 
+                                                              ^
+vignettes/UPtooltest.R:176:74: style: [trailing_whitespace_linter] Remove trailing whitespace.
+levelplot(jobs.distribution, margin=FALSE, colorkey=list(space="bottom"), 
+                                                                         ^
+vignettes/UPtooltest.R:180:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+pop.in.hazard <- hazard.exposure(hazard.zones, pop = population.base)
+^~~~~~~~~~~~~
+vignettes/UPtooltest.R:182:43: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(pop.in.hazard, "latex", booktabs = T) %>%
+                                         ~^
+vignettes/UPtooltest.R:182:45: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(pop.in.hazard, "latex", booktabs = T) %>%
+                                            ^~~
+vignettes/UPtooltest.R:187:31: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(hazard.zones, margin=FALSE, colorkey=list(space="bottom"))
+                              ^
+vignettes/UPtooltest.R:187:47: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(hazard.zones, margin=FALSE, colorkey=list(space="bottom"))
+                                              ^
+vignettes/UPtooltest.R:187:58: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(hazard.zones, margin=FALSE, colorkey=list(space="bottom"))
+                                                         ^
+vignettes/UPtooltest.R:191:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+l.consumption <- land.consumption(buildup.base, buildup.horizon)
+^~~~~~~~~~~~~
+vignettes/UPtooltest.R:193:43: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(l.consumption, "latex", booktabs = T) %>%
+                                         ~^
+vignettes/UPtooltest.R:193:45: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(l.consumption, "latex", booktabs = T) %>%
+                                            ^~~
+vignettes/UPtooltest.R:198:51: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(`urban.expansion_ Build_up_2030`, margin=FALSE, colorkey=list(space="bottom"))
+                                                  ^
+vignettes/UPtooltest.R:198:67: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(`urban.expansion_ Build_up_2030`, margin=FALSE, colorkey=list(space="bottom"))
+                                                                  ^
+vignettes/UPtooltest.R:198:78: style: [infix_spaces_linter] Put spaces around all infix operators.
+levelplot(`urban.expansion_ Build_up_2030`, margin=FALSE, colorkey=list(space="bottom"))
+                                                                             ^
+vignettes/UPtooltest.R:198:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 88 characters.
+levelplot(`urban.expansion_ Build_up_2030`, margin=FALSE, colorkey=list(space="bottom"))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+vignettes/UPtooltest.R:202:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+infill.area <- infill(population.base, population.horizon)
+^~~~~~~~~~~
+vignettes/UPtooltest.R:204:41: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(infill.area, "latex", booktabs = T) %>%
+                                       ~^
+vignettes/UPtooltest.R:204:43: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(infill.area, "latex", booktabs = T) %>%
+                                          ^~~
+vignettes/UPtooltest.R:214:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+proximities.pct <- subset(proximities, units == "%")
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.R:221:30: style: [infix_spaces_linter] Put spaces around all infix operators.
+  geom_bar(stat = "identity")+
+                             ^
+vignettes/UPtooltest.R:222:38: style: [infix_spaces_linter] Put spaces around all infix operators.
+  scale_fill_brewer(palette = "Set2")+
+                                     ^
+vignettes/UPtooltest.R:223:13: style: [infix_spaces_linter] Put spaces around all infix operators.
+  theme_bw()+
+            ^
+vignettes/UPtooltest.R:224:51: style: [infix_spaces_linter] Put spaces around all infix operators.
+  ylab("Percentage of inhabitants with proximity")+
+                                                  ^
+vignettes/UPtooltest.R:225:39: style: [infix_spaces_linter] Put spaces around all infix operators.
+  xlab("Urban amenities and services")+
+                                      ^
+vignettes/UPtooltest.R:226:24: style: [infix_spaces_linter] Put spaces around all infix operators.
+  theme(legend.position="none")+
+                       ^
+vignettes/UPtooltest.R:226:32: style: [infix_spaces_linter] Put spaces around all infix operators.
+  theme(legend.position="none")+
+                               ^
+vignettes/UPtooltest.R:227:10: style: [commas_linter] Put a space after a comma.
+  ylim(0,100)
+         ^
+vignettes/UPtooltest.R:228:1: style: [trailing_whitespace_linter] Remove trailing whitespace.
+  
+^~
+vignettes/UPtooltest.R:230:1: style: [trailing_blank_lines_linter] Remove trailing blank lines.
+
+^
+vignettes/UPtooltest.Rmd:122:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:122:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 81 characters.
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+vignettes/UPtooltest.Rmd:123:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.base <- raster::raster(population.base)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:125:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:125:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 84 characters.
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+vignettes/UPtooltest.Rmd:126:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+population.horizon <- raster::raster(population.horizon)
+^~~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:128:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:128:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 83 characters.
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+vignettes/UPtooltest.Rmd:129:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.base <- raster::raster(buildup.base)
+^~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:131:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:131:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 86 characters.
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+vignettes/UPtooltest.Rmd:132:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.horizon <- raster::raster(buildup.horizon)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:134:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.distribution <- system.file("extdata", "Jobs.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:135:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.distribution <- raster::raster(jobs.distribution)
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:137:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.zones <- system.file("extdata", "Hazard.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:138:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.zones <- raster::raster(hazard.zones)
+^~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:140:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+^~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:140:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 86 characters.
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+vignettes/UPtooltest.Rmd:141:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover.18 <- raster::raster(land.cover.18)
+^~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:143:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover <- system.file("extdata", "Land_cover.tif", package = "UPtooltest")
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:144:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover <- raster::raster(land.cover)
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:151:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+hazard.zones <- rasterchecker(hazard.zones, base = population.base)
+^~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:152:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.base <- rasterchecker(buildup.base, base = population.base)
+^~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:153:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+buildup.horizon <- rasterchecker(buildup.horizon, base = population.base)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:154:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.distribution <- rasterchecker(jobs.distribution, base = population.base)
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:155:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.cover <- rasterchecker(land.cover, base = population.base)
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:184:45: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(total_popultion, "latex", booktabs = T) %>%
+                                           ~^
+vignettes/UPtooltest.Rmd:184:47: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(total_popultion, "latex", booktabs = T) %>%
+                                              ^~~
+vignettes/UPtooltest.Rmd:195:45: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(urban_footprint, "latex", booktabs = T) %>%
+                                           ~^
+vignettes/UPtooltest.Rmd:195:47: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(urban_footprint, "latex", booktabs = T) %>%
+                                              ^~~
+vignettes/UPtooltest.Rmd:215:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+pop.dens <- population.density(population.base, buildup.base)
+^~~~~~~~
+vignettes/UPtooltest.Rmd:217:38: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(pop.dens, "latex", booktabs = T) %>%
+                                    ~^
+vignettes/UPtooltest.Rmd:217:40: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(pop.dens, "latex", booktabs = T) %>%
+                                       ^~~
+vignettes/UPtooltest.Rmd:237:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.l <- stack(land.cover.18, land.cover)
+^~~~~~
+vignettes/UPtooltest.Rmd:238:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+lc.areas <- land.cover.areas(land.l, land.cover.classes)
+^~~~~~~~
+vignettes/UPtooltest.Rmd:240:38: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(lc.areas, "latex", booktabs = T) %>%
+                                    ~^
+vignettes/UPtooltest.Rmd:240:40: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(lc.areas, "latex", booktabs = T) %>%
+                                       ^~~
+vignettes/UPtooltest.Rmd:250:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+land.loss <- land.cover.loss(land.l, areas = lc.areas)
+^~~~~~~~~
+vignettes/UPtooltest.Rmd:252:39: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(land.loss, "latex", booktabs = T) %>%
+                                     ~^
+vignettes/UPtooltest.Rmd:252:41: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(land.loss, "latex", booktabs = T) %>%
+                                        ^~~
+vignettes/UPtooltest.Rmd:262:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.land <- land.cover[[1]]
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:263:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.land[green.land != 8] <- NA
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:265:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+green.a.capita <- green.area.pcapita(green.land, pop = population.base)
+^~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:267:44: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(green.a.capita, "latex", booktabs = T) %>%
+                                          ~^
+vignettes/UPtooltest.Rmd:267:46: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(green.a.capita, "latex", booktabs = T) %>%
+                                             ^~~
+vignettes/UPtooltest.Rmd:276:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+roads.l <- roads.length(roads.cun)
+^~~~~~~
+vignettes/UPtooltest.Rmd:278:37: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(roads.l, "latex", booktabs = T) %>%
+                                   ~^
+vignettes/UPtooltest.Rmd:278:39: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(roads.l, "latex", booktabs = T) %>%
+                                      ^~~
+vignettes/UPtooltest.Rmd:287:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+roads.dens <- roads.density(roads.cun, buildup.base)
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:289:40: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(roads.dens, "latex", booktabs = T) %>%
+                                      ~^
+vignettes/UPtooltest.Rmd:289:42: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(roads.dens, "latex", booktabs = T) %>%
+                                         ^~~
+vignettes/UPtooltest.Rmd:299:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+intersection.dens <- intersection.density(roads.cun, buildup.base)
+^~~~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:301:47: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(intersection.dens, "latex", booktabs = T) %>%
+                                             ~^
+vignettes/UPtooltest.Rmd:301:49: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(intersection.dens, "latex", booktabs = T) %>%
+                                                ^~~
+vignettes/UPtooltest.Rmd:312:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+cycle.dens <- cycle_track_density(cycle.cun, buildup.base)
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:314:40: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(cycle.dens, "latex", booktabs = T) %>%
+                                      ~^
+vignettes/UPtooltest.Rmd:314:42: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(cycle.dens, "latex", booktabs = T) %>%
+                                         ^~~
+vignettes/UPtooltest.Rmd:324:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+cycle.prox <- cycle_proximity(cycle.cun, population.base)
+^~~~~~~~~~
+vignettes/UPtooltest.Rmd:326:40: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(cycle.prox, "latex", booktabs = T) %>%
+                                      ~^
+vignettes/UPtooltest.Rmd:326:42: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(cycle.prox, "latex", booktabs = T) %>%
+                                         ^~~
+vignettes/UPtooltest.Rmd:337:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+ptransport.prox <- public.transport.proximity(transport.cun, pop = population.base)
+^~~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:337:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 83 characters.
+ptransport.prox <- public.transport.proximity(transport.cun, pop = population.base)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+vignettes/UPtooltest.Rmd:339:45: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(ptransport.prox, "latex", booktabs = T) %>%
+                                           ~^
+vignettes/UPtooltest.Rmd:339:47: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(ptransport.prox, "latex", booktabs = T) %>%
+                                              ^~~
+vignettes/UPtooltest.Rmd:348:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+amenities.prox <- amenities.proximity(amenities.cun, pop = population.base, save = FALSE)
+^~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:348:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 89 characters.
+amenities.prox <- amenities.proximity(amenities.cun, pop = population.base, save = FALSE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+vignettes/UPtooltest.Rmd:350:44: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(amenities.prox, "latex", booktabs = T) %>%
+                                          ~^
+vignettes/UPtooltest.Rmd:350:46: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(amenities.prox, "latex", booktabs = T) %>%
+                                             ^~~
+vignettes/UPtooltest.Rmd:359:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+jobs.prox <- jobs.proximity(jobs.distribution[[1]], pop = population.base)
+^~~~~~~~~
+vignettes/UPtooltest.Rmd:361:39: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(jobs.prox, "latex", booktabs = T) %>%
+                                     ~^
+vignettes/UPtooltest.Rmd:361:41: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(jobs.prox, "latex", booktabs = T) %>%
+                                        ^~~
+vignettes/UPtooltest.Rmd:380:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+pop.in.hazard <- hazard.exposure(hazard.zones, pop = population.base)
+^~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:382:43: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(pop.in.hazard, "latex", booktabs = T) %>%
+                                         ~^
+vignettes/UPtooltest.Rmd:382:45: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(pop.in.hazard, "latex", booktabs = T) %>%
+                                            ^~~
+vignettes/UPtooltest.Rmd:395:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+l.consumption <- land.consumption(buildup.base, buildup.horizon)
+^~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:397:43: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(l.consumption, "latex", booktabs = T) %>%
+                                         ~^
+vignettes/UPtooltest.Rmd:397:45: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(l.consumption, "latex", booktabs = T) %>%
+                                            ^~~
+vignettes/UPtooltest.Rmd:403:81: style: [line_length_linter] Lines should not be more than 80 characters. This line is 94 characters.
+levelplot(`urban.expansion_ Build_up_2030`, margin = FALSE, colorkey = list(space = "bottom"))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+vignettes/UPtooltest.Rmd:411:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+infill.area <- infill(population.base, population.horizon)
+^~~~~~~~~~~
+vignettes/UPtooltest.Rmd:413:41: style: [T_and_F_symbol_linter] Use TRUE instead of the symbol T.
+kable(infill.area, "latex", booktabs = T) %>%
+                                       ~^
+vignettes/UPtooltest.Rmd:413:43: style: [pipe_consistency_linter] Use the |> pipe operator instead of the %>% pipe operator.
+kable(infill.area, "latex", booktabs = T) %>%
+                                          ^~~
+vignettes/UPtooltest.Rmd:426:1: style: [object_name_linter] Variable and function name style should match snake_case or symbols.
+proximities.pct <- subset(proximities, units == "%")
+^~~~~~~~~~~~~~~
