@@ -34,8 +34,10 @@ library(sf)
 library(raster)
 data(roads.cun)
 
-footprint.b <- system.file("extdata", "Build_up_2025.tif", package =
-"UPtooltest")
+footprint.b <- system.file("extdata", "Build_up_2025.tif",
+  package =
+    "UPtooltest"
+)
 footprint.b <- raster::raster(footprint.b)
 
 inter.dens <- intersection.density(roads.cun, footprint.b)

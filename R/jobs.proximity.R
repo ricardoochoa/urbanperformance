@@ -11,7 +11,6 @@
 #' @param pop a raster that contains information about population distribution
 #' @return a data frame with information about the number and percentage of
 #' population with proximity to job hubs
-#' @import raster
 #' @export
 #' @examples
 #' library(raster)
@@ -38,7 +37,10 @@ jobs.proximity <- function(jobs, pop) {
   jobs.proximity <- data.frame(
     indicator = "Jobs proximity",
     fclass = "jobs",
-    value = c(round(cellStats(j.prox, sum, na.rm = TRUE), 0), round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+    value = c(
+        round(cellStats(j.prox, sum, na.rm = TRUE), 0),
+        round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+      ),
     units = c("inhabitants", "%")
   )
   return(jobs.proximity)

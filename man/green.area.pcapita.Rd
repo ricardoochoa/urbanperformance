@@ -30,8 +30,10 @@ and public open spaces of the urban area, and dividing this result
 \examples{
 library(raster)
 
-land.cover2025 <- system.file("extdata", "Land_cover.tif", package =
-"UPtooltest")
+land.cover2025 <- system.file("extdata", "Land_cover.tif",
+  package =
+    "UPtooltest"
+)
 land.cover2025 <- raster::raster(land.cover2025)
 pop.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
 pop.base <- raster::raster(pop.base)

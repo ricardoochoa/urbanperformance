@@ -5,7 +5,6 @@
 #' @param base base layer that contains the extent and resolution desired.
 #' @return A standardize raster, or rasters with the same extent and resolution,
 #' and projection
-#' @import raster
 #' @export
 #' @examples
 #' library(raster)

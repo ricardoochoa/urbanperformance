@@ -35,11 +35,15 @@ Finally, the difference between both scenarios is calculated (loss).
 library(raster)
 library(reshape2)
 
-land.cover2018 <- system.file("extdata", "Land_cover_2018.tif", package =
-"UPtooltest")
+land.cover2018 <- system.file("extdata", "Land_cover_2018.tif",
+  package =
+    "UPtooltest"
+)
 land.cover2018 <- raster::raster(land.cover2018)
-land.cover2025 <- system.file("extdata", "Land_cover.tif", package =
-"UPtooltest")
+land.cover2025 <- system.file("extdata", "Land_cover.tif",
+  package =
+    "UPtooltest"
+)
 land.cover2025 <- raster::raster(land.cover2025)
 
 land.cover <- stack(land.cover2018, land.cover2025)

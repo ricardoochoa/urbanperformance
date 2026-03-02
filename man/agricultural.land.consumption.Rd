@@ -33,11 +33,15 @@ located within the agricultural polygon (agri.b).
 \examples{
 library(raster)
 
-land.cover2025 <- system.file("extdata", "Land_cover.tif", package =
-"UPtooltest")
+land.cover2025 <- system.file("extdata", "Land_cover.tif",
+  package =
+    "UPtooltest"
+)
 land.cover2025 <- raster::raster(land.cover2025)
-footprint.2030 <- system.file("extdata", "Build_up_2030.tif", package =
-"UPtooltest")
+footprint.2030 <- system.file("extdata", "Build_up_2030.tif",
+  package =
+    "UPtooltest"
+)
 footprint.2030 <- raster::raster(footprint.2030)
 agri.land <- land.cover2025
 agri.land[agri.land != 1] <- 0

@@ -25,8 +25,6 @@
 #' calculated in inhabitants per square kilometer,
 #' total population, and the total footprint calculated in square kilometers per
 #' each scenario.
-#' @import raster
-#' @import dplyr
 #' @export
 #' @examples
 #' library(raster)
@@ -46,7 +44,9 @@ population.density <- function(pop, fp) {
   pop <- stack(pop)
   fp <- stack(fp)
   if (nlayers(pop) != nlayers(fp)) {
-    warning("Please provide the same number of population and urban footprint layers")
+    warning(
+      "Please provide the same number of population and urban footprint layers"
+    )
   }
   fp <- rasterchecker(fp, base = pop)
   nl <- as.numeric(max(nlayers(pop), nlayers(fp)))

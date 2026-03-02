@@ -32,11 +32,15 @@ located within the green land polygon (greenl.b).
 \examples{
 library(raster)
 
-land.cover2025 <- system.file("extdata", "Land_cover.tif", package =
-"UPtooltest")
+land.cover2025 <- system.file("extdata", "Land_cover.tif",
+  package =
+    "UPtooltest"
+)
 land.cover2025 <- raster::raster(land.cover2025)
-footprint.2030 <- system.file("extdata", "Build_up_2030.tif", package =
-"UPtooltest")
+footprint.2030 <- system.file("extdata", "Build_up_2030.tif",
+  package =
+    "UPtooltest"
+)
 footprint.2030 <- raster::raster(footprint.2030)
 green.land <- land.cover2025
 green.land[green.land != 8] <- 0

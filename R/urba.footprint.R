@@ -9,7 +9,6 @@
 #' @param ras one raster that contains buildup information
 #' @return a data frame with information about the urban footprint area in
 #' square kilometers
-#' @import raster
 #' @export
 #' @examples
 #' library(raster)
@@ -30,7 +29,9 @@ urban.footprint <- function(ras) {
     t <- data.frame(
       indicator = "Urban footprint",
       fclass = names(r),
-      value = paste(round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)),
+      value = paste(
+        round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)
+      ),
       units = "km2"
     )
   }) %>% bind_rows()

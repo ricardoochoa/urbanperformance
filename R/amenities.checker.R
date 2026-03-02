@@ -10,7 +10,6 @@
 #' @param proj CRS coordinates
 #' @return a standardize shapefile that contains the amenities points that are
 #' inside the study area.
-#' @import raster
 #' @export
 #' @examples
 #' library(sf)

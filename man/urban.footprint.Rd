@@ -23,8 +23,10 @@ to convert the value to square kilometer.
 \examples{
 library(raster)
 
-footprint.b <- system.file("extdata", "Build_up_2025.tif", package =
-"UPtooltest")
+footprint.b <- system.file("extdata", "Build_up_2025.tif",
+  package =
+    "UPtooltest"
+)
 footprint.b <- raster::raster(footprint.b)
 
 u.footprint25 <- urban.footprint(footprint.b)

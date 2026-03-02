@@ -30,8 +30,6 @@
 #' process
 #' @return a data frame with the results of the indicator with
 #' the total and percentage population with proximity to cycle tracks
-#' @import raster
-#' @import sf
 #' @export
 #' @examples
 #' library(sf)
@@ -72,7 +70,10 @@ cycle_proximity <- function(cycle, pop, parameters = NULL, save = TRUE) {
     fclass = "cycle",
     value = c(
       round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
-      round((cellStats(pop.prox.cycle, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+      round(
+        (cellStats(pop.prox.cycle, sum, na.rm = TRUE) /
+          cellStats(pop, sum, na.rm = TRUE)) * 100, 2
+      )
     ),
     units = c("inhabitants", "%")
   )

@@ -22,8 +22,6 @@
 #' year
 #' @return a data frame with information about the infill areas in square
 #' kilometers
-#' @import raster
-#' @import dplyr
 #' @export
 #' @examples
 #' library(raster)

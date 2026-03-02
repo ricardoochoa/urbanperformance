@@ -27,8 +27,10 @@ of each land cover.
 \examples{
 library(raster)
 
-land.cover2025 <- system.file("extdata", "Land_cover.tif", package =
-"UPtooltest")
+land.cover2025 <- system.file("extdata", "Land_cover.tif",
+  package =
+    "UPtooltest"
+)
 land.cover2025 <- raster::raster(land.cover2025)
 
 lc.areas.2025 <- land.cover.areas(land.cover2025, class = land.cover.classes)

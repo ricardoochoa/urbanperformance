@@ -15,8 +15,6 @@
 #' information of total population
 #' @return a data frame with information about the infill areas in square
 #' kilometers
-#' @import raster
-#' @import sf
 #' @export
 #' @examples
 #' library(raster)
@@ -44,7 +42,8 @@ green.area.pcapita <- function(ga, pop) {
   if (inherits(ga, "RasterLayer")) {
     green.area <- one.cero(ga)
     green.area.r <- projectRaster(ga, crs = sp::CRS("+init=EPSG:3857"))
-    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] * res(green.area.r)[2]
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] *
+      res(green.area.r)[2]
   } else {
     green.area <- st_transform(ga, crs = 3857)
     green.area$aream <- st_area(green.area)

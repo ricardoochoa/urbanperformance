@@ -31,11 +31,15 @@ including streets, open space, and inner vacant land.
 \examples{
 library(raster)
 
-footprint.base <- system.file("extdata", "Build_up_2025.tif", package =
-"UPtooltest")
+footprint.base <- system.file("extdata", "Build_up_2025.tif",
+  package =
+    "UPtooltest"
+)
 footprint.base <- raster::raster(footprint.base)
-footprint.2030 <- system.file("extdata", "Build_up_2030.tif", package =
-"UPtooltest")
+footprint.2030 <- system.file("extdata", "Build_up_2030.tif",
+  package =
+    "UPtooltest"
+)
 footprint.2030 <- raster::raster(footprint.2030)
 
 l.consumption <- land.consumption(footprint.base, footprint.2030)

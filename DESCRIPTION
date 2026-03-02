@@ -4,7 +4,7 @@ Title: UP indicators package
 Version: 0.1.0
 Author: CAPSUS/UP Technology
 Maintainer: The package maintainer <socorro.roman@up.technology>
-Description: This package includes calculation methods to estimate Urban Performance indicators.
+Description: This package includes calculation methods to estimate Urban Performance indicators. It provides functions to analyze spatial geometries and calculate variables over specific zones.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -21,6 +21,9 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rasterVis,
+    kableExtra,
+    ggplot2
 VignetteBuilder: knitr
 Config/testthat/edition: 3

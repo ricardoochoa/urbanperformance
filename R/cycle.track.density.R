@@ -12,9 +12,6 @@
 #' @param footprint raster that contains the urban footprint in the base year
 #' @return a data frame with information about the total km of cycle tracks per
 #' square kilometer
-#' @import raster
-#' @import dplyr
-#' @import sf
 #' @export
 #' @examples
 #' library(sf)

@@ -35,8 +35,6 @@
 #' @return a data frame with the results of the indicator with
 #' the total and percentage population with proximity to transport stops or
 #' services
-#' @import raster
-#' @import sf
 #' @export
 #' @examples
 #' library(sf)
@@ -79,7 +77,10 @@ public.transport.proximity <- function(..., pop, parameters = NULL) {
     param.row <- p[p$fclass == cat, ]
 
     if (nrow(param.row) != 1) {
-      warning(paste("There is not a parameter for :", cat, ". Indicator will not be calculated, please adjust the parameters."))
+      warning(paste(
+        "There is not a parameter for :", cat,
+        ". Indicator will not be calculated, please adjust the parameters."
+      ))
       dist.reclass <- raster(pop)
       values(dist.reclass) <- 0
       names(dist.reclass) <- cat
@@ -112,7 +113,9 @@ public.transport.proximity <- function(..., pop, parameters = NULL) {
     fclass = "public transport",
     value = c(
       round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
-      round((cellStats(pop.prox.transit, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+      round(
+        (cellStats(pop.prox.transit, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2
+      )
     ),
     units = c("inhabitants", "%")
   )

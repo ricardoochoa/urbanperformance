@@ -18,9 +18,6 @@
 #' @param buildup raster that contains the urban footprint in the base year
 #' @return a data frame with information about the losses in agricultural land
 #' in square kilometers
-#' @import raster
-#' @import dplyr
-#' @import sf
 #' @export
 #' @examples
 #' library(raster)

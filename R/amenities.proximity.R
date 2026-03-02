@@ -41,8 +41,6 @@
 #' environment
 #' @return a data frame with the results of the indicator with
 #' the total and percentage of population with proximity to urban amenities
-#' @import raster
-#' @import sf
 #' @export
 #' @examples
 #' library(sf)
@@ -88,7 +86,10 @@ amenities.proximity <- function(..., pop, parameters = NULL, save = TRUE) {
     param.row <- p[p$fclass == cat, ]
 
     if (nrow(param.row) != 1) {
-      warning(paste("There is not a parameter for :", cat, ". Indicator will not be calculated, please adjust the parameters."))
+      warning(paste(
+        "There is not a parameter for :", cat,
+        ". Indicator will not be calculated, please adjust the parameters."
+      ))
       dist.reclass <- raster(pop)
       values(dist.reclass) <- 0
       names(dist.reclass) <- cat
@@ -119,7 +120,10 @@ amenities.proximity <- function(..., pop, parameters = NULL, save = TRUE) {
     y <- data.frame(
       indicator = "Amenities proximity",
       fclass = names(r),
-      value = c(round(cellStats(r, sum, na.rm = TRUE), 0), round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)),
+      value = c(
+        round(cellStats(r, sum, na.rm = TRUE), 0),
+        round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+      ),
       units = c("inhabitants", "%")
     )
     return(y)

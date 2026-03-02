@@ -17,8 +17,6 @@
 #' @param buildup raster that contains the urban footprint in the base year
 #' @return a data frame with information about the losses in green land in
 #' square kilometers
-#' @import raster
-#' @import dplyr
 #' @export
 #' @examples
 #' library(raster)
@@ -54,7 +52,9 @@ green.land.consumption <- function(greenl, buildup) {
   greenl.consumption <- data.frame(
     indicator = "Green land consumption",
     fclass = "green land loss",
-    value = round(((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2),
+    value = round(
+        ((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2
+      ),
     units = "km2"
   )
   return(greenl.consumption)

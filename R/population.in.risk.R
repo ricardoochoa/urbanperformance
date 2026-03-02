@@ -22,7 +22,6 @@
 #' distribution
 #' @return a data frame with information about total population in inhabitants
 #' and percentage
-#' @import raster
 #' @export
 #' @examples
 #' library(raster)
@@ -44,7 +43,10 @@ hazard.exposure <- function(r, pop) {
     y <- data.frame(
       indicator = "Population exposed to risk",
       fclass = names(r),
-      value = c(round(cellStats(r.pop, sum), 0), round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)),
+      value = c(
+        round(cellStats(r.pop, sum), 0),
+        round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)
+      ),
       units = c("inhabitants", "%")
     )
     return(y)

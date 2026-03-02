@@ -19,9 +19,6 @@
 #' categories
 #' @return a data frame with information about the losses in land coverage in
 #' square kilometers
-#' @import raster
-#' @import dplyr
-#' @import reshape2
 #' @export
 #' @examples
 #' library(raster)

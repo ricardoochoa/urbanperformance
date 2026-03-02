@@ -12,7 +12,6 @@
 #' land cover classification
 #' @return a data frame with information about the land consumption in square
 #' kilometers
-#' @import raster
 #' @export
 #' @examples
 #' library(raster)

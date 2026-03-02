@@ -3,7 +3,6 @@
 #' @param ras a raster that contains population information
 #' @return a data frame with information about the total population in
 #' inhabitants
-#' @import raster
 #' @export
 #' @examples
 #' library(raster)

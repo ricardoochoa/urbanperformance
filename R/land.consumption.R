@@ -16,8 +16,6 @@
 #' @param fp.horizon a raster that contains the footprint in the horizon year
 #' @return a data frame with information about the land consumption indicator
 #' calculated in square kilometers
-#' @import raster
-#' @import dplyr
 #' @export
 #' @examples
 #' library(raster)
@@ -51,7 +49,10 @@ land.consumption <- function(fp.base, fp.horizon) {
     y <- data.frame(
       indicator = "Land consumption",
       fclass = paste(names(horizon), "-", names(base)),
-      value = round((cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6, 2),
+      value = round(
+        (cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6,
+        2
+      ),
       units = "km2"
     )
     assign(paste("urban.expansion_", names(horizon)), l.consumption, envir = .GlobalEnv)

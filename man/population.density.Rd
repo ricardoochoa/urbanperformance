@@ -39,11 +39,15 @@ and footprint stack.
 }
 \examples{
 library(raster)
-population.b <- system.file("extdata", "POP_2025.tif", package =
-"UPtooltest")
-population.b <- raster::raster(population.b )
-footprint.base <- system.file("extdata", "Build_up_2025.tif", package =
-"UPtooltest")
+population.b <- system.file("extdata", "POP_2025.tif",
+  package =
+    "UPtooltest"
+)
+population.b <- raster::raster(population.b)
+footprint.base <- system.file("extdata", "Build_up_2025.tif",
+  package =
+    "UPtooltest"
+)
 footprint.base <- raster::raster(footprint.base)
 
 pop.dens <- population.density(population.b, footprint.base)

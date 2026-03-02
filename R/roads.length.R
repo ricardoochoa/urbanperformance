@@ -11,7 +11,6 @@
 #' @return a data frame with information about the total km of roads of each
 #' category in kilometers
 #' @importFrom sf st_length
-#' @import dplyr
 #' @export
 #' @examples
 #' library(sf)
