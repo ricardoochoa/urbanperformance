@@ -1,4 +1,4 @@
 library(testthat)
-library(UPtooltest)
+library(urbanperformance)
 
-test_check("UPtooltest")
+test_check("urbanperformance")

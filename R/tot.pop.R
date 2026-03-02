@@ -7,20 +7,23 @@
 #' @examples
 #' library(raster)
 #'
-#' pop.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
-#' pop.base <- raster::raster(pop.base)
+#' pop_base <- system.file("extdata", "POP_2025.tif",
+#'   package = "urbanperformance"
+#' )
+#' pop_base <- raster::raster(pop_base)
 #'
-#' total.population <- tot.pop(pop.base)
-tot.pop <- function(ras) {
-  ras <- stack(ras)
-  pop <- lapply(1:nlayers(ras), function(i) {
+#' total_population <- tot_pop(pop_base)
+tot_pop <- function(ras) {
+  ras <- raster::stack(ras)
+  pop <- lapply(1:raster::nlayers(ras), function(i) {
     r <- ras[[i]]
     t <- data.frame(
       indicator = "Total population",
       fclass = names(r),
-      value = paste(round(cellStats(r, sum), 0)),
+      value = paste(round(raster::cellStats(r, sum), 0)),
       units = "inhabitants"
     )
-  }) %>% bind_rows()
-  return(pop)
+    t
+  }) |> dplyr::bind_rows()
+  pop
 }

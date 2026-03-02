@@ -27,8 +27,8 @@ the total and percentage population with proximity to cycle tracks
 }
 \description{
 METHOD:
-Cycle proximity (cycle.proximity) is calculated by dividing the population
-(pop.prox.cycle) that
+Cycle proximity (cycle_proximity) is calculated by dividing the population
+(pop_prox_cycle) that
 lives within the service radio of cycling infrastructure by the total
 population (pop).
 First, a raster distance is calculated from the cycle tracks buffer. Next, a
@@ -39,7 +39,7 @@ distance for cycle track can be found in the ‘p.distances’ table of this
 package.
 Next, the population (pop) of all the pixels contained in the raster
 selection is added up to obtain the population that
-has access to the cycle track (pop.prox.cycle). Finally, this population is
+has access to the cycle track (pop_prox_cycle). Finally, this population is
 divided by the total population of the
 urban area (pop) to obtain the percentage of the population that lives within
 the recommended distance for that
@@ -50,8 +50,10 @@ library(sf)
 library(raster)
 data(cycle.cun)
 
-pop.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
-pop.base <- raster::raster(pop.base)
+pop_base <- system.file("extdata", "POP_2025.tif",
+  package = "urbanperformance"
+)
+pop_base <- raster::raster(pop_base)
 
-cycle.prox <- cycle_proximity(cycle.cun, pop = pop.base)
+cycle_prox <- cycle_proximity(cycle.cun, pop = pop_base)
 }

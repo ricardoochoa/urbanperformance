@@ -1,9 +1,16 @@
-Package: UPtooltest
+Package: urbanperformance
 Type: Package
-Title: UP indicators package
+Title: Urban Performance
 Version: 0.1.0
-Author: CAPSUS/UP Technology
-Maintainer: The package maintainer <socorro.roman@up.technology>
+Authors@R: 
+  c(person(given = "Ricardo",
+           family = "Ochoa",
+           role = c("aut", "cre"),
+           email = "ricardo.ochoa@capsus.mx"),
+    person(given = "Socorro",
+           family = "Roman",
+           role = c("aut", "ctb"))
+  )
 Description: This package includes calculation methods to estimate Urban Performance indicators. It provides functions to analyze spatial geometries and calculate variables over specific zones.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -11,13 +18,12 @@ LazyData: true
 RoxygenNote: 7.3.3
 Imports: 
     dplyr,
-    magrittr,
     raster,
     sf,
     reshape2,
     sp
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1.0)
 Suggests: 
     knitr,
     rmarkdown,

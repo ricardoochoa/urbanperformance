@@ -6,10 +6,10 @@
 #' raster.
 #'
 #' METHOD:
-#' Land cover loss (land.cover.loss) is calculated as the difference in areas of
+#' Land cover loss (land_cover_loss) is calculated as the difference in areas of
 #' a specific land cover in two different periods.
 #' First the area of each coverage is calculated for the base year using the
-#' function land.cover.areas included in the
+#' function land_cover_areas included in the
 #' package. Next, the areas of each coverage is calculated for the horizon year
 #' or for the scenario or period selected.
 #' Finally, the difference between both scenarios is calculated (loss).
@@ -26,30 +26,30 @@
 #'
 #' land.cover2018 <- system.file("extdata", "Land_cover_2018.tif",
 #'   package =
-#'     "UPtooltest"
+#'     "urbanperformance"
 #' )
 #' land.cover2018 <- raster::raster(land.cover2018)
 #' land.cover2025 <- system.file("extdata", "Land_cover.tif",
 #'   package =
-#'     "UPtooltest"
+#'     "urbanperformance"
 #' )
 #' land.cover2025 <- raster::raster(land.cover2025)
 #'
-#' land.cover <- stack(land.cover2018, land.cover2025)
+#' land.cover <- raster::stack(land.cover2018, land.cover2025)
 #'
-#' land.loss <- land.cover.loss(land.cover)
-land.cover.loss <- function(..., areas = NULL) {
-  ras <- stack(...)
+#' land_loss <- land_cover_loss(land.cover)
+land_cover_loss <- function(..., areas = NULL) {
+  ras <- raster::stack(...)
   if (!is.null(areas)) {
     y <- areas
   } else {
-    y <- land.cover.areas(ras)
+    y <- land_cover_areas(ras)
   }
-  if (nlayers(ras) > 1) {
-    y <- dcast(y, fclass ~ layer, value.var = "value")
-    base <- names(y)[2]
-    loss <- y %>%
-      mutate(across(-c(1, 2), ~ .x - y[[2]], .names = "value"))
+  if (raster::nlayers(ras) > 1) {
+    y <- reshape2::dcast(y, fclass ~ layer, value.var = "value")
+    # `base` is not used in the formula directly below, relying on `.x - y[[2]]`
+    loss <- y |>
+      dplyr::mutate(dplyr::across(-c(1, 2), ~ .x - y[[2]], .names = "value"))
     loss <- loss[, c(1, 4:ncol(loss))]
     loss$indicator <- "Land cover loss"
     loss$units <- "km2"
@@ -60,5 +60,5 @@ land.cover.loss <- function(..., areas = NULL) {
 
     names(loss) <- c("indicator", "fclass", "value", "units")
   }
-  return(loss)
+  loss
 }

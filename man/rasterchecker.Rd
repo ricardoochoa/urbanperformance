@@ -24,11 +24,11 @@ into a stack
 library(raster)
 library(raster)
 
-pop.b <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
-pop.b <- raster::raster(pop.b)
+pop_b <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+pop_b <- raster::raster(pop_b)
 
-pop.2030 <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
-pop.2030 <- raster::raster(pop.2030)
+pop_2030 <- system.file("extdata", "POP_2030.tif", package = "urbanperformance")
+pop_2030 <- raster::raster(pop_2030)
 
-pop.corrected <- rasterchecker(pop.2030, base = pop.b)
+pop_corrected <- rasterchecker(pop_2030, base = pop_b)
 }

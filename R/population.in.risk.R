@@ -4,15 +4,15 @@
 #'
 #' METHOD:
 #' Exposure (hazard.exposure) is calculated by dividing the number of
-#' inhabitants (r.pop)
+#' inhabitants (r_pop)
 #' that live within the zone of influence of a hazard zone by the total
 #' population (p).
 #' First, clean raster process in apply to convert the layer into a binary
 #' raster. Each type of
-#' hazard is identified by its layer name. Second, the population (r.pop) of all
+#' hazard is identified by its layer name. Second, the population (r_pop) of all
 #' the analysis
 #' points contained in the hazard area is added up to obtain the population that
-#' lives within the affectation zone (r.pop).
+#' lives within the affectation zone (r_pop).
 #' Finally, the population is divided by the total population of the urban area
 #' (p) to obtain the exposure
 #' (hazard.exposure) expressed as a percentage.
@@ -26,30 +26,31 @@
 #' @examples
 #' library(raster)
 #'
-#' pop.b <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+#' pop.b <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
 #' pop.b <- raster::raster(pop.b)
 #'
-#' hazard <- system.file("extdata", "Hazard.tif", package = "UPtooltest")
+#' hazard <- system.file("extdata", "Hazard.tif", package = "urbanperformance")
 #' hazard <- raster::raster(hazard)
 #'
-#' pop.in.hazard <- hazard.exposure(hazard, pop = pop.b)
-hazard.exposure <- function(r, pop) {
-  h <- stack(r)
+#' pop_in_hazard <- hazard_exposure(hazard, pop = pop.b)
+hazard_exposure <- function(r, pop) {
+  h <- raster::stack(r)
   p <- pop
-  x <- lapply(1:nlayers(h), function(i) {
+  x <- lapply(1:raster::nlayers(h), function(i) {
     r <- h[[i]]
-    r <- one.cero(r)
-    r.pop <- r * p
+    r <- one_cero(r)
+    r_pop <- r * p
     y <- data.frame(
       indicator = "Population exposed to risk",
       fclass = names(r),
       value = c(
-        round(cellStats(r.pop, sum), 0),
-        round((cellStats(r.pop, sum) / cellStats(p, sum)) * 100, 2)
+        round(raster::cellStats(r_pop, sum), 0),
+        round((raster::cellStats(r_pop, sum) /
+          raster::cellStats(p, sum)) * 100, 2)
       ),
       units = c("inhabitants", "%")
     )
-    return(y)
-  }) %>% bind_rows()
-  return(x)
+    y
+  }) |> dplyr::bind_rows()
+  x
 }

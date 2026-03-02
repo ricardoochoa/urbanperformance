@@ -15,33 +15,34 @@
 #' @examples
 #' library(raster)
 #'
-#' pop.b <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+#' pop.b <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
 #' pop.b <- raster::raster(pop.b)
 #'
-#' jobs <- system.file("extdata", "Jobs.tif", package = "UPtooltest")
+#' jobs <- system.file("extdata", "Jobs.tif", package = "urbanperformance")
 #' jobs <- raster::raster(jobs)
 #'
-#' jobs.prox <- jobs.proximity(jobs, pop = pop.b)
-jobs.proximity <- function(jobs, pop) {
+#' jobs_prox <- jobs_proximity(jobs, pop = pop.b)
+jobs_proximity <- function(jobs, pop) {
   j <- jobs
   p <- pop
-  j.mean <- cellStats(j, mean)
-  j.sd <- cellStats(j, sd)
-  j.value <- (2 * j.sd) + j.mean
-  j[j <= j.value] <- NA
-  j[j > j.value] <- 1
-  j.dist <- distance(j)
-  j.dist[j.dist > 1000] <- NA
-  j.dist[!is.na(j.dist)] <- 1
-  j.prox <- j.dist * p
-  jobs.proximity <- data.frame(
+  j_mean <- raster::cellStats(j, mean)
+  j_sd <- raster::cellStats(j, stats::sd)
+  j_value <- (2 * j_sd) + j_mean
+  j[j <= j_value] <- NA
+  j[j > j_value] <- 1
+  j_dist <- raster::distance(j)
+  j_dist[j_dist > 1000] <- NA
+  j_dist[!is.na(j_dist)] <- 1
+  j_prox <- j_dist * p
+  jobs_prox <- data.frame(
     indicator = "Jobs proximity",
     fclass = "jobs",
     value = c(
-        round(cellStats(j.prox, sum, na.rm = TRUE), 0),
-        round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
-      ),
+      round(raster::cellStats(j_prox, sum, na.rm = TRUE), 0),
+      round((raster::cellStats(j_prox, sum, na.rm = TRUE) /
+        raster::cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+    ),
     units = c("inhabitants", "%")
   )
-  return(jobs.proximity)
+  jobs_prox
 }

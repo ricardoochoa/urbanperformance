@@ -8,7 +8,7 @@
 A spatial lines data frame.
 }
 \source{
-Simulated data for the UPtooltest package.
+Simulated data for the urbanperformance package.
 }
 \usage{
 transport.cun

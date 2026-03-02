@@ -8,10 +8,10 @@
 #' The first step is to calculate the roads intersection (inter) and calculate
 #' the total number
 #' of unique points. Then, the total number of identified intersections
-#' (n.inter) is then divided by the
-#' total built-up area (u.footprint) which is calculated using the urban
+#' (n_inter) is then divided by the
+#' total built-up area (u_footprint) which is calculated using the urban
 #' footprint function included in the
-#' package, to obtain the intersection density (inter.dens).
+#' package, to obtain the intersection density (inter_dens).
 #'
 #' @param roads  shapefile that contains  roads
 #' @param footprint raster that contains the urban footprint in the base year
@@ -25,28 +25,28 @@
 #'
 #' footprint.b <- system.file("extdata", "Build_up_2025.tif",
 #'   package =
-#'     "UPtooltest"
+#'     "urbanperformance"
 #' )
 #' footprint.b <- raster::raster(footprint.b)
 #'
-#' inter.dens <- intersection.density(roads.cun, footprint.b)
-intersection.density <- function(roads, footprint) {
-  inter <- st_intersection(roads)
+#' inter_dens <- intersection_density(roads.cun, footprint.b)
+intersection_density <- function(roads, footprint) {
+  inter <- sf::st_intersection(roads)
 
-  inter <- inter %>%
-    filter(st_is(geometry, c("POINT", "MULTIPOINT")))
-  inter <- unique(st_geometry(inter))
+  inter <- inter |>
+    dplyr::filter(sf::st_is(.data$geometry, c("POINT", "MULTIPOINT")))
+  inter <- unique(sf::st_geometry(inter))
 
-  n.inter <- as.numeric(length(inter))
+  n_inter <- as.numeric(length(inter))
 
-  u.footprint <- urban.footprint(footprint)$value
+  u_footprint <- urban_footprint(footprint)$value
 
-  inter.dens <- data.frame(
+  inter_dens <- data.frame(
     indicator = "Intersection density",
     fclass = "intersection density",
-    value = round(n.inter / as.numeric(u.footprint), 2),
+    value = round(n_inter / as.numeric(u_footprint), 2),
     units = "int/km2"
   )
 
-  return(inter.dens)
+  inter_dens
 }

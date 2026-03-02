@@ -22,7 +22,7 @@ The cycling infrastructure coverage (cycle.dens) is calculated by adding up
 the
 length of each cycle path (c.lengthm) in the urban area and dividing this
 total (c.length) by
-the urban area’s footprint (u.footprint).
+the urban area’s footprint (u_footprint).
 }
 \examples{
 library(sf)
@@ -31,7 +31,7 @@ data(cycle.cun)
 
 footprint.b <- system.file("extdata", "Build_up_2025.tif",
   package =
-    "UPtooltest"
+    "urbanperformance"
 )
 footprint.b <- raster::raster(footprint.b)
 

@@ -6,18 +6,18 @@
 #' METHOD:
 #' Public transport proximity (transport.proximity) is calculated by dividing
 #' the population
-#' (pop.prox.transit) that lives within the maximum recommended distance to a
+#' (pop_prox_transit) that lives within the maximum recommended distance to a
 #' public transport route or stop,
 #' by the total population (pop).
 #' First, a raster that contains the linear distance from bus stops location is
-#' calculated (dist.r),
+#' calculated (dist_r),
 #' according to the type of transportation system (fclass). The maximum
 #' recommended distance varies according
 #' to the type of transportation.
 #' Second, the population (pop) of all the analysis points contained in the
 #' buffer is added up
 #' to obtain the population that lives close to public transport
-#' (pop.prox.transit).
+#' (pop_prox_transit).
 #' Third, this population is divided by the total population of the urban area
 #' (tot_pop) to
 #' obtain the percentage of the population that lives close to public transport
@@ -41,83 +41,86 @@
 #' library(raster)
 #' data(transport.cun)
 #'
-#' pop.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
-#' pop.base <- raster::raster(pop.base)
+#' pop_base <- system.file("extdata", "POP_2025.tif",
+#'   package = "urbanperformance"
+#' )
+#' pop_base <- raster::raster(pop_base)
 #'
-#' pt.prox <- public.transport.proximity(transport.cun, pop = pop.base)
-public.transport.proximity <- function(..., pop, parameters = NULL) {
+#' pt_prox <- public_transport_proximity(transport.cun, pop = pop_base)
+public_transport_proximity <- function(..., pop, parameters = NULL) {
   if (is.null(parameters)) {
     p <- p.distances
   } else {
     p <- parameters
   }
 
-  t.args <- list(...)
+  t_args <- list(...)
 
-  if (length(t.args) == 1 && is.list(t.args[[1]])) {
-    transport <- t.args[[1]]
+  if (length(t_args) == 1 && is.list(t_args[[1]])) {
+    transport <- t_args[[1]]
   } else {
-    transport <- do.call(rbind, t.args)
+    transport <- do.call(rbind, t_args)
   }
 
-  if (all(st_geometry_type(transport) != "POINT")) {
-    transport.p <- sf::st_centroid(transport)
+  if (all(sf::st_geometry_type(transport) != "POINT")) {
+    transport_p <- sf::st_centroid(transport)
   } else {
-    transport.p <- transport
+    transport_p <- transport
   }
-  category <- unique(stats::na.omit(transport.p$fclass))
+  category <- unique(stats::na.omit(transport_p$fclass))
 
-  dist.rasters.list <- lapply(category, function(cat) {
-    transport.s <- transport.p[which(transport.p$fclass == cat), ]
+  dist_rasters_list <- lapply(category, function(cat) {
+    transport_s <- transport_p[which(transport_p$fclass == cat), ]
 
-    coords <- sf::st_coordinates(transport.s)
+    coords <- sf::st_coordinates(transport_s)
 
-    dist.r <- raster::distanceFromPoints(pop, coords)
+    dist_r <- raster::distanceFromPoints(pop, coords)
 
-    param.row <- p[p$fclass == cat, ]
+    param_row <- p[p$fclass == cat, ]
 
-    if (nrow(param.row) != 1) {
+    if (nrow(param_row) != 1) {
       warning(paste(
         "There is not a parameter for :", cat,
         ". Indicator will not be calculated, please adjust the parameters."
       ))
-      dist.reclass <- raster(pop)
-      values(dist.reclass) <- 0
-      names(dist.reclass) <- cat
-      return(dist.reclass)
+      dist_reclass <- raster::raster(pop)
+      raster::values(dist_reclass) <- 0
+      names(dist_reclass) <- cat
+      return(dist_reclass)
     }
 
-    param.value <- as.numeric(param.row$value)
+    param_value <- as.numeric(param_row$value)
 
-    dist.reclass <- dist.r
-    dist.reclass[dist.reclass <= param.value] <- 1
-    dist.reclass[dist.reclass > param.value] <- 0
-    dist.reclass[is.na(dist.reclass)] <- 0
+    dist_reclass <- dist_r
+    dist_reclass[dist_reclass <= param_value] <- 1
+    dist_reclass[dist_reclass > param_value] <- 0
+    dist_reclass[is.na(dist_reclass)] <- 0
 
-    names(dist.reclass) <- cat
-    return(dist.reclass)
+    names(dist_reclass) <- cat
+    dist_reclass
   })
 
-  distance.stack <- raster::stack(dist.rasters.list)
+  distance_stack <- raster::stack(dist_rasters_list)
 
-  if (nlayers(distance.stack) > 1) {
-    distance.stack <- calc(distance.stack, fun = sum, na.rm = TRUE)
-    distance.stack <- one.cero(distance.stack)
+  if (raster::nlayers(distance_stack) > 1) {
+    distance_stack <- raster::calc(distance_stack, fun = sum, na.rm = TRUE)
+    distance_stack <- one_cero(distance_stack)
   }
 
-  assign("transport.distances", distance.stack, envir = .GlobalEnv)
-  pop.prox.transit <- distance.stack * pop
+  assign("transport_distances", distance_stack, envir = .GlobalEnv)
+  pop_prox_transit <- distance_stack * pop
 
-  transport.proximity <- data.frame(
+  transport_proximity <- data.frame(
     indicator = "Public transport proximity",
     fclass = "public transport",
     value = c(
-      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+      round(raster::cellStats(pop_prox_transit, sum, na.rm = TRUE), 0),
       round(
-        (cellStats(pop.prox.transit, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2
+        (raster::cellStats(pop_prox_transit, sum, na.rm = TRUE) /
+          raster::cellStats(pop, sum, na.rm = TRUE)) * 100, 2
       )
     ),
     units = c("inhabitants", "%")
   )
-  return(transport.proximity)
+  transport_proximity
 }

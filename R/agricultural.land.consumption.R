@@ -9,13 +9,12 @@
 #' base year.
 #' The first step is to define the polygon or the area that acknowledges
 #' high-value agricultural land.
-#' The agricultural land lost to urbanization (agri.c) is calculated by adding
+#' The agricultural land lost to urbanization (agri_c) is calculated by adding
 #' up the hectares of urban area (buildup)
-#' located within the agricultural polygon (agri.b).
+#' located within the agricultural polygon (agri_b).
 #'
-#' @param agri  polygon or raster that contains the area of high-value
-#' agricultural land
-#' @param buildup raster that contains the urban footprint in the base year
+#' @param agr_land_base a raster that contains agricultural land base information
+#' @param agr_land_horizon a raster that contains buildup informationt in the base year
 #' @return a data frame with information about the losses in agricultural land
 #' in square kilometers
 #' @export
@@ -24,37 +23,41 @@
 #'
 #' land.cover2025 <- system.file("extdata", "Land_cover.tif",
 #'   package =
-#'     "UPtooltest"
+#'     "urbanperformance"
 #' )
 #' land.cover2025 <- raster::raster(land.cover2025)
 #' footprint.2030 <- system.file("extdata", "Build_up_2030.tif",
 #'   package =
-#'     "UPtooltest"
+#'     "urbanperformance"
 #' )
 #' footprint.2030 <- raster::raster(footprint.2030)
 #' agri.land <- land.cover2025
 #' agri.land[agri.land != 1] <- 0
 #'
-#' agri.consumption <- agricultural.land.consumption(agri.land, footprint.2030)
-agricultural.land.consumption <- function(agri, buildup) {
-  if (!inherits(agri, "RasterLayer")) {
-    agri.b <- rasterize(agri, buildup, field = 1)
-    agri.b <- one.cero(agri.b)
+#' agri.consumption <- agricultural_land_consumption(agri.land, footprint.2030)
+agricultural_land_consumption <- function(agr_land_base, agr_land_horizon) {
+  if (!inherits(agr_land_base, "RasterLayer")) {
+    agri_b <- raster::rasterize(agr_land_base, agr_land_horizon, field = 1)
+    agri_b <- one_cero(agri_b)
   } else {
-    agri.b <- one.cero(agri)
+    agri_b <- one_cero(agr_land_base)
   }
 
-  buildup.b <- one.cero(buildup)
+  buildup_b <- one_cero(agr_land_horizon)
 
-  agri.c <- agri.b + buildup.b
-  agri.c[agri.c != 2] <- NA
-  agri.r <- projectRaster(agri.c, crs = sp::CRS("+init=EPSG:3857"))
 
-  agricultural.consumption <- data.frame(
+  agr_1 <- agri_b + buildup_b
+  agr_1[agr_1 != 2] <- NA
+  agr_1 <- raster::projectRaster(agr_1,
+    crs = sp::CRS("+init=EPSG:3857")
+  )
+
+  agricultural_consumption <- data.frame(
     indicator = "Agricultural land consumption",
     fclass = "agricultural loss",
-    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+    value = round(((raster::cellStats(agr_1, sum) *
+      raster::res(agr_1)[1] * raster::res(agr_1)[2])) / 1e6, 2),
     units = "km2"
   )
-  return(agricultural.consumption)
+  agricultural_consumption
 }

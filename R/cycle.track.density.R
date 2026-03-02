@@ -6,7 +6,7 @@
 #' the
 #' length of each cycle path (c.lengthm) in the urban area and dividing this
 #' total (c.length) by
-#' the urban area’s footprint (u.footprint).
+#' the urban area’s footprint (u_footprint).
 #'
 #' @param cycle  shapefile that contains cycle tracks
 #' @param footprint raster that contains the urban footprint in the base year
@@ -20,22 +20,22 @@
 #'
 #' footprint.b <- system.file("extdata", "Build_up_2025.tif",
 #'   package =
-#'     "UPtooltest"
+#'     "urbanperformance"
 #' )
 #' footprint.b <- raster::raster(footprint.b)
 #'
 #' cycle.dens <- cycle_track_density(cycle.cun, footprint.b)
 cycle_track_density <- function(cycle, footprint) {
   c <- cycle
-  c$lengthm <- st_length(c)
-  c.length <- round(as.numeric(sum(c$lengthm)) / 1e3, 2)
+  c$lengthm <- sf::st_length(c)
+  c_length <- round(as.numeric(sum(c$lengthm)) / 1e3, 2)
 
-  u.footprint <- urban.footprint(footprint)$value
-  cycle.dens <- data.frame(
+  u_footprint <- urban_footprint(footprint)$value
+  cycle_dens <- data.frame(
     indicator = "Cycle density",
     fclass = "cycle density",
-    value = round(c.length / as.numeric(u.footprint), 2),
+    value = round(c_length / as.numeric(u_footprint), 2),
     units = "km/km2"
   )
-  return(cycle.dens)
+  cycle_dens
 }

@@ -2,8 +2,8 @@
 #' lives within a maximum recommended distance from a cycle track
 #'
 #' METHOD:
-#' Cycle proximity (cycle.proximity) is calculated by dividing the population
-#' (pop.prox.cycle) that
+#' Cycle proximity (cycle_proximity) is calculated by dividing the population
+#' (pop_prox_cycle) that
 #' lives within the service radio of cycling infrastructure by the total
 #' population (pop).
 #' First, a raster distance is calculated from the cycle tracks buffer. Next, a
@@ -14,7 +14,7 @@
 #' package.
 #' Next, the population (pop) of all the pixels contained in the raster
 #' selection is added up to obtain the population that
-#' has access to the cycle track (pop.prox.cycle). Finally, this population is
+#' has access to the cycle track (pop_prox_cycle). Finally, this population is
 #' divided by the total population of the
 #' urban area (pop) to obtain the percentage of the population that lives within
 #' the recommended distance for that
@@ -36,10 +36,12 @@
 #' library(raster)
 #' data(cycle.cun)
 #'
-#' pop.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
-#' pop.base <- raster::raster(pop.base)
+#' pop_base <- system.file("extdata", "POP_2025.tif",
+#'   package = "urbanperformance"
+#' )
+#' pop_base <- raster::raster(pop_base)
 #'
-#' cycle.prox <- cycle_proximity(cycle.cun, pop = pop.base)
+#' cycle_prox <- cycle_proximity(cycle.cun, pop = pop_base)
 cycle_proximity <- function(cycle, pop, parameters = NULL, save = TRUE) {
   if (is.null(parameters)) {
     p <- p.distances
@@ -50,32 +52,32 @@ cycle_proximity <- function(cycle, pop, parameters = NULL, save = TRUE) {
   param <- p[p$fclass == category, ]
   param <- as.numeric(param$value)
 
-  cycle.r <- rasterize(cycle, pop)
-  cycle.d <- distance(cycle.r)
-  cycle.d <- resample(cycle.d, pop, method = "ngb")
+  cycle_r <- raster::rasterize(cycle, pop)
+  cycle_d <- raster::distance(cycle_r)
+  cycle_d <- raster::resample(cycle_d, pop, method = "ngb")
 
-  cycle.reclass <- cycle.d
-  cycle.reclass[cycle.reclass <= param] <- 1
-  cycle.reclass[cycle.reclass > param] <- 0
-  cycle.reclass[is.na(cycle.reclass)] <- 0
+  cycle_reclass <- cycle_d
+  cycle_reclass[cycle_reclass <= param] <- 1
+  cycle_reclass[cycle_reclass > param] <- 0
+  cycle_reclass[is.na(cycle_reclass)] <- 0
 
-  pop.prox.cycle <- cycle.reclass * pop
+  pop_prox_cycle <- cycle_reclass * pop
 
   if (save == TRUE) {
-    assign("cycle.distances", cycle.reclass, envir = .GlobalEnv)
+    assign("cycle_distances", cycle_reclass, envir = .GlobalEnv)
   }
 
-  c.proximity <- data.frame(
+  c_proximity <- data.frame(
     indicator = "Cycle proximity",
     fclass = "cycle",
     value = c(
-      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+      round(raster::cellStats(pop_prox_cycle, sum, na.rm = TRUE), 0),
       round(
-        (cellStats(pop.prox.cycle, sum, na.rm = TRUE) /
-          cellStats(pop, sum, na.rm = TRUE)) * 100, 2
+        (raster::cellStats(pop_prox_cycle, sum, na.rm = TRUE) /
+          raster::cellStats(pop, sum, na.rm = TRUE)) * 100, 2
       )
     ),
     units = c("inhabitants", "%")
   )
-  return(c.proximity)
+  c_proximity
 }

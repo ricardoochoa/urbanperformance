@@ -17,18 +17,18 @@
 #' data(aoi.cun)
 #'
 #'
-#' amenities <- amenities.checker(amenities.cun, aoi = aoi.cun)
-amenities.checker <- function(..., aoi, proj = 4326) {
+#' amenities <- amenities_checker(amenities.cun, aoi = aoi.cun)
+amenities_checker <- function(..., aoi, proj = 4326) {
   x <- list(...)
   if (sf::st_crs(aoi) != sf::st_crs(proj)) {
-    aoi <- st_transform(aoi, crs = proj)
+    aoi <- sf::st_transform(aoi, crs = proj)
   }
   flatten <- function(x) {
     if (inherits(x, "sf")) {
       return(list(x))
     }
     if (is.list(x)) {
-      return(unlist(lapply(x, flatten), recursive = FALSE))
+      unlist(lapply(x, flatten), recursive = FALSE)
     }
   }
   x <- flatten(x)
@@ -37,13 +37,13 @@ amenities.checker <- function(..., aoi, proj = 4326) {
       s <- sf::st_transform(s, crs = proj)
     }
     points <- sf::st_intersection(s, aoi)
-    points.c <- st_centroid(points)
-    points.c$X <- st_coordinates(points.c)[, 1]
-    points.c$Y <- st_coordinates(points.c)[, 2]
-    return(points.c)
+    points_c <- sf::st_centroid(points)
+    points_c$X <- sf::st_coordinates(points_c)[, 1]
+    points_c$Y <- sf::st_coordinates(points_c)[, 2]
+    points_c
   }
   l <- lapply(x, check)
   p <- do.call(rbind, l)
   p <- p[c("fclass", "X", "Y")]
-  return(p)
+  p
 }

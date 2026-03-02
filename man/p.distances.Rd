@@ -8,7 +8,7 @@
 A numeric vector.
 }
 \source{
-Simulated data for the UPtooltest package.
+Simulated data for the urbanperformance package.
 }
 \usage{
 p.distances

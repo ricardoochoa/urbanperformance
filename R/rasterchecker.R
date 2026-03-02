@@ -11,13 +11,15 @@
 #' @examples
 #' library(raster)
 #'
-#' pop.b <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
-#' pop.b <- raster::raster(pop.b)
+#' pop_b <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+#' pop_b <- raster::raster(pop_b)
 #'
-#' pop.2030 <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
-#' pop.2030 <- raster::raster(pop.2030)
+#' pop_2030 <- system.file("extdata", "POP_2030.tif",
+#'   package = "urbanperformance"
+#' )
+#' pop_2030 <- raster::raster(pop_2030)
 #'
-#' pop.corrected <- rasterchecker(pop.2030, base = pop.b)
+#' pop_corrected <- rasterchecker(pop_2030, base = pop_b)
 rasterchecker <- function(..., base) {
   x <- list(...)
   if (length(x) == 1 && is.list(x[[1]])) {
@@ -25,18 +27,19 @@ rasterchecker <- function(..., base) {
   } else {
     r <- x
   }
-  y <- base # r[[1]]
+  y <- base
   adjust <- function(p) {
-    if (!compareCRS(y, p)) {
-      p <- projectRaster(p, y)
+    if (!raster::compareCRS(y, p)) {
+      p <- raster::projectRaster(p, y)
     }
-    if (!extent(p) == extent(y) ||
-      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
-      p <- resample(p, y, method = "ngb")
+    if (!raster::extent(p) == raster::extent(y) ||
+      raster::res(p)[1] != raster::res(y)[1] ||
+      raster::res(p)[2] != raster::res(y)[2]) {
+      p <- raster::resample(p, y, method = "ngb")
     }
-    return(p)
+    p
   }
   s <- lapply(r, adjust)
-  f <- stack(s)
-  return(f)
+  f <- raster::stack(s)
+  f
 }

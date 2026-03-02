@@ -4,7 +4,7 @@
 #' @param r a raster layer with values >= 0
 #' @return a binary raster with values 1 and 0
 #' @export
-non.cero <- function(r) {
+non_cero <- function(r) {
   r[r <= 0] <- NA
-  return(r)
+  r
 }

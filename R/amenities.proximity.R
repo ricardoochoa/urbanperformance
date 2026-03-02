@@ -25,9 +25,9 @@
 #' selection is added up to obtain the population that
 #' has access to a particular amenity (proxi). Finally, this population is
 #' divided by the total population of the
-#' urban area (tot.pop) to obtain the percentage of the population that lives
+#' urban area (tot_pop) to obtain the percentage of the population that lives
 #' within the recommended distance for that
-#' type of amenity (r.proximity).
+#' type of amenity (r_proximity).
 #' @param ... a shapefile or list of shapefiles that contains polygons or points
 #' with the location of urban amenities.
 #' The shapefile must contain the "fclass" column.
@@ -47,87 +47,93 @@
 #' library(raster)
 #' data(amenities.cun)
 #'
-#' pop.b <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+#' pop.b <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
 #' pop.b <- raster::raster(pop.b)
 #'
-#' amen.proximity <- amenities.proximity(amenities.cun, pop = pop.b)
-amenities.proximity <- function(..., pop, parameters = NULL, save = TRUE) {
+#' amen.proximity <- amenities_proximity(amenities.cun, pop = pop.b)
+amenities_proximity <- function(..., pop, parameters = NULL, save = TRUE) {
   if (is.null(parameters)) {
     p <- p.distances
   } else {
     p <- parameters
   }
 
-  amen.args <- list(...)
+  amen_args <- list(...)
 
-  if (length(amen.args) == 1 && is.list(amen.args[[1]]) && !inherits(amen.args[[1]], "sf")) {
-    amen <- amen.args[[1]]
+  if (length(amen_args) == 1 && is.list(amen_args[[1]]) &&
+    !inherits(amen_args[[1]], "sf")) {
+    amen <- amen_args[[1]]
     amen <- do.call(rbind, amen)
   } else {
-    amen <- do.call(rbind, amen.args)
+    amen <- do.call(rbind, amen_args)
   }
 
   category <- unique(stats::na.omit(amen$fclass))
 
-  dist.rasters.list <- lapply(category, function(cat) {
-    amen.s <- amen[which(amen$fclass == cat), ]
+  dist_rasters_list <- lapply(category, function(cat) {
+    amen_s <- amen[which(amen$fclass == cat), ]
 
-    if (all(st_geometry_type(amen.s) != "POINT")) {
-      amen.p <- sf::st_centroid(amen.s)
+    if (all(sf::st_geometry_type(amen_s) != "POINT")) {
+      amen_p <- sf::st_centroid(amen_s)
     } else {
-      amen.p <- amen.s
+      amen_p <- amen_s
     }
 
 
-    coords <- sf::st_coordinates(amen.p)
+    coords <- sf::st_coordinates(amen_p)
 
-    dist.r <- raster::distanceFromPoints(pop, coords)
+    dist_r <- raster::distanceFromPoints(pop, coords)
 
-    param.row <- p[p$fclass == cat, ]
+    param_row <- p[p$fclass == cat, ]
 
-    if (nrow(param.row) != 1) {
+    if (nrow(param_row) != 1) {
       warning(paste(
         "There is not a parameter for :", cat,
         ". Indicator will not be calculated, please adjust the parameters."
       ))
-      dist.reclass <- raster(pop)
-      values(dist.reclass) <- 0
-      names(dist.reclass) <- cat
-      return(dist.reclass)
+      dist_reclass <- raster::raster(pop)
+      raster::values(dist_reclass) <- 0
+      names(dist_reclass) <- cat
+      return(dist_reclass)
     }
 
-    param.value <- as.numeric(param.row$value)
+    param_value <- as.numeric(param_row$value)
 
-    dist.reclass <- dist.r
-    dist.reclass[dist.reclass <= param.value] <- 1
-    dist.reclass[dist.reclass > param.value] <- 0
-    dist.reclass[is.na(dist.reclass)] <- 0
+    dist_reclass <- dist_r
+    dist_reclass[dist_reclass <= param_value] <- 1
+    dist_reclass[dist_reclass > param_value] <- 0
+    dist_reclass[is.na(dist_reclass)] <- 0
 
-    names(dist.reclass) <- cat
+    names(dist_reclass) <- cat
     if (save == TRUE) {
-      assign(paste("amenities.distances.", cat), dist.reclass, envir = .GlobalEnv)
+      assign(paste("amenities.distances.", cat), dist_reclass,
+        envir = .GlobalEnv
+      )
     }
-    return(dist.reclass)
+    dist_reclass
   })
 
-  distance.stack <- raster::stack(dist.rasters.list)
+  distance_stack <- raster::stack(dist_rasters_list)
 
-  r.proximity <- distance.stack * pop
-  names(r.proximity) <- category
+  r_proximity <- distance_stack * pop
+  names(r_proximity) <- category
 
-  proxi <- lapply(1:nlayers(r.proximity), function(i) {
-    r <- r.proximity[[i]]
+  proxi <- lapply(1:raster::nlayers(r_proximity), function(i) {
+    r <- r_proximity[[i]]
+
+    sum_r <- raster::cellStats(r, sum, na.rm = TRUE)
+    sum_pop <- raster::cellStats(pop, sum, na.rm = TRUE)
+
     y <- data.frame(
       indicator = "Amenities proximity",
       fclass = names(r),
       value = c(
-        round(cellStats(r, sum, na.rm = TRUE), 0),
-        round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+        round(sum_r, 0),
+        round((sum_r / sum_pop) * 100, 2)
       ),
       units = c("inhabitants", "%")
     )
-    return(y)
+    y
   })
-  proximities <- do.call(rbind, proxi)
-  return(proximities)
+  do.call(rbind, proxi)
 }

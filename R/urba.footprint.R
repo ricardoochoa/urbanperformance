@@ -1,7 +1,7 @@
 #' This function calculates the urban footprint for a specific scenario/year
 #'
 #' METHOD:
-#' Urban footprint (urban.footprint) of the urban area in a specific year or
+#' Urban footprint (urban_footprint) of the urban area in a specific year or
 #' scenario is calculated
 #' by adding up the area of each pixel with buildup (r), then divide it by 1e6
 #' to convert the value to square kilometer.
@@ -13,27 +13,28 @@
 #' @examples
 #' library(raster)
 #'
-#' footprint.b <- system.file("extdata", "Build_up_2025.tif",
-#'   package =
-#'     "UPtooltest"
+#' footprint_b <- system.file("extdata", "Build_up_2025.tif",
+#'   package = "urbanperformance"
 #' )
-#' footprint.b <- raster::raster(footprint.b)
+#' footprint_b <- raster::raster(footprint_b)
 #'
-#' u.footprint25 <- urban.footprint(footprint.b)
-urban.footprint <- function(ras) {
-  ras <- stack(ras)
-  x <- lapply(1:nlayers(ras), function(i) {
+#' u_footprint25 <- urban_footprint(footprint_b)
+urban_footprint <- function(ras) {
+  ras <- raster::stack(ras)
+  x <- lapply(1:raster::nlayers(ras), function(i) {
     r <- ras[[i]]
     r[r != 0] <- 1
-    r <- projectRaster(r, crs = sp::CRS("+init=EPSG:3857"))
+    r <- raster::projectRaster(r, crs = sp::CRS("+init=EPSG:3857"))
     t <- data.frame(
       indicator = "Urban footprint",
       fclass = names(r),
       value = paste(
-        round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)
+        round(((raster::cellStats(r, sum) *
+          (raster::res(r)[1] * raster::res(r)[2])) / 1e6), 2)
       ),
       units = "km2"
     )
-  }) %>% bind_rows()
-  return(x)
+    t
+  }) |> dplyr::bind_rows()
+  x
 }

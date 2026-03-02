@@ -8,7 +8,7 @@
 A data frame with land cover classes and descriptions.
 }
 \source{
-Simulated data for the UPtooltest package.
+Simulated data for the urbanperformance package.
 }
 \usage{
 land.cover.classes

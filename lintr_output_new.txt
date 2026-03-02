@@ -1,0 +1,1437 @@
+[1mR/agricultural.land.consumption.R:39:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+agricultural.land.consumption <- function(agri, buildup) {
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/agricultural.land.consumption.R:41:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    agri.b <- rasterize(agri, buildup, field = 1)
+    ^~~~~~
+[1mR/agricultural.land.consumption.R:41:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterize'[22m
+    agri.b <- rasterize(agri, buildup, field = 1)
+              ^~~~~~~~~
+[1mR/agricultural.land.consumption.R:42:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    agri.b <- one.cero(agri.b)
+    ^~~~~~
+[1mR/agricultural.land.consumption.R:42:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    agri.b <- one.cero(agri.b)
+              ^~~~~~~~
+[1mR/agricultural.land.consumption.R:44:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    agri.b <- one.cero(agri)
+    ^~~~~~
+[1mR/agricultural.land.consumption.R:44:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    agri.b <- one.cero(agri)
+              ^~~~~~~~
+[1mR/agricultural.land.consumption.R:47:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  buildup.b <- one.cero(buildup)
+  ^~~~~~~~~
+[1mR/agricultural.land.consumption.R:47:16: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+  buildup.b <- one.cero(buildup)
+               ^~~~~~~~
+[1mR/agricultural.land.consumption.R:49:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  agri.c <- agri.b + buildup.b
+  ^~~~~~
+[1mR/agricultural.land.consumption.R:50:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  agri.c[agri.c != 2] <- NA
+  ^~~~~~
+[1mR/agricultural.land.consumption.R:51:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  agri.r <- projectRaster(agri.c, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~~~
+[1mR/agricultural.land.consumption.R:51:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+  agri.r <- projectRaster(agri.c, crs = sp::CRS("+init=EPSG:3857"))
+            ^~~~~~~~~~~~~
+[1mR/agricultural.land.consumption.R:53:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  agricultural.consumption <- data.frame(
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/agricultural.land.consumption.R:56:21: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+                    ^~~~~~~~~
+[1mR/agricultural.land.consumption.R:56:46: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+                                             ^~~
+[1mR/agricultural.land.consumption.R:56:46: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+                                             ^~~
+[1mR/agricultural.land.consumption.R:56:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 89 characters.[22m
+    value = round(((cellStats(agri.c, sum) * res(agri.r)[1] * res(agri.r)[2])) / 1e6, 2),
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+[1mR/agricultural.land.consumption.R:59:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(agricultural.consumption)
+  ^~~~~~
+[1mR/amenities.checker.R:21:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+amenities.checker <- function(..., aoi, proj = 4326) {
+^~~~~~~~~~~~~~~~~
+[1mR/amenities.checker.R:24:12: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_transform'[22m
+    aoi <- st_transform(aoi, crs = proj)
+           ^~~~~~~~~~~~
+[1mR/amenities.checker.R:31:7: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+      return(unlist(lapply(x, flatten), recursive = FALSE))
+      ^~~~~~
+[1mR/amenities.checker.R:40:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_centroid'[22m
+    points.c <- st_centroid(points)
+                ^~~~~~~~~~~
+[1mR/amenities.checker.R:41:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_coordinates'[22m
+    points.c$X <- st_coordinates(points.c)[, 1]
+                  ^~~~~~~~~~~~~~
+[1mR/amenities.checker.R:42:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_coordinates'[22m
+    points.c$Y <- st_coordinates(points.c)[, 2]
+                  ^~~~~~~~~~~~~~
+[1mR/amenities.checker.R:43:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(points.c)
+    ^~~~~~
+[1mR/amenities.checker.R:48:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(p)
+  ^~~~~~
+[1mR/amenities.proximity.R:54:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+amenities.proximity <- function(..., pop, parameters = NULL, save = TRUE) {
+^~~~~~~~~~~~~~~~~~~
+[1mR/amenities.proximity.R:56:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible binding for global variable 'p.distances'[22m
+    p <- p.distances
+         ^~~~~~~~~~~
+[1mR/amenities.proximity.R:61:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  amen.args <- list(...)
+  ^~~~~~~~~
+[1mR/amenities.proximity.R:63:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 93 characters.[22m
+  if (length(amen.args) == 1 && is.list(amen.args[[1]]) && !inherits(amen.args[[1]], "sf")) {
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+[1mR/amenities.proximity.R:72:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  dist.rasters.list <- lapply(category, function(cat) {
+  ^~~~~~~~~~~~~~~~~
+[1mR/amenities.proximity.R:73:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    amen.s <- amen[which(amen$fclass == cat), ]
+    ^~~~~~
+[1mR/amenities.proximity.R:75:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_geometry_type'[22m
+    if (all(st_geometry_type(amen.s) != "POINT")) {
+            ^~~~~~~~~~~~~~~~
+[1mR/amenities.proximity.R:76:7: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      amen.p <- sf::st_centroid(amen.s)
+      ^~~~~~
+[1mR/amenities.proximity.R:78:7: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      amen.p <- amen.s
+      ^~~~~~
+[1mR/amenities.proximity.R:84:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.r <- raster::distanceFromPoints(pop, coords)
+    ^~~~~~
+[1mR/amenities.proximity.R:86:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    param.row <- p[p$fclass == cat, ]
+    ^~~~~~~~~
+[1mR/amenities.proximity.R:93:7: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      dist.reclass <- raster(pop)
+      ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:93:23: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'raster'[22m
+      dist.reclass <- raster(pop)
+                      ^~~~~~
+[1mR/amenities.proximity.R:94:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'values<-'[22m
+      values(dist.reclass) <- 0
+      ^~~~~~
+[1mR/amenities.proximity.R:94:14: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      values(dist.reclass) <- 0
+             ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:95:13: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      names(dist.reclass) <- cat
+            ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:99:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    param.value <- as.numeric(param.row$value)
+    ^~~~~~~~~~~
+[1mR/amenities.proximity.R:101:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass <- dist.r
+    ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:102:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass[dist.reclass <= param.value] <- 1
+    ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:103:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass[dist.reclass > param.value] <- 0
+    ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:104:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass[is.na(dist.reclass)] <- 0
+    ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:106:11: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    names(dist.reclass) <- cat
+          ^~~~~~~~~~~~
+[1mR/amenities.proximity.R:108:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 82 characters.[22m
+      assign(paste("amenities.distances.", cat), dist.reclass, envir = .GlobalEnv)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+[1mR/amenities.proximity.R:110:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(dist.reclass)
+    ^~~~~~
+[1mR/amenities.proximity.R:113:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  distance.stack <- raster::stack(dist.rasters.list)
+  ^~~~~~~~~~~~~~
+[1mR/amenities.proximity.R:115:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  r.proximity <- distance.stack * pop
+  ^~~~~~~~~~~
+[1mR/amenities.proximity.R:116:9: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  names(r.proximity) <- category
+        ^~~~~~~~~~~
+[1mR/amenities.proximity.R:118:21: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  proxi <- lapply(1:nlayers(r.proximity), function(i) {
+                    ^~~~~~~
+[1mR/amenities.proximity.R:124:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(cellStats(r, sum, na.rm = TRUE), 0),
+              ^~~~~~~~~
+[1mR/amenities.proximity.R:124:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(cellStats(r, sum, na.rm = TRUE), 0),
+              ^~~~~~~~~
+[1mR/amenities.proximity.R:124:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(cellStats(r, sum, na.rm = TRUE), 0),
+              ^~~~~~~~~
+[1mR/amenities.proximity.R:125:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 93 characters.[22m
+        round((cellStats(r, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+[1mR/amenities.proximity.R:129:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(y)
+    ^~~~~~
+[1mR/amenities.proximity.R:132:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(proximities)
+  ^~~~~~
+[1mR/biodiversity.land.consumption.R:33:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+biodiversity.land.consumption <- function(bl, buildup) {
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/biodiversity.land.consumption.R:35:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    bl.b <- rasterize(bl, buildup, field = 1)
+    ^~~~
+[1mR/biodiversity.land.consumption.R:35:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterize'[22m
+    bl.b <- rasterize(bl, buildup, field = 1)
+            ^~~~~~~~~
+[1mR/biodiversity.land.consumption.R:36:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    bl.b <- one.cero(bl.b)
+    ^~~~
+[1mR/biodiversity.land.consumption.R:36:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    bl.b <- one.cero(bl.b)
+            ^~~~~~~~
+[1mR/biodiversity.land.consumption.R:38:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    bl.b <- one.cero(bl)
+    ^~~~
+[1mR/biodiversity.land.consumption.R:38:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    bl.b <- one.cero(bl)
+            ^~~~~~~~
+[1mR/biodiversity.land.consumption.R:41:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  buildup.b <- one.cero(buildup)
+  ^~~~~~~~~
+[1mR/biodiversity.land.consumption.R:41:16: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+  buildup.b <- one.cero(buildup)
+               ^~~~~~~~
+[1mR/biodiversity.land.consumption.R:43:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  bl.c <- bl.b + buildup.b
+  ^~~~
+[1mR/biodiversity.land.consumption.R:44:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  bl.c[bl.c != 2] <- NA
+  ^~~~
+[1mR/biodiversity.land.consumption.R:45:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  bl.r <- projectRaster(bl.c, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~
+[1mR/biodiversity.land.consumption.R:45:11: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+  bl.r <- projectRaster(bl.c, crs = sp::CRS("+init=EPSG:3857"))
+          ^~~~~~~~~~~~~
+[1mR/biodiversity.land.consumption.R:47:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  bl.consumption <- data.frame(
+  ^~~~~~~~~~~~~~
+[1mR/biodiversity.land.consumption.R:51:9: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      ((cellStats(bl.c, sum) * res(bl.r)[1] * res(bl.r)[2])) / 1e6,
+        ^~~~~~~~~
+[1mR/biodiversity.land.consumption.R:51:32: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      ((cellStats(bl.c, sum) * res(bl.r)[1] * res(bl.r)[2])) / 1e6,
+                               ^~~
+[1mR/biodiversity.land.consumption.R:51:32: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      ((cellStats(bl.c, sum) * res(bl.r)[1] * res(bl.r)[2])) / 1e6,
+                               ^~~
+[1mR/biodiversity.land.consumption.R:56:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(bl.consumption)
+  ^~~~~~
+[1mR/cycle.proximity.R:39:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+#' pop.base <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mR/cycle.proximity.R:45:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible binding for global variable 'p.distances'[22m
+    p <- p.distances
+         ^~~~~~~~~~~
+[1mR/cycle.proximity.R:53:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.r <- rasterize(cycle, pop)
+  ^~~~~~~
+[1mR/cycle.proximity.R:53:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterize'[22m
+  cycle.r <- rasterize(cycle, pop)
+             ^~~~~~~~~
+[1mR/cycle.proximity.R:54:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.d <- distance(cycle.r)
+  ^~~~~~~
+[1mR/cycle.proximity.R:54:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'distance'[22m
+  cycle.d <- distance(cycle.r)
+             ^~~~~~~~
+[1mR/cycle.proximity.R:55:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.d <- resample(cycle.d, pop, method = "ngb")
+  ^~~~~~~
+[1mR/cycle.proximity.R:55:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'resample'[22m
+  cycle.d <- resample(cycle.d, pop, method = "ngb")
+             ^~~~~~~~
+[1mR/cycle.proximity.R:57:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.reclass <- cycle.d
+  ^~~~~~~~~~~~~
+[1mR/cycle.proximity.R:58:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.reclass[cycle.reclass <= param] <- 1
+  ^~~~~~~~~~~~~
+[1mR/cycle.proximity.R:59:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.reclass[cycle.reclass > param] <- 0
+  ^~~~~~~~~~~~~
+[1mR/cycle.proximity.R:60:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.reclass[is.na(cycle.reclass)] <- 0
+  ^~~~~~~~~~~~~
+[1mR/cycle.proximity.R:62:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  pop.prox.cycle <- cycle.reclass * pop
+  ^~~~~~~~~~~~~~
+[1mR/cycle.proximity.R:65:12: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    assign("cycle.distances", cycle.reclass, envir = .GlobalEnv)
+           ^~~~~~~~~~~~~~~~~
+[1mR/cycle.proximity.R:72:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/cycle.proximity.R:72:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/cycle.proximity.R:72:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(pop.prox.cycle, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/cycle.proximity.R:75:10: [22m[34mstyle: [39m[indentation_linter] [1mIndentation should be 11 spaces but is 10 spaces.[22m
+          cellStats(pop, sum, na.rm = TRUE)) * 100, 2
+         ^~
+[1mR/cycle.proximity.R:80:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(c.proximity)
+  ^~~~~~
+[1mR/cycle.track.density.R:30:16: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_length'[22m
+  c$lengthm <- st_length(c)
+               ^~~~~~~~~
+[1mR/cycle.track.density.R:33:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  u.footprint <- urban.footprint(footprint)$value
+  ^~~~~~~~~~~
+[1mR/cycle.track.density.R:33:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'urban.footprint'[22m
+  u.footprint <- urban.footprint(footprint)$value
+                 ^~~~~~~~~~~~~~~
+[1mR/cycle.track.density.R:34:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  cycle.dens <- data.frame(
+  ^~~~~~~~~~
+[1mR/cycle.track.density.R:40:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(cycle.dens)
+  ^~~~~~
+[1mR/green.area.pcapita.R:27:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+#' pop.base <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mR/green.area.pcapita.R:33:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+green.area.pcapita <- function(ga, pop) {
+^~~~~~~~~~~~~~~~~~
+[1mR/green.area.pcapita.R:38:27: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'tot.pop'[22m
+      t.pop <- as.numeric(tot.pop(pop)$value)
+                          ^~~~~~~
+[1mR/green.area.pcapita.R:43:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    green.area <- one.cero(ga)
+    ^~~~~~~~~~
+[1mR/green.area.pcapita.R:43:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    green.area <- one.cero(ga)
+                  ^~~~~~~~
+[1mR/green.area.pcapita.R:44:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    green.area.r <- projectRaster(ga, crs = sp::CRS("+init=EPSG:3857"))
+    ^~~~~~~~~~~~
+[1mR/green.area.pcapita.R:44:21: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+    green.area.r <- projectRaster(ga, crs = sp::CRS("+init=EPSG:3857"))
+                    ^~~~~~~~~~~~~
+[1mR/green.area.pcapita.R:45:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] *
+    ^~~~~~~~~~~~
+[1mR/green.area.pcapita.R:45:21: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] *
+                    ^~~~~~~~~
+[1mR/green.area.pcapita.R:45:42: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] *
+                                         ^~~
+[1mR/green.area.pcapita.R:45:42: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+    green.area.t <- cellStats(ga, sum) * res(green.area.r)[1] *
+                                         ^~~
+[1mR/green.area.pcapita.R:48:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    green.area <- st_transform(ga, crs = 3857)
+    ^~~~~~~~~~
+[1mR/green.area.pcapita.R:48:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_transform'[22m
+    green.area <- st_transform(ga, crs = 3857)
+                  ^~~~~~~~~~~~
+[1mR/green.area.pcapita.R:49:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    green.area$aream <- st_area(green.area)
+    ^~~~~~~~~~
+[1mR/green.area.pcapita.R:49:25: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_area'[22m
+    green.area$aream <- st_area(green.area)
+                        ^~~~~~~
+[1mR/green.area.pcapita.R:50:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    green.area.t <- as.numeric(sum(green.area$aream))
+    ^~~~~~~~~~~~
+[1mR/green.area.pcapita.R:53:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  green.area.p <- data.frame(
+  ^~~~~~~~~~~~
+[1mR/green.area.pcapita.R:59:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(green.area.p)
+  ^~~~~~
+[1mR/green.land.consumption.R:38:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+green.land.consumption <- function(greenl, buildup) {
+^~~~~~~~~~~~~~~~~~~~~~
+[1mR/green.land.consumption.R:40:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    greenl.b <- rasterize(greenl, buildup, field = 1)
+    ^~~~~~~~
+[1mR/green.land.consumption.R:40:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterize'[22m
+    greenl.b <- rasterize(greenl, buildup, field = 1)
+                ^~~~~~~~~
+[1mR/green.land.consumption.R:41:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    greenl.b <- one.cero(greenl.b)
+    ^~~~~~~~
+[1mR/green.land.consumption.R:41:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    greenl.b <- one.cero(greenl.b)
+                ^~~~~~~~
+[1mR/green.land.consumption.R:43:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    greenl.b <- one.cero(greenl)
+    ^~~~~~~~
+[1mR/green.land.consumption.R:43:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    greenl.b <- one.cero(greenl)
+                ^~~~~~~~
+[1mR/green.land.consumption.R:46:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  buildup.b <- one.cero(buildup)
+  ^~~~~~~~~
+[1mR/green.land.consumption.R:46:16: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+  buildup.b <- one.cero(buildup)
+               ^~~~~~~~
+[1mR/green.land.consumption.R:48:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  greenl.c <- greenl.b + buildup.b
+  ^~~~~~~~
+[1mR/green.land.consumption.R:49:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  greenl.c[greenl.c != 2] <- NA
+  ^~~~~~~~
+[1mR/green.land.consumption.R:50:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  greenl.r <- projectRaster(greenl.c, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~~~~~
+[1mR/green.land.consumption.R:50:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+  greenl.r <- projectRaster(greenl.c, crs = sp::CRS("+init=EPSG:3857"))
+              ^~~~~~~~~~~~~
+[1mR/green.land.consumption.R:52:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  greenl.consumption <- data.frame(
+  ^~~~~~~~~~~~~~~~~~
+[1mR/green.land.consumption.R:56:9: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      ((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2
+        ^~~~~~~~~
+[1mR/green.land.consumption.R:56:36: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      ((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2
+                                   ^~~
+[1mR/green.land.consumption.R:56:36: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      ((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2
+                                   ^~~
+[1mR/green.land.consumption.R:56:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 81 characters.[22m
+      ((cellStats(greenl.c, sum) * res(greenl.r)[1] * res(greenl.r)[2])) / 1e6, 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+[1mR/green.land.consumption.R:60:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(greenl.consumption)
+  ^~~~~~
+[1mR/infill.R:29:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 82 characters.[22m
+#' pop2025 <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+[1mR/infill.R:31:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 82 characters.[22m
+#' pop2030 <- system.file("extdata", "POP_2030.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+[1mR/infill.R:35:20: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+infill <- function(p.base, p.scenario) {
+                   ^~~~~~
+[1mR/infill.R:35:28: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+infill <- function(p.base, p.scenario) {
+                           ^~~~~~~~~~
+[1mR/infill.R:36:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  p.scenario <- rasterchecker(p.scenario, base = p.base)
+  ^~~~~~~~~~
+[1mR/infill.R:36:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterchecker'[22m
+  p.scenario <- rasterchecker(p.scenario, base = p.base)
+                ^~~~~~~~~~~~~
+[1mR/infill.R:41:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  area.in <- projectRaster(ue, crs = sp::CRS("+init=EPSG:3857"))
+  ^~~~~~~
+[1mR/infill.R:41:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+  area.in <- projectRaster(ue, crs = sp::CRS("+init=EPSG:3857"))
+             ^~~~~~~~~~~~~
+[1mR/infill.R:42:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+  ^~~~~~~
+[1mR/infill.R:42:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+              ^~~~~~~~~
+[1mR/infill.R:42:37: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+                                    ^~~
+[1mR/infill.R:42:37: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+  area.in <- (cellStats(ue, sum) * (res(area.in)[1] * res(area.in)[2])) / 1e6
+                                    ^~~
+[1mR/infill.R:44:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  infill.a <- data.frame(
+  ^~~~~~~~
+[1mR/infill.R:50:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(infill.a)
+  ^~~~~~
+[1mR/intersection.density.R:33:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+intersection.density <- function(roads, footprint) {
+^~~~~~~~~~~~~~~~~~~~
+[1mR/intersection.density.R:34:12: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_intersection'[22m
+  inter <- st_intersection(roads)
+           ^~~~~~~~~~~~~~~
+[1mR/intersection.density.R:36:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  inter <- inter %>%
+                 ^~~
+[1mR/intersection.density.R:36:18: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  inter <- inter %>%
+                 ^~~
+[1mR/intersection.density.R:37:12: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_is'[22m
+    filter(st_is(geometry, c("POINT", "MULTIPOINT")))
+           ^~~~~
+[1mR/intersection.density.R:37:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible binding for global variable 'geometry'[22m
+    filter(st_is(geometry, c("POINT", "MULTIPOINT")))
+                 ^~~~~~~~
+[1mR/intersection.density.R:38:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_geometry'[22m
+  inter <- unique(st_geometry(inter))
+                  ^~~~~~~~~~~
+[1mR/intersection.density.R:40:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  n.inter <- as.numeric(length(inter))
+  ^~~~~~~
+[1mR/intersection.density.R:42:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  u.footprint <- urban.footprint(footprint)$value
+  ^~~~~~~~~~~
+[1mR/intersection.density.R:42:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'urban.footprint'[22m
+  u.footprint <- urban.footprint(footprint)$value
+                 ^~~~~~~~~~~~~~~
+[1mR/intersection.density.R:44:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  inter.dens <- data.frame(
+  ^~~~~~~~~~
+[1mR/intersection.density.R:51:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(inter.dens)
+  ^~~~~~
+[1mR/jobs.proximity.R:25:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.proximity <- function(jobs, pop) {
+^~~~~~~~~~~~~~
+[1mR/jobs.proximity.R:28:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.mean <- cellStats(j, mean)
+  ^~~~~~
+[1mR/jobs.proximity.R:28:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+  j.mean <- cellStats(j, mean)
+            ^~~~~~~~~
+[1mR/jobs.proximity.R:29:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.sd <- cellStats(j, sd)
+  ^~~~
+[1mR/jobs.proximity.R:29:11: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+  j.sd <- cellStats(j, sd)
+          ^~~~~~~~~
+[1mR/jobs.proximity.R:30:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.value <- (2 * j.sd) + j.mean
+  ^~~~~~~
+[1mR/jobs.proximity.R:33:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.dist <- distance(j)
+  ^~~~~~
+[1mR/jobs.proximity.R:33:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'distance'[22m
+  j.dist <- distance(j)
+            ^~~~~~~~
+[1mR/jobs.proximity.R:34:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.dist[j.dist > 1000] <- NA
+  ^~~~~~
+[1mR/jobs.proximity.R:35:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.dist[!is.na(j.dist)] <- 1
+  ^~~~~~
+[1mR/jobs.proximity.R:36:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  j.prox <- j.dist * p
+  ^~~~~~
+[1mR/jobs.proximity.R:37:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  jobs.proximity <- data.frame(
+  ^~~~~~~~~~~~~~
+[1mR/jobs.proximity.R:41:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(j.prox, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/jobs.proximity.R:41:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(j.prox, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/jobs.proximity.R:41:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(j.prox, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/jobs.proximity.R:42:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 96 characters.[22m
+      round((cellStats(j.prox, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+[1mR/jobs.proximity.R:46:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(jobs.proximity)
+  ^~~~~~
+[1mR/land.consumption.R:35:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.consumption <- function(fp.base, fp.horizon) {
+^~~~~~~~~~~~~~~~
+[1mR/land.consumption.R:35:30: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.consumption <- function(fp.base, fp.horizon) {
+                             ^~~~~~~
+[1mR/land.consumption.R:35:39: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.consumption <- function(fp.base, fp.horizon) {
+                                      ^~~~~~~~~~
+[1mR/land.consumption.R:39:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterchecker'[22m
+    p <- rasterchecker(fp.horizon, base = fp.base)
+         ^~~~~~~~~~~~~
+[1mR/land.consumption.R:41:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  base <- fp.base %>%
+                  ^~~
+[1mR/land.consumption.R:41:19: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  base <- fp.base %>%
+                  ^~~
+[1mR/land.consumption.R:42:5: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    one.cero()
+    ^~~~~~~~
+[1mR/land.consumption.R:43:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  x <- lapply(1:nlayers(p), function(i) {
+                ^~~~~~~
+[1mR/land.consumption.R:45:16: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    horizon <- one.cero(horizon)
+               ^~~~~~~~
+[1mR/land.consumption.R:46:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    l.consumption <- horizon - base
+    ^~~~~~~~~~~~~
+[1mR/land.consumption.R:47:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    l.consumption[l.consumption != 1] <- NA
+    ^~~~~~~~~~~~~
+[1mR/land.consumption.R:48:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    r.consumption <- projectRaster(l.consumption, crs = sp::CRS("+init=EPSG:3857"))
+    ^~~~~~~~~~~~~
+[1mR/land.consumption.R:48:22: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+    r.consumption <- projectRaster(l.consumption, crs = sp::CRS("+init=EPSG:3857"))
+                     ^~~~~~~~~~~~~
+[1mR/land.consumption.R:48:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+    r.consumption <- projectRaster(l.consumption, crs = sp::CRS("+init=EPSG:3857"))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mR/land.consumption.R:53:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        (cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6,
+         ^~~~~~~~~
+[1mR/land.consumption.R:53:43: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+        (cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6,
+                                          ^~~
+[1mR/land.consumption.R:53:43: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+        (cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6,
+                                          ^~~
+[1mR/land.consumption.R:53:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 96 characters.[22m
+        (cellStats(l.consumption, sum) * (res(r.consumption)[1] * res(r.consumption)[2])) / 1e6,
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+[1mR/land.consumption.R:58:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 88 characters.[22m
+    assign(paste("urban.expansion_", names(horizon)), l.consumption, envir = .GlobalEnv)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+[1mR/land.consumption.R:59:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(y)
+    ^~~~~~
+[1mR/land.consumption.R:60:6: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/land.consumption.R:60:6: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/land.consumption.R:60:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'bind_rows'[22m
+  }) %>% bind_rows()
+         ^~~~~~~~~
+[1mR/land.consumption.R:61:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(x)
+  ^~~~~~
+[1mR/land.cover.areas.R:26:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover.areas <- function(ras, class = NULL) {
+^~~~~~~~~~~~~~~~
+[1mR/land.cover.areas.R:28:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  x <- lapply(1:nlayers(ras), function(i) {
+                ^~~~~~~
+[1mR/land.cover.areas.R:30:24: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'freq'[22m
+    w <- as.data.frame(freq(r))
+                       ^~~~
+[1mR/land.cover.areas.R:33:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+      y <- class %>%
+                 ^~~
+[1mR/land.cover.areas.R:33:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+      y <- class %>%
+                 ^~~
+[1mR/land.cover.areas.R:33:18: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+      y <- class %>%
+                 ^~~
+[1mR/land.cover.areas.R:34:9: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'left_join'[22m
+        left_join(w)
+        ^~~~~~~~~
+[1mR/land.cover.areas.R:36:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+      y <- w %>%
+             ^~~
+[1mR/land.cover.areas.R:36:14: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+      y <- w %>%
+             ^~~
+[1mR/land.cover.areas.R:37:9: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'mutate'[22m
+        mutate(fclass = cat)
+        ^~~~~~
+[1mR/land.cover.areas.R:40:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+    r <- projectRaster(r, crs = sp::CRS("+init=EPSG:3857"))
+         ^~~~~~~~~~~~~
+[1mR/land.cover.areas.R:41:24: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+    y$value <- round(((res(r)[1] * res(r)[2]) * ifelse(is.na(y$count), 0, y$count) / 1e6), 2)
+                       ^~~
+[1mR/land.cover.areas.R:41:24: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+    y$value <- round(((res(r)[1] * res(r)[2]) * ifelse(is.na(y$count), 0, y$count) / 1e6), 2)
+                       ^~~
+[1mR/land.cover.areas.R:41:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 93 characters.[22m
+    y$value <- round(((res(r)[1] * res(r)[2]) * ifelse(is.na(y$count), 0, y$count) / 1e6), 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+[1mR/land.cover.areas.R:43:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(y)
+    ^~~~~~
+[1mR/land.cover.areas.R:44:6: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/land.cover.areas.R:44:6: [22m[34mstyle: [39m[pipe_continuation_linter] [1mPut a space before `%>%` and a new line after it, unless the full pipeline fits on one line.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/land.cover.areas.R:44:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'bind_rows'[22m
+  }) %>% bind_rows()
+         ^~~~~~~~~
+[1mR/land.cover.areas.R:46:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(x)
+  ^~~~~~
+[1mR/land.cover.loss.R:41:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover.loss <- function(..., areas = NULL) {
+^~~~~~~~~~~~~~~
+[1mR/land.cover.loss.R:46:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'land.cover.areas'[22m
+    y <- land.cover.areas(ras)
+         ^~~~~~~~~~~~~~~~
+[1mR/land.cover.loss.R:48:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  if (nlayers(ras) > 1) {
+      ^~~~~~~
+[1mR/land.cover.loss.R:49:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'dcast'[22m
+    y <- dcast(y, fclass ~ layer, value.var = "value")
+         ^~~~~
+[1mR/land.cover.loss.R:50:5: [22m[35mwarning: [39m[object_usage_linter] [1mlocal variable 'base' assigned but may not be used[22m
+    base <- names(y)[2]
+    ^~~~
+[1mR/land.cover.loss.R:51:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+    loss <- y %>%
+              ^~~
+[1mR/land.cover.loss.R:51:15: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+    loss <- y %>%
+              ^~~
+[1mR/land.cover.loss.R:52:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'mutate'[22m
+      mutate(across(-c(1, 2), ~ .x - y[[2]], .names = "value"))
+      ^~~~~~
+[1mR/land.cover.loss.R:52:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'across'[22m
+      mutate(across(-c(1, 2), ~ .x - y[[2]], .names = "value"))
+             ^~~~~~
+[1mR/land.cover.loss.R:63:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(loss)
+  ^~~~~~
+[1mR/non.cero.R:7:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+non.cero <- function(r) {
+^~~~~~~~
+[1mR/non.cero.R:9:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(r)
+  ^~~~~~
+[1mR/one.cero.R:7:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+one.cero <- function(r) {
+^~~~~~~~
+[1mR/one.cero.R:10:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(r)
+  ^~~~~~
+[1mR/one.na.R:7:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+one.na <- function(r) {
+^~~~~~
+[1mR/one.na.R:10:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(r)
+  ^~~~~~
+[1mR/population.density.R:43:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.density <- function(pop, fp) {
+^~~~~~~~~~~~~~~~~~
+[1mR/population.density.R:46:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  if (nlayers(pop) != nlayers(fp)) {
+      ^~~~~~~
+[1mR/population.density.R:46:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  if (nlayers(pop) != nlayers(fp)) {
+      ^~~~~~~
+[1mR/population.density.R:51:9: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'rasterchecker'[22m
+  fp <- rasterchecker(fp, base = pop)
+        ^~~~~~~~~~~~~
+[1mR/population.density.R:52:24: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  nl <- as.numeric(max(nlayers(pop), nlayers(fp)))
+                       ^~~~~~~
+[1mR/population.density.R:52:24: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  nl <- as.numeric(max(nlayers(pop), nlayers(fp)))
+                       ^~~~~~~
+[1mR/population.density.R:56:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    pop.tot <- as.numeric(tot.pop(p)$value)
+    ^~~~~~~
+[1mR/population.density.R:56:27: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'tot.pop'[22m
+    pop.tot <- as.numeric(tot.pop(p)$value)
+                          ^~~~~~~
+[1mR/population.density.R:57:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    urban.fp <- as.numeric(urban.footprint(b)$value)
+    ^~~~~~~~
+[1mR/population.density.R:57:28: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'urban.footprint'[22m
+    urban.fp <- as.numeric(urban.footprint(b)$value)
+                           ^~~~~~~~~~~~~~~
+[1mR/population.density.R:58:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    pop.dens <- round(pop.tot / urban.fp, 2)
+    ^~~~~~~~
+[1mR/population.density.R:65:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(density)
+    ^~~~~~
+[1mR/population.density.R:66:6: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/population.density.R:66:6: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/population.density.R:66:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'bind_rows'[22m
+  }) %>% bind_rows()
+         ^~~~~~~~~
+[1mR/population.density.R:67:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(r)
+  ^~~~~~
+[1mR/population.in.risk.R:36:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.exposure <- function(r, pop) {
+^~~~~~~~~~~~~~~
+[1mR/population.in.risk.R:39:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  x <- lapply(1:nlayers(h), function(i) {
+                ^~~~~~~
+[1mR/population.in.risk.R:41:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    r <- one.cero(r)
+         ^~~~~~~~
+[1mR/population.in.risk.R:42:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    r.pop <- r * p
+    ^~~~~
+[1mR/population.in.risk.R:47:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(cellStats(r.pop, sum), 0),
+              ^~~~~~~~~
+[1mR/population.in.risk.R:47:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(cellStats(r.pop, sum), 0),
+              ^~~~~~~~~
+[1mR/population.in.risk.R:47:15: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(cellStats(r.pop, sum), 0),
+              ^~~~~~~~~
+[1mR/population.in.risk.R:52:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(y)
+    ^~~~~~
+[1mR/population.in.risk.R:53:6: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/population.in.risk.R:53:6: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/population.in.risk.R:53:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'bind_rows'[22m
+  }) %>% bind_rows()
+         ^~~~~~~~~
+[1mR/population.in.risk.R:54:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(x)
+  ^~~~~~
+[1mR/public.transport.proximity.R:44:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+#' pop.base <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mR/public.transport.proximity.R:48:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+public.transport.proximity <- function(..., pop, parameters = NULL) {
+^~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:50:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible binding for global variable 'p.distances'[22m
+    p <- p.distances
+         ^~~~~~~~~~~
+[1mR/public.transport.proximity.R:63:11: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_geometry_type'[22m
+  if (all(st_geometry_type(transport) != "POINT")) {
+          ^~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:64:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    transport.p <- sf::st_centroid(transport)
+    ^~~~~~~~~~~
+[1mR/public.transport.proximity.R:66:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    transport.p <- transport
+    ^~~~~~~~~~~
+[1mR/public.transport.proximity.R:70:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  dist.rasters.list <- lapply(category, function(cat) {
+  ^~~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:71:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    transport.s <- transport.p[which(transport.p$fclass == cat), ]
+    ^~~~~~~~~~~
+[1mR/public.transport.proximity.R:75:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.r <- raster::distanceFromPoints(pop, coords)
+    ^~~~~~
+[1mR/public.transport.proximity.R:77:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    param.row <- p[p$fclass == cat, ]
+    ^~~~~~~~~
+[1mR/public.transport.proximity.R:84:7: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      dist.reclass <- raster(pop)
+      ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:84:23: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'raster'[22m
+      dist.reclass <- raster(pop)
+                      ^~~~~~
+[1mR/public.transport.proximity.R:85:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'values<-'[22m
+      values(dist.reclass) <- 0
+      ^~~~~~
+[1mR/public.transport.proximity.R:85:14: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      values(dist.reclass) <- 0
+             ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:86:13: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+      names(dist.reclass) <- cat
+            ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:90:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    param.value <- as.numeric(param.row$value)
+    ^~~~~~~~~~~
+[1mR/public.transport.proximity.R:92:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass <- dist.r
+    ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:93:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass[dist.reclass <= param.value] <- 1
+    ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:94:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass[dist.reclass > param.value] <- 0
+    ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:95:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    dist.reclass[is.na(dist.reclass)] <- 0
+    ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:97:11: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    names(dist.reclass) <- cat
+          ^~~~~~~~~~~~
+[1mR/public.transport.proximity.R:98:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(dist.reclass)
+    ^~~~~~
+[1mR/public.transport.proximity.R:101:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  distance.stack <- raster::stack(dist.rasters.list)
+  ^~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:103:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  if (nlayers(distance.stack) > 1) {
+      ^~~~~~~
+[1mR/public.transport.proximity.R:104:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    distance.stack <- calc(distance.stack, fun = sum, na.rm = TRUE)
+    ^~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:104:23: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'calc'[22m
+    distance.stack <- calc(distance.stack, fun = sum, na.rm = TRUE)
+                      ^~~~
+[1mR/public.transport.proximity.R:105:5: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+    distance.stack <- one.cero(distance.stack)
+    ^~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:105:23: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'one.cero'[22m
+    distance.stack <- one.cero(distance.stack)
+                      ^~~~~~~~
+[1mR/public.transport.proximity.R:108:10: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  assign("transport.distances", distance.stack, envir = .GlobalEnv)
+         ^~~~~~~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:109:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  pop.prox.transit <- distance.stack * pop
+  ^~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:111:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  transport.proximity <- data.frame(
+  ^~~~~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:115:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/public.transport.proximity.R:115:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/public.transport.proximity.R:115:13: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      round(cellStats(pop.prox.transit, sum, na.rm = TRUE), 0),
+            ^~~~~~~~~
+[1mR/public.transport.proximity.R:117:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 101 characters.[22m
+        (cellStats(pop.prox.transit, sum, na.rm = TRUE) / cellStats(pop, sum, na.rm = TRUE)) * 100, 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+[1mR/public.transport.proximity.R:122:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(transport.proximity)
+  ^~~~~~
+[1mR/rasterchecker.R:17:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+#' pop.2030 <- system.file("extdata", "POP_2030.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mR/rasterchecker.R:28:15: [22m[34mstyle: [39m[commented_code_linter] [1mRemove commented code.[22m
+  y <- base # r[[1]]
+              ^~~~~~
+[1mR/rasterchecker.R:30:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'compareCRS'[22m
+    if (!compareCRS(y, p)) {
+         ^~~~~~~~~~
+[1mR/rasterchecker.R:31:12: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+      p <- projectRaster(p, y)
+           ^~~~~~~~~~~~~
+[1mR/rasterchecker.R:33:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'extent'[22m
+    if (!extent(p) == extent(y) ||
+         ^~~~~~
+[1mR/rasterchecker.R:33:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'extent'[22m
+    if (!extent(p) == extent(y) ||
+         ^~~~~~
+[1mR/rasterchecker.R:34:6: [22m[34mstyle: [39m[indentation_linter] [1mIndentation should be 10 spaces but is 6 spaces.[22m
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+     ^~~~~
+[1mR/rasterchecker.R:34:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+[1mR/rasterchecker.R:34:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+[1mR/rasterchecker.R:34:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+[1mR/rasterchecker.R:34:7: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+      res(p)[1] != res(y)[1] || res(p)[2] != res(y)[2]) {
+      ^~~
+[1mR/rasterchecker.R:35:12: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'resample'[22m
+      p <- resample(p, y, method = "ngb")
+           ^~~~~~~~
+[1mR/rasterchecker.R:37:5: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+    return(p)
+    ^~~~~~
+[1mR/rasterchecker.R:41:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(f)
+  ^~~~~~
+[1mR/roads.density.R:29:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+roads.density <- function(roads, footprint) {
+^~~~~~~~~~~~~
+[1mR/roads.density.R:31:16: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_length'[22m
+  r$lengthm <- st_length(r)
+               ^~~~~~~~~
+[1mR/roads.density.R:32:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  r.length <- round(as.numeric(sum(r$lengthm)) / 1e3, 2)
+  ^~~~~~~~
+[1mR/roads.density.R:34:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  u.footprint <- urban.footprint(footprint)$value
+  ^~~~~~~~~~~
+[1mR/roads.density.R:34:18: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'urban.footprint'[22m
+  u.footprint <- urban.footprint(footprint)$value
+                 ^~~~~~~~~~~~~~~
+[1mR/roads.density.R:35:3: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+  roads.dens <- data.frame(
+  ^~~~~~~~~~
+[1mR/roads.density.R:41:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(roads.dens)
+  ^~~~~~
+[1mR/roads.length.R:20:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+roads.length <- function(roads) {
+^~~~~~~~~~~~
+[1mR/roads.length.R:22:28: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'st_length'[22m
+  r$lengthkm <- as.numeric(st_length(r)) / 1e3
+                           ^~~~~~~~~
+[1mR/roads.length.R:27:26: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  r2 <- as.data.frame(r) %>%
+                         ^~~
+[1mR/roads.length.R:27:26: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  r2 <- as.data.frame(r) %>%
+                         ^~~
+[1mR/roads.length.R:27:26: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  r2 <- as.data.frame(r) %>%
+                         ^~~
+[1mR/roads.length.R:28:5: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'group_by'[22m
+    group_by(fclass) %>%
+    ^~~~~~~~
+[1mR/roads.length.R:28:14: [22m[35mwarning: [39m[object_usage_linter] [1mno visible binding for global variable 'fclass'[22m
+    group_by(fclass) %>%
+             ^~~~~~
+[1mR/roads.length.R:28:22: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+    group_by(fclass) %>%
+                     ^~~
+[1mR/roads.length.R:29:5: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'summarize'[22m
+    summarize(value = sum(lengthkm))
+    ^~~~~~~~~
+[1mR/roads.length.R:29:27: [22m[35mwarning: [39m[object_usage_linter] [1mno visible binding for global variable 'lengthkm'[22m
+    summarize(value = sum(lengthkm))
+                          ^~~~~~~~
+[1mR/roads.length.R:32:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(rl)
+  ^~~~~~
+[1mR/tot.pop.R:10:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+#' pop.base <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mR/tot.pop.R:14:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+tot.pop <- function(ras) {
+^~~~~~~
+[1mR/tot.pop.R:16:19: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  pop <- lapply(1:nlayers(ras), function(i) {
+                  ^~~~~~~
+[1mR/tot.pop.R:18:5: [22m[35mwarning: [39m[object_usage_linter] [1mlocal variable 't' assigned but may not be used[22m
+    t <- data.frame(
+    ^
+[1mR/tot.pop.R:21:27: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+      value = paste(round(cellStats(r, sum), 0)),
+                          ^~~~~~~~~
+[1mR/tot.pop.R:24:6: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/tot.pop.R:24:6: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/tot.pop.R:24:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'bind_rows'[22m
+  }) %>% bind_rows()
+         ^~~~~~~~~
+[1mR/tot.pop.R:25:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(pop)
+  ^~~~~~
+[1mR/UPtooltest-package.R:3:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 91 characters.[22m
+#' @importFrom dplyr bind_rows filter mutate across select left_join %>% group_by summarize
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+[1mR/UPtooltest-package.R:4:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 154 characters.[22m
+#' @importFrom raster cellStats res nlayers extent distance projectRaster raster rasterize distanceFromPoints freq stack resample values<- calc compareCRS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/UPtooltest-package.R:5:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 126 characters.[22m
+#' @importFrom sf st_length st_centroid st_coordinates st_transform st_geometry_type st_area st_intersection st_is st_geometry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/UPtooltest-package.R:11:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 92 characters.[22m
+  "fclass", "geometry", "lengthkm", "p.distances", ".data", "value", "layer", "units", "cat"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+[1mR/urba.footprint.R:23:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+urban.footprint <- function(ras) {
+^~~~~~~~~~~~~~~
+[1mR/urba.footprint.R:25:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'nlayers'[22m
+  x <- lapply(1:nlayers(ras), function(i) {
+                ^~~~~~~
+[1mR/urba.footprint.R:28:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'projectRaster'[22m
+    r <- projectRaster(r, crs = sp::CRS("+init=EPSG:3857"))
+         ^~~~~~~~~~~~~
+[1mR/urba.footprint.R:29:5: [22m[35mwarning: [39m[object_usage_linter] [1mlocal variable 't' assigned but may not be used[22m
+    t <- data.frame(
+    ^
+[1mR/urba.footprint.R:33:17: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'cellStats'[22m
+        round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)
+                ^~~~~~~~~
+[1mR/urba.footprint.R:33:38: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+        round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)
+                                     ^~~
+[1mR/urba.footprint.R:33:38: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'res'[22m
+        round(((cellStats(r, sum) * (res(r)[1] * res(r)[2])) / 1e6), 2)
+                                     ^~~
+[1mR/urba.footprint.R:37:6: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for '%>%'[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/urba.footprint.R:37:6: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+  }) %>% bind_rows()
+     ^~~
+[1mR/urba.footprint.R:37:10: [22m[35mwarning: [39m[object_usage_linter] [1mno visible global function definition for 'bind_rows'[22m
+  }) %>% bind_rows()
+         ^~~~~~~~~
+[1mR/urba.footprint.R:38:3: [22m[34mstyle: [39m[return_linter] [1mUse implicit return behavior; explicit return() is not needed.[22m
+  return(x)
+  ^~~~~~
+[1mR/urbanperformance-package.R:3:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 91 characters.[22m
+#' @importFrom dplyr bind_rows filter mutate across select left_join %>% group_by summarize
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+[1mR/urbanperformance-package.R:4:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 154 characters.[22m
+#' @importFrom raster cellStats res nlayers extent distance projectRaster raster rasterize distanceFromPoints freq stack resample values<- calc compareCRS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/urbanperformance-package.R:5:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 126 characters.[22m
+#' @importFrom sf st_length st_centroid st_coordinates st_transform st_geometry_type st_area st_intersection st_is st_geometry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[1mR/urbanperformance-package.R:11:4: [22m[34mstyle: [39m[indentation_linter] [1mIndentation should be 2 spaces but is 4 spaces.[22m
+    "fclass", "geometry", "lengthkm", "p.distances", ".data", "value", "layer", "units", "cat"
+  ~^
+[1mR/urbanperformance-package.R:11:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 94 characters.[22m
+    "fclass", "geometry", "lengthkm", "p.distances", ".data", "value", "layer", "units", "cat"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+[1mtests/testthat/test-agricultural_land_consumption.R:19:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 81 characters.[22m
+  r2 <- raster(m2, xmn = 0, xmx = 10, ymn = 0, ymx = 10, crs = "+init=EPSG:3857")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+[1mtests/testthat/test-agricultural_land_consumption.R:21:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 88 characters.[22m
+  # Note: The bug in the function might cause an error here, but we just want it to run.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+[1mtests/testthat/test-agricultural_land_consumption.R:25:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 82 characters.[22m
+  # Until the bug is fixed, we just check if it returns a data frame (might fail!)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+[1mvignettes/UPtooltest.R:23:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:23:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 81 characters.[22m
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+[1mvignettes/UPtooltest.R:24:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.base <- raster::raster(population.base)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:26:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:26:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 84 characters.[22m
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+[1mvignettes/UPtooltest.R:27:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.horizon <- raster::raster(population.horizon)
+^~~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:29:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:29:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mvignettes/UPtooltest.R:30:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.base <- raster::raster(buildup.base)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:32:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:32:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 86 characters.[22m
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+[1mvignettes/UPtooltest.R:33:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.horizon <- raster::raster(buildup.horizon)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:35:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.distribution <- system.file("extdata", "Jobs.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:36:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.distribution <- raster::raster(jobs.distribution)
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:38:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.zones <- system.file("extdata", "Hazard.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:39:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.zones <- raster::raster(hazard.zones)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:41:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+^~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:41:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 86 characters.[22m
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+[1mvignettes/UPtooltest.R:42:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover.18 <- raster::raster(land.cover.18)
+^~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:44:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover <- system.file("extdata", "Land_cover.tif", package = "UPtooltest")
+^~~~~~~~~~
+[1mvignettes/UPtooltest.R:45:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover <- raster::raster(land.cover)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.R:49:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.zones <- rasterchecker(hazard.zones, base = population.base)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:50:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.base <- rasterchecker(buildup.base, base = population.base)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:51:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.horizon <- rasterchecker(buildup.horizon, base = population.base)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:52:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.distribution <- rasterchecker(jobs.distribution, base = population.base)
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.R:53:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover <- rasterchecker(land.cover, base = population.base)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.R:54:1: [22m[34mstyle: [39m[trailing_blank_lines_linter] [1mRemove trailing blank lines.[22m
+
+^
+[1mvignettes/UPtooltest.Rmd:122:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:122:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 81 characters.[22m
+population.base <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+[1mvignettes/UPtooltest.Rmd:123:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.base <- raster::raster(population.base)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:125:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:125:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 84 characters.[22m
+population.horizon <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+[1mvignettes/UPtooltest.Rmd:126:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+population.horizon <- raster::raster(population.horizon)
+^~~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:128:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:128:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+buildup.base <- system.file("extdata", "Build_up_2025.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mvignettes/UPtooltest.Rmd:129:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.base <- raster::raster(buildup.base)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:131:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:131:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 86 characters.[22m
+buildup.horizon <- system.file("extdata", "Build_up_2030.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+[1mvignettes/UPtooltest.Rmd:132:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.horizon <- raster::raster(buildup.horizon)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:134:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.distribution <- system.file("extdata", "Jobs.tif", package = "UPtooltest")
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:135:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.distribution <- raster::raster(jobs.distribution)
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:137:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.zones <- system.file("extdata", "Hazard.tif", package = "UPtooltest")
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:138:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.zones <- raster::raster(hazard.zones)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:140:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+^~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:140:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 86 characters.[22m
+land.cover.18 <- system.file("extdata", "Land_cover_2018.tif", package = "UPtooltest")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+[1mvignettes/UPtooltest.Rmd:141:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover.18 <- raster::raster(land.cover.18)
+^~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:143:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover <- system.file("extdata", "Land_cover.tif", package = "UPtooltest")
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:144:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover <- raster::raster(land.cover)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:151:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+hazard.zones <- rasterchecker(hazard.zones, base = population.base)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:152:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.base <- rasterchecker(buildup.base, base = population.base)
+^~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:153:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+buildup.horizon <- rasterchecker(buildup.horizon, base = population.base)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:154:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.distribution <- rasterchecker(jobs.distribution, base = population.base)
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:155:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.cover <- rasterchecker(land.cover, base = population.base)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:184:45: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(total_popultion, "latex", booktabs = T) %>%
+                                           ~^
+[1mvignettes/UPtooltest.Rmd:184:47: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(total_popultion, "latex", booktabs = T) %>%
+                                              ^~~
+[1mvignettes/UPtooltest.Rmd:195:45: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(urban_footprint, "latex", booktabs = T) %>%
+                                           ~^
+[1mvignettes/UPtooltest.Rmd:195:47: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(urban_footprint, "latex", booktabs = T) %>%
+                                              ^~~
+[1mvignettes/UPtooltest.Rmd:215:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+pop.dens <- population.density(population.base, buildup.base)
+^~~~~~~~
+[1mvignettes/UPtooltest.Rmd:217:38: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(pop.dens, "latex", booktabs = T) %>%
+                                    ~^
+[1mvignettes/UPtooltest.Rmd:217:40: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(pop.dens, "latex", booktabs = T) %>%
+                                       ^~~
+[1mvignettes/UPtooltest.Rmd:237:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.l <- stack(land.cover.18, land.cover)
+^~~~~~
+[1mvignettes/UPtooltest.Rmd:238:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+lc.areas <- land.cover.areas(land.l, land.cover.classes)
+^~~~~~~~
+[1mvignettes/UPtooltest.Rmd:240:38: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(lc.areas, "latex", booktabs = T) %>%
+                                    ~^
+[1mvignettes/UPtooltest.Rmd:240:40: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(lc.areas, "latex", booktabs = T) %>%
+                                       ^~~
+[1mvignettes/UPtooltest.Rmd:250:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+land.loss <- land.cover.loss(land.l, areas = lc.areas)
+^~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:252:39: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(land.loss, "latex", booktabs = T) %>%
+                                     ~^
+[1mvignettes/UPtooltest.Rmd:252:41: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(land.loss, "latex", booktabs = T) %>%
+                                        ^~~
+[1mvignettes/UPtooltest.Rmd:262:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+green.land <- land.cover[[1]]
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:263:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+green.land[green.land != 8] <- NA
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:265:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+green.a.capita <- green.area.pcapita(green.land, pop = population.base)
+^~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:267:44: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(green.a.capita, "latex", booktabs = T) %>%
+                                          ~^
+[1mvignettes/UPtooltest.Rmd:267:46: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(green.a.capita, "latex", booktabs = T) %>%
+                                             ^~~
+[1mvignettes/UPtooltest.Rmd:276:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+roads.l <- roads.length(roads.cun)
+^~~~~~~
+[1mvignettes/UPtooltest.Rmd:278:37: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(roads.l, "latex", booktabs = T) %>%
+                                   ~^
+[1mvignettes/UPtooltest.Rmd:278:39: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(roads.l, "latex", booktabs = T) %>%
+                                      ^~~
+[1mvignettes/UPtooltest.Rmd:287:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+roads.dens <- roads.density(roads.cun, buildup.base)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:289:40: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(roads.dens, "latex", booktabs = T) %>%
+                                      ~^
+[1mvignettes/UPtooltest.Rmd:289:42: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(roads.dens, "latex", booktabs = T) %>%
+                                         ^~~
+[1mvignettes/UPtooltest.Rmd:299:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+intersection.dens <- intersection.density(roads.cun, buildup.base)
+^~~~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:301:47: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(intersection.dens, "latex", booktabs = T) %>%
+                                             ~^
+[1mvignettes/UPtooltest.Rmd:301:49: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(intersection.dens, "latex", booktabs = T) %>%
+                                                ^~~
+[1mvignettes/UPtooltest.Rmd:312:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+cycle.dens <- cycle_track_density(cycle.cun, buildup.base)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:314:40: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(cycle.dens, "latex", booktabs = T) %>%
+                                      ~^
+[1mvignettes/UPtooltest.Rmd:314:42: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(cycle.dens, "latex", booktabs = T) %>%
+                                         ^~~
+[1mvignettes/UPtooltest.Rmd:324:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+cycle.prox <- cycle_proximity(cycle.cun, population.base)
+^~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:326:40: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(cycle.prox, "latex", booktabs = T) %>%
+                                      ~^
+[1mvignettes/UPtooltest.Rmd:326:42: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(cycle.prox, "latex", booktabs = T) %>%
+                                         ^~~
+[1mvignettes/UPtooltest.Rmd:337:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+ptransport.prox <- public.transport.proximity(transport.cun, pop = population.base)
+^~~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:337:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 83 characters.[22m
+ptransport.prox <- public.transport.proximity(transport.cun, pop = population.base)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+[1mvignettes/UPtooltest.Rmd:339:45: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(ptransport.prox, "latex", booktabs = T) %>%
+                                           ~^
+[1mvignettes/UPtooltest.Rmd:339:47: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(ptransport.prox, "latex", booktabs = T) %>%
+                                              ^~~
+[1mvignettes/UPtooltest.Rmd:348:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+amenities.prox <- amenities.proximity(amenities.cun, pop = population.base, save = FALSE)
+^~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:348:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 89 characters.[22m
+amenities.prox <- amenities.proximity(amenities.cun, pop = population.base, save = FALSE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:350:44: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(amenities.prox, "latex", booktabs = T) %>%
+                                          ~^
+[1mvignettes/UPtooltest.Rmd:350:46: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(amenities.prox, "latex", booktabs = T) %>%
+                                             ^~~
+[1mvignettes/UPtooltest.Rmd:359:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+jobs.prox <- jobs.proximity(jobs.distribution[[1]], pop = population.base)
+^~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:361:39: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(jobs.prox, "latex", booktabs = T) %>%
+                                     ~^
+[1mvignettes/UPtooltest.Rmd:361:41: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(jobs.prox, "latex", booktabs = T) %>%
+                                        ^~~
+[1mvignettes/UPtooltest.Rmd:380:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+pop.in.hazard <- hazard.exposure(hazard.zones, pop = population.base)
+^~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:382:43: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(pop.in.hazard, "latex", booktabs = T) %>%
+                                         ~^
+[1mvignettes/UPtooltest.Rmd:382:45: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(pop.in.hazard, "latex", booktabs = T) %>%
+                                            ^~~
+[1mvignettes/UPtooltest.Rmd:395:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+l.consumption <- land.consumption(buildup.base, buildup.horizon)
+^~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:397:43: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(l.consumption, "latex", booktabs = T) %>%
+                                         ~^
+[1mvignettes/UPtooltest.Rmd:397:45: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(l.consumption, "latex", booktabs = T) %>%
+                                            ^~~
+[1mvignettes/UPtooltest.Rmd:403:81: [22m[34mstyle: [39m[line_length_linter] [1mLines should not be more than 80 characters. This line is 94 characters.[22m
+levelplot(`urban.expansion_ Build_up_2030`, margin = FALSE, colorkey = list(space = "bottom"))
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:411:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+infill.area <- infill(population.base, population.horizon)
+^~~~~~~~~~~
+[1mvignettes/UPtooltest.Rmd:413:41: [22m[34mstyle: [39m[T_and_F_symbol_linter] [1mUse TRUE instead of the symbol T.[22m
+kable(infill.area, "latex", booktabs = T) %>%
+                                       ~^
+[1mvignettes/UPtooltest.Rmd:413:43: [22m[34mstyle: [39m[pipe_consistency_linter] [1mUse the |> pipe operator instead of the %>% pipe operator.[22m
+kable(infill.area, "latex", booktabs = T) %>%
+                                          ^~~
+[1mvignettes/UPtooltest.Rmd:426:1: [22m[34mstyle: [39m[object_name_linter] [1mVariable and function name style should match snake_case or symbols.[22m
+proximities.pct <- subset(proximities, units == "%")
+^~~~~~~~~~~~~~~

@@ -8,7 +8,7 @@
 A spatial polygon data frame.
 }
 \source{
-Simulated data for the UPtooltest package.
+Simulated data for the urbanperformance package.
 }
 \usage{
 aoi.cun

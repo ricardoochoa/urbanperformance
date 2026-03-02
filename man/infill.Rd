@@ -9,12 +9,12 @@ population
 between the base year and the horizon year. It is also known as
 intensification area.}
 \usage{
-infill(p.base, p.scenario)
+infill(p_base, p_scenario)
 }
 \arguments{
-\item{p.base}{raster that contains population distribution in the base year}
+\item{p_base}{raster that contains population distribution in the base year}
 
-\item{p.scenario}{raster that contains population distribution in the horizon
+\item{p_scenario}{raster that contains population distribution in the horizon
 year}
 }
 \value{
@@ -23,12 +23,12 @@ kilometers
 }
 \description{
 METHOD:
-The infill area (infill.a) is calculated as the sum of the area (area.in) of
+The infill area (infill_a) is calculated as the sum of the area (area_in) of
 all analysis pixels that
 had population since the base scenario (base > 0) and their population in the
-scenario of analysis for the horizon year (p.scenario)
-is at least twice the population in the base scenario (p.base).
-Vacant lands (p.base = 0) in which population will settle in the future are
+scenario of analysis for the horizon year (p_scenario)
+is at least twice the population in the base scenario (p_base).
+Vacant lands (p_base = 0) in which population will settle in the future are
 not considered in the
 calculation of the infill area, since they will use infrastructure networks
 within
@@ -37,9 +37,13 @@ the capacity with which they were first conceived.
 \examples{
 library(raster)
 
-pop2025 <- system.file("extdata", "POP_2025.tif", package = "UPtooltest")
+pop2025 <- system.file("extdata", "POP_2025.tif",
+  package = "urbanperformance"
+)
 pop2025 <- raster::raster(pop2025)
-pop2030 <- system.file("extdata", "POP_2030.tif", package = "UPtooltest")
+pop2030 <- system.file("extdata", "POP_2030.tif",
+  package = "urbanperformance"
+)
 pop2030 <- raster::raster(pop2030)
 
 infill.area <- infill(pop2025, pop2030)

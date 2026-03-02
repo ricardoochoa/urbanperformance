@@ -2,7 +2,7 @@
 #' area
 #'
 #' METHOD:
-#' The roads length (roads.length) is calculated by adding up the
+#' The roads length (roads_length) is calculated by adding up the
 #' length of road roads in kilometers (lengthkm) for each category (fclass)
 #' included.
 #'
@@ -16,18 +16,18 @@
 #' library(sf)
 #' data(roads.cun)
 #'
-#' r.length <- roads.length(roads.cun)
-roads.length <- function(roads) {
+#' r_length <- roads_length(roads.cun)
+roads_length <- function(roads) {
   r <- roads
-  r$lengthkm <- as.numeric(st_length(r)) / 1e3
+  r$lengthkm <- as.numeric(sf::st_length(r)) / 1e3
   rl <- data.frame(
     indicator = "Roads length",
     units = "km"
   )
-  r2 <- as.data.frame(r) %>%
-    group_by(fclass) %>%
-    summarize(value = sum(lengthkm))
+  r2 <- as.data.frame(r) |>
+    dplyr::group_by(.data$fclass) |>
+    dplyr::summarize(value = sum(.data$lengthkm))
 
   rl <- cbind(rl, r2)
-  return(rl)
+  rl
 }

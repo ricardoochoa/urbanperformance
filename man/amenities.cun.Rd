@@ -8,7 +8,7 @@
 A spatial points data frame.
 }
 \source{
-Simulated data for the UPtooltest package.
+Simulated data for the urbanperformance package.
 }
 \usage{
 amenities.cun
