@@ -1,5 +1,5 @@
 ---
-title: "urbanperformance"
+title: "Introduction to the *urbanperformance* Package"
 output: 
   rmarkdown::pdf_document:
     extra_dependencies: ["float"]
@@ -18,81 +18,78 @@ knitr::opts_chunk$set(
 )
 ```
 
+# **Introduction**
 
-# Introduction
+This vignette introduces the `urbanperformance` package, developed within the Urban Performance (UP) Tool framework. The UP Tool is designed to generate scenarios to project possible futures for specific study areas. The tool includes two main components: the Urban Performance Calculator and the Urban Performance Visualizer.
 
-This vignette introduces the "UPtool" package, developed whiting the Urban Performance (UP) Tool framework. UP Tool is designed to generate scenarios to project possible futures of specific study areas. The tool includes two main components: the Urban Performance Calculator, and the Urban Performance Visualizer.
+The `urbanperformance` package integrates a list of indicators aligned with the Sustainable Development Goals (SDGs). Included in the Urban Performance Calculator, these indicators assess a city's present and future performance by modeling the impacts of investment projects and policy interventions.
 
-UPtool package integrates a list of indicators alignated to the Sustainable Development Goals (SDGs). Included in the Urban Performance Calculator, these indicators assess a city's present and future performance by modeling the impacts of investment projects and policy interventions. 
+Through this package, users can access functions to evaluate multiple scenarios and spatial solutions, enabling rigorous testing of their effectiveness in advancing sustainable urban development.
 
-Through this package, users access functions to evaluate multiple scenarios and spatial solutions, allowing for the rigorous testing of their effectiveness in contributing to sustainable urban development.
+## Indicators
 
-## Indicators 
-The UPtool package includes a list of indicators designated to assess city conditions across various scenarios. These indicators are numeric values that characterize the urban environment and identify critical issues, facilitating the evaluation, monitoring, and communication of a city's status. They are key for integrated urban planning, enabling users to model how an area currently addresses specific urban challenges.
+The `urbanperformance` package includes a list of indicators designated to assess city conditions across various scenarios. These indicators are numeric values that characterize the urban environment and identify critical issues, facilitating the evaluation, monitoring, and communication of a city's status. They are key for integrated urban planning, enabling users to model how an area currently addresses specific urban challenges.
 
 The indicators included in the package are listed in the table below. Note that several of these metrics comprise sub-indicators to enhance the granularity of the analysis.
 
-|List of indicators                                               |
-|:-------------------------------|:-------------------------------|
-|1. Total population             |11. Roads length                |           
-|2. Urban footprint              |12. Roads density               |
-|3. Population density           |13. Intersection density        |
-|4. Land consumption             |14. Cycle track density         |
-|5. Infill                       |15. Cycle proximity             |
-|6. Biodiversity land consumption|16. Public transport proximity  |
-|7. Agricultural land consumption|17. Amenities proximity         |
-|8. Green land consumption       |18. Jobs proximity              |
-|9. Green land per capita        |19. Hazard exposure             |
-|10. Land cover loss             |                                |
+| List of indicators |  |
+| :---- | :---- |
+| 1. Total population | 11. Roads length |
+| 2. Urban footprint | 12. Roads density |
+| 3. Population density | 13. Intersection density |
+| 4. Land consumption | 14. Cycle track density |
+| 5. Infill | 15. Cycle proximity |
+| 6. Biodiversity land consumption | 16. Public transport proximity |
+| 7. Agricultural land consumption | 17. Amenities proximity |
+| 8. Green land consumption | 18. Jobs proximity |
+| 9. Green land per capita | 19. Hazard exposure |
+| 10. Land cover loss |  |
 
-As well as in the Urban Performance Calculator, the UPtool package integrates the calculation methodology of the indicators. These methodologies are demonstrated in this document through a practical exercise. In essence, UPtool executes a series of geoprocessing tasks and calculations.
+Similar to the Urban Performance Calculator, the `urbanperformance` package operationalizes the calculation methodology for these indicators. These methodologies are demonstrated in this document through a practical exercise. In essence, `urbanperformance` executes a series of geoprocessing tasks and calculations.
 
-## Basic Data 
+## Basic Data
 
-To calculate the indicators, the UPtool package requires two types of inputs: spatial data and numerical data.
+To calculate the indicators, the `urbanperformance` package requires two types of inputs: spatial data and numerical data.
 
-**Spatial Data**
+### Spatial Data
 
-This comprises a set of georreferenced information layers, including:
+This comprises a set of georeferenced information layers, including:
 
-|Data                            |Description                                      |
-|:-------------------------------|:------------------------------------------------|
-|Population.                     |Spatial distribution of inhabitants              |
-|Urban Amenities location.       |Location of schools, hospitals and basic services|
-|Employment distribution.        |Spatial distribution of employments              |
-|Roads network.                  |Location of roads, including categories.         |
-|Land cover zones.               |Land cover areas and classification              |
-|Cycle tracks.                   |Location of cycle tracks.                        |
-|Transport systems.              |Location of bus stops or transport routes.       |
-|Hazard-prone areas.             |Location of hazard-prone areas in the city.      |
-|Biodiversity areas.             |Delimitation of biodiversity zones.              |
-|Green areas.                    |Location of green areas in the city.             |
+| Data | Description |
+| :---- | :---- |
+| Population | Spatial distribution of inhabitants |
+| Urban Amenities location | Location of schools, hospitals, and basic services |
+| Employment distribution | Spatial distribution of employment |
+| Roads network | Location of roads, including categories |
+| Land cover zones | Land cover areas and classification |
+| Cycle tracks | Location of cycle tracks |
+| Transport systems | Location of bus stops or transport routes |
+| Hazard-prone areas | Location of hazard-prone areas in the city |
+| Biodiversity areas | Delimitation of biodiversity zones |
+| Green areas | Location of green areas in the city |
 
-
-The package supports various standard formats, including:raster (.tif), or vectors (.shp, .kml, .geojson).
+The package supports various standard formats, including rasters (`.tif`) or vectors (`.shp`, `.kml`, `.geojson`).
 
 *Note: All spatial datasets must be cleaned and standardized prior to use within the package.*
 
-
-**Numerical Data**
+### Numerical Data
 
 In addition to spatial layers, numerical inputs are required. These include proximity parameters, land use classifications, and scalar values representing specific facts or assumptions about the urban environment.
 
-To demonstrate UPtool functionality, this vignette utilizes the pre-loaded data, which users can use to explore the indicators and assess conditions for the example city.
+To demonstrate the functionality of `urbanperformance`, this vignette utilizes pre-loaded dummy data based on a localized area in Cancún, Mexico. Users can use this dataset to explore the indicators and assess conditions for the example city.
 
-# UPtool Application
+# The `urbanperformance` package
 
-The exercise is integrated by four main steps to use the UPtool package: 
+The exercise is integrated by four main steps to use the `urbanperformance` package:
 
 1. Installation
 2. Input data
 3. Indicators calculation
 4. Results analysis
 
-
 ## Installation
 
-The first step is to load the necessary packages to perform the complete example. Additionally, as can be consulted in the UPtool package documentation, the calculations included use functions from other packages to simplify processes.
+The first step is to load the necessary packages to perform the complete example. Additionally, as can be consulted in the `urbanperformance` package documentation, the calculations included use functions from other packages to simplify processes.
 
 ```{r setup, warning= FALSE, echo = TRUE, message=FALSE}
 # Load require libraries
@@ -104,9 +101,9 @@ library(dplyr)
 
 ## Input data
 
-The second step is to load the city data. This data could be gather from open data sources or local sources, dependent on the availability. For this exercise, a dummy dataset is included in the package to perform an example of application of the calculations.
+The second step is to load the city data. This data could be gathered from open data sources or local sources, depending on availability. For this exercise, a dummy dataset is included in the package to perform an example of application of the calculations.
 
-The example dataset is already clean and standardize following a specific structured, described in the UPtool documentation. This dataset includes information about population, roads, land cover, cycle infrastructure, amenities location, hazard areas, and jobs proximity. 
+The example dataset is already cleaned and standardized following a specific structure, described in the `urbanperformance` documentation. This dataset includes information about population, roads, land cover, cycle infrastructure, amenities location, hazard areas, and jobs proximity.
 
 Dataset can be loaded as follows:
 
@@ -161,7 +158,7 @@ land_cover <- system.file("extdata", "Land_cover.tif",
 land_cover <- raster::raster(land_cover)
 ```
 
-
+The `rasterchecker()` function ensures that all spatial rasters share the same resolution, projection, and bounding box as the base population raster.
 
 ```{r, fig.width= 7, fig.height= 8}
 ## Verify urban extents
@@ -174,9 +171,9 @@ land_cover <- rasterchecker(land_cover, base = population_base)
 
 ## Indicators calculation
 
-**2.3.1 Total population**
+### Total population
 
-This function calculates the total population in the urban area by adding the population located in each pixel. 
+This function calculates the total population in the urban area by adding the population located in each pixel.
 
 This metric serves as the fundamental baseline for the entire analysis. Accurate population counts are essential for normalizing other indicators (creating per-capita metrics) and for dimensioning the scale of urban needs, such as utility demand and service coverage.
 
@@ -190,7 +187,7 @@ levelplot(population_base,
 )
 ```
 
-Calculate total population
+Calculate total population:
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 # library for plotting tables
@@ -202,7 +199,7 @@ kable(total_population, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.2 Urban Footprint**
+### Urban Footprint
 
 This function quantifies the total physical area occupied by artificial surfaces, built-up areas, and urban structures.
 
@@ -213,7 +210,6 @@ kable(urban_footprint, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-
 ```{r, fig.width= 4, fig.height= 5, fig.pos="H", fig.align = "center"}
 levelplot(buildup_base,
   margin = FALSE, colorkey = list(space = "bottom"),
@@ -221,8 +217,7 @@ levelplot(buildup_base,
 )
 ```
 
-
-**2.3.3. Population density**
+### Population density
 
 Population density is the amount of inhabitants per built-up area. This indicator measures the intensity of land use by dividing the total population by the urban footprint area.
 
@@ -235,8 +230,9 @@ kable(pop_dens, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.4 Land cover areas**
-This function calculates areas for each land cover in a specific scenario
+### Land cover areas
+
+This function calculates areas for each land cover in a specific scenario.
 
 ```{r, fig.width= 4, fig.height= 5, fig.pos="H", fig.align = "center"}
 levelplot(land_cover_18,
@@ -249,7 +245,6 @@ levelplot(land_cover,
 )
 ```
 
-
 ```{r fig.height=6, fig.pos="H", fig.width=5, message=FALSE, warning=FALSE}
 land_l <- stack(land_cover_18, land_cover)
 lc_areas <- land_cover_areas(land_l, land.cover.classes)
@@ -258,10 +253,9 @@ kable(lc_areas, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.5 Land cover loss**
+### Land cover loss
 
 This function calculates the amount of a specific land coverage that is become to a different land cover, between different scenarios. This indicator can be calculate for a specific land coverage loss or different coverages including in the same raster.
-
 
 ```{r,fig.width= 5, fig.height= 6, fig.pos="H"}
 land_loss <- land_cover_loss(land_l, areas = lc_areas)
@@ -270,10 +264,9 @@ kable(land_loss, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.6 Green land per capita**
+### Green land per capita
 
-This function calculates the total green area within the urban area (forests, parks, gardens, etc.) per inhabitant. 
-
+This function calculates the total green area within the urban area (forests, parks, gardens, etc.) per inhabitant.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 green_land <- land_cover[[1]]
@@ -285,9 +278,9 @@ kable(green_a_capita, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.7 Roads length**
+### Roads length
 
-This function calculates the roads kilometers per each fclass in the study area. 
+This function calculates the roads kilometers per each fclass in the study area.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 roads_l <- roads_length(roads.cun)
@@ -296,7 +289,7 @@ kable(roads_l, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.8 Roads density**
+### Roads density
 
 This function calculates the roads kilometers per square kilometer in the study area. Road density indicates the level of infrastructure penetration. While high density implies good connectivity, an excessively high density may suggest an over-dominance of car-oriented infrastructure and high impervious surface coverage, which can contribute to heat island effects and runoff issues.
 
@@ -307,8 +300,7 @@ kable(roads_dens, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-
-**2.3.9 Intersection density**
+### Intersection density
 
 This function calculates the average number of urban crossroads per pixel. Intersection density is a widely recognized proxy for walkability. A higher density typically indicates a finer street grain (smaller blocks) and greater connectivity, which offers pedestrians more route choices and shorter distances between destinations. Conversely, low intersection density often characterizes car-dependent suburban designs.
 
@@ -319,11 +311,11 @@ kable(intersection_dens, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.10 Cycle track density**
+### Cycle track density
 
 This function calculates the cycle track kilometers per square kilometer of urban area.
 
-This measures the supply of active mobility infrastructure relative to the city size. It helps identify if the investment in cycling networks matches the scale of the urban area
+This measures the supply of active mobility infrastructure relative to the city size. It helps identify if the investment in cycling networks matches the scale of the urban area.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 cycle_dens <- cycle_track_density(cycle.cun, buildup_base)
@@ -332,10 +324,9 @@ kable(cycle_dens, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
+### Cycle proximity
 
-**2.3.11 Cycle proximity**
-
-This function calculates the total and the percentage of the population that lives within a maximum recommended distance from a cycle track. This indicator  reveals who actually has access to the network, highlighting gaps where neighborhoods are disconnected from safe cycling routes.
+This function calculates the total and the percentage of the population that lives within a maximum recommended distance from a cycle track. This indicator reveals who actually has access to the network, highlighting gaps where neighborhoods are disconnected from safe cycling routes.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 cycle_prox <- cycle_proximity(cycle.cun, population_base)
@@ -344,11 +335,11 @@ kable(cycle_prox, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.12 Public transport proximity**
+### Public transport proximity
 
-This function calculates the total and the percentage of the population that lives within a maximum recommended distance from a public transport station, according to the transport classification. 
+This function calculates the total and the percentage of the population that lives within a maximum recommended distance from a public transport station, according to the transport classification.
 
-High proximity ensures that mass transit is a viable option for residents, reducing dependency on private vehicles and lowering carbon emissions. 
+High proximity ensures that mass transit is a viable option for residents, reducing dependency on private vehicles and lowering carbon emissions.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 ptransport_prox <- public_transport_proximity(transport.cun,
@@ -359,9 +350,9 @@ kable(ptransport_prox, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.13 Amenities proximity**
+### Amenities proximity
 
-This function calculates the total and the percentage of the population that lives within the maximum recommended distance to each of the following urban public services and amenities.
+This function calculates the total and the percentage of the population that lives within the maximum recommended distance to each of the following urban public services and amenities. Setting save = FALSE prevents the function from writing intermediate shapefiles to your local working directory.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 amenities_prox <- amenities_proximity(amenities.cun,
@@ -373,9 +364,9 @@ kable(amenities_prox, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-**2.3.14 Jobs proximity**
+### Jobs proximity
 
-This function calculates the percentage of the population that lives within  the areas with high job density in the urban area. This indicator helps in evaluation of the proportion of residents living near major employment clusters or high job-density zones.
+This function calculates the percentage of the population that lives within the areas with high job density in the urban area. This indicator helps in evaluation of the proportion of residents living near major employment clusters or high job-density zones.
 
 ```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
 jobs_prox <- jobs_proximity(jobs_distribution[[1]], pop = population_base)
@@ -384,7 +375,6 @@ kable(jobs_prox, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
-
 ```{r, fig.width= 4, fig.height= 5, fig.pos="H", fig.align = "center"}
 levelplot(jobs_distribution,
   margin = FALSE, colorkey = list(space = "bottom"),
@@ -392,7 +382,7 @@ levelplot(jobs_distribution,
 )
 ```
 
-**2.3.15 Population in risk**
+### Population in risk
 
 This function calculates the number and percentage of the population that is exposed to hazards because they live within the zone of influence of natural and anthropogenic sources.
 
@@ -409,7 +399,7 @@ kable(pop_in_hazard, "latex", booktabs = TRUE) |>
 levelplot(hazard_zones, margin = FALSE, colorkey = list(space = "bottom"))
 ```
 
-**2.3.16 Land consumption**
+### Land consumption
 
 This function calculates land consumption between two urban growth scenarios. Land consumption is the amount of land predicted to change from natural habitats or agricultural uses into urban human settlements between the base year and the horizon year.
 
@@ -420,6 +410,7 @@ kable(l_consumption, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 
+*Note: The `land_consumption` function automatically generates a raster object in your global environment named `urban.expansion_ Build_up_2030` representing the expanded areas. You can plot this object directly:*
 
 ```{r, fig.width= 4, fig.height= 5, fig.pos="H", fig.align = "center"}
 levelplot(`urban.expansion_ Build_up_2030`,
@@ -428,7 +419,7 @@ levelplot(`urban.expansion_ Build_up_2030`,
 )
 ```
 
-**2.3.17 Infill**
+### Infill
 
 This function calculates the amount of land that was located within the boundaries of the urban area in the base scenario and that at least doubled its population between the base year and the horizon year. It is also known as intensification area.
 
