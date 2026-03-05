@@ -64,7 +64,7 @@ cycle_proximity <- function(cycle, pop, parameters = NULL, save = TRUE) {
   pop_prox_cycle <- cycle_reclass * pop
 
   if (save == TRUE) {
-    assign("cycle_distances", cycle_reclass, envir = .GlobalEnv)
+    warning("The 'save' argument is deprecated. Rasters are no longer automatically saved to the global environment to comply with CRAN policies.")
   }
 
   c_proximity <- data.frame(

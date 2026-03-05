@@ -44,8 +44,11 @@ population_density <- function(pop, fp) {
   pop <- raster::stack(pop)
   fp <- raster::stack(fp)
   if (raster::nlayers(pop) != raster::nlayers(fp)) {
-    warning(
-      "Please provide the same number of population and urban footprint layers"
+    stop(
+      paste0(
+        "Please provide the same number of population ",
+        "and urban footprint layers"
+      )
     )
   }
   fp <- rasterchecker(fp, base = pop)

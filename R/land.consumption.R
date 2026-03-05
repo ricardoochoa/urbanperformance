@@ -58,9 +58,6 @@ land_consumption <- function(fp_base, fp_horizon) {
       ),
       units = "km2"
     )
-    assign(paste("urban.expansion_", names(horizon)), l_consumption,
-      envir = .GlobalEnv
-    )
     y
   }) |> dplyr::bind_rows()
   x

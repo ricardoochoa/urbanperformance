@@ -38,16 +38,17 @@
 #' infill.area <- infill(pop2025, pop2030)
 infill <- function(p_base, p_scenario) {
   p_scenario <- rasterchecker(p_scenario,
-                              base = p_base)
+    base = p_base
+  )
   base <- p_base
   base[base <= 0] <- NA
   ue <- p_scenario / base
   ue[ue < 2] <- NA
   area_in <- raster::projectRaster(ue, crs = sp::CRS("+init=EPSG:3857"))
   area_in <- (raster::cellStats(ue, sum) * (raster::res(area_in)[1] *
-                                            
+
     raster::res(area_in)[2])) / 1e6
-  assign("infill_area", ue, envir = .GlobalEnv)
+
   infill_a <- data.frame(
     indicator = "Infill",
     fclass = "infill",

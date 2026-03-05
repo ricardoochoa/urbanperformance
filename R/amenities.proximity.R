@@ -106,8 +106,10 @@ amenities_proximity <- function(..., pop, parameters = NULL, save = TRUE) {
 
     names(dist_reclass) <- cat
     if (save == TRUE) {
-      assign(paste("amenities.distances.", cat), dist_reclass,
-        envir = .GlobalEnv
+      warning(
+        "The 'save' argument is deprecated. Rasters are no longer ",
+        "automatically saved to the global environment to comply ",
+        "with CRAN policies."
       )
     }
     dist_reclass

@@ -19,7 +19,9 @@ This function calculates the total population of a specific scenario or year
 \examples{
 library(raster)
 
-pop_base <- system.file("extdata", "POP_2025.tif", package = "urbanperformance")
+pop_base <- system.file("extdata", "POP_2025.tif",
+  package = "urbanperformance"
+)
 pop_base <- raster::raster(pop_base)
 
 total_population <- tot_pop(pop_base)

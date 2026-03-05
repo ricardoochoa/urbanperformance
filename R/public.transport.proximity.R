@@ -107,7 +107,7 @@ public_transport_proximity <- function(..., pop, parameters = NULL) {
     distance_stack <- one_cero(distance_stack)
   }
 
-  assign("transport_distances", distance_stack, envir = .GlobalEnv)
+
   pop_prox_transit <- distance_stack * pop
 
   transport_proximity <- data.frame(
