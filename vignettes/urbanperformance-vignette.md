@@ -351,11 +351,15 @@ l\_consumption \<- land\_consumption(buildup\_base, buildup\_horizon)
 kable(l\_consumption, "latex", booktabs \= TRUE) |\>  
   kable\_styling(latex\_options \= "HOLD\_position")
 
-*Note: The land\_consumption function automatically generates a raster object in your global environment named \`urban.expansion\_ Build\_up\_2030\` representing the expanded areas. You can plot this object directly:*
+*Note: Since the package avoids saving objects to the global environment to comply with CRAN policies, you can calculate and plot the urban expansion directly by computing the difference between the base and horizon footprint rasters:*
 
-levelplot(\`urban.expansion\_ Build\_up\_2030\`,  
-  margin \= FALSE,  
-  colorkey \= list(space \= "bottom")  
+# Calculate urban expansion
+urban_expansion <- buildup_horizon - buildup_base
+urban_expansion[urban_expansion != 1] <- NA
+
+levelplot(urban_expansion,  
+  margin = FALSE,  
+  colorkey = list(space = "bottom")  
 )
 
 ### **Infill**
