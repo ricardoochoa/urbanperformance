@@ -22,32 +22,40 @@ workshopViewUI <- function(id) {
           tags$span(style = "font-weight: 700; font-size: 14px; letter-spacing: 0.5px;", "FACILITATOR CONTROLS"),
           tags$span(style = "font-size: 11px; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px;", "LIVE")
         ),
-        # Sidebar Scrollable Content
+        # Sidebar Scrollable Content with Progressive Disclosure
         div(
-          style = "padding: 16px; overflow-y: auto; flex-grow: 1;",
-          # Scenario Swipe Selector
-          tags$strong(style = "color: #556270; font-size: 12px; display: block; margin-bottom: 6px; text-transform: uppercase;", "Swipe Map Comparison"),
-          div(
-            style = "display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;",
-            selectInput(ns("swipe_left_layer"), "Left Pane", choices = c("Baseline Footprint" = "base_fp", "Baseline Land Cover" = "base_lc", "Hazard Zones" = "hazard"), selected = "base_fp", width = "100%"),
-            selectInput(ns("swipe_right_layer"), "Right Pane", choices = c("Horizon Footprint" = "horizon_fp", "Horizon Land Cover" = "horizon_lc", "Hazard Zones" = "hazard"), selected = "horizon_fp", width = "100%")
-          ),
-
-          hr(style = "margin: 12px 0; border-color: #ECEFF1;"),
-
-          # Model Parameter Sliders
-          tags$strong(style = "color: #556270; font-size: 12px; display: block; margin-bottom: 10px; text-transform: uppercase;", "Proximity & Model Sliders"),
-          sliderInput(ns("slider_transit_buffer"), "Transit Service Catchment (m)", min = 200, max = 1500, value = 800, step = 50, width = "100%"),
-          sliderInput(ns("slider_amenities_buffer"), "Amenities Walking Catchment (m)", min = 200, max = 1200, value = 500, step = 50, width = "100%"),
-          sliderInput(ns("slider_cycle_buffer"), "Cycle Infrastructure Buffer (m)", min = 100, max = 1000, value = 500, step = 50, width = "100%"),
-          sliderInput(ns("slider_rural_buffer"), "UHI Rural Reference Buffer (km)", min = 1, max = 10, value = 5, step = 0.5, width = "100%"),
-
-          # Layer Visibility Toggles
-          tags$strong(style = "color: #556270; font-size: 12px; display: block; margin-bottom: 6px; text-transform: uppercase;", "Overlay Layers"),
-          checkboxInput(ns("chk_show_transit"), "Public Transit Network", value = TRUE),
-          checkboxInput(ns("chk_show_amenities"), "Urban Amenities (Schools, Health)", value = FALSE),
-          checkboxInput(ns("chk_show_cycle"), "Cycle Tracks", value = FALSE),
-          checkboxInput(ns("chk_show_hazard"), "Hazard Exposure Zones", value = FALSE)
+          style = "padding: 10px; overflow-y: auto; flex-grow: 1;",
+          bslib::accordion(
+            id = ns("facilitator_accordion"),
+            open = "Swipe Comparison",
+            multiple = TRUE,
+            class = "accordion-flush",
+            accordion_panel(
+              title = "Swipe Comparison",
+              icon = icon("columns"),
+              div(
+                style = "display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;",
+                selectInput(ns("swipe_left_layer"), "Left Pane", choices = c("Baseline Footprint" = "base_fp", "Baseline Land Cover" = "base_lc", "Hazard Zones" = "hazard"), selected = "base_fp", width = "100%"),
+                selectInput(ns("swipe_right_layer"), "Right Pane", choices = c("Horizon Footprint" = "horizon_fp", "Horizon Land Cover" = "horizon_lc", "Hazard Zones" = "hazard"), selected = "horizon_fp", width = "100%")
+              )
+            ),
+            accordion_panel(
+              title = "Catchment & Sliders",
+              icon = icon("sliders"),
+              sliderInput(ns("slider_transit_buffer"), "Transit Service Catchment (m)", min = 200, max = 1500, value = 800, step = 50, width = "100%"),
+              sliderInput(ns("slider_amenities_buffer"), "Amenities Walking Catchment (m)", min = 200, max = 1200, value = 500, step = 50, width = "100%"),
+              sliderInput(ns("slider_cycle_buffer"), "Cycle Infrastructure Buffer (m)", min = 100, max = 1000, value = 500, step = 50, width = "100%"),
+              sliderInput(ns("slider_rural_buffer"), "UHI Rural Reference Buffer (km)", min = 1, max = 10, value = 5, step = 0.5, width = "100%")
+            ),
+            accordion_panel(
+              title = "Spatial Overlays",
+              icon = icon("layer-group"),
+              checkboxInput(ns("chk_show_transit"), "Public Transit Network", value = TRUE),
+              checkboxInput(ns("chk_show_amenities"), "Urban Amenities (Schools, Health)", value = FALSE),
+              checkboxInput(ns("chk_show_cycle"), "Cycle Tracks", value = FALSE),
+              checkboxInput(ns("chk_show_hazard"), "Hazard Exposure Zones", value = FALSE)
+            )
+          )
         ),
         # Sticky Action Footer
         div(
@@ -57,7 +65,7 @@ workshopViewUI <- function(id) {
             "Run Simulation",
             icon = icon("play"),
             class = "btn-primary",
-            style = "background-color: #4ECDC4; border-color: #4ECDC4; color: white; font-weight: 700; flex-grow: 1;"
+            style = "background-color: #4ECDC4; border-color: #4ECDC4; color: #212529; font-weight: 700; flex-grow: 1;"
           )
         )
       ),
@@ -203,32 +211,56 @@ workshopViewServer <- function(id, project_state, active_project_path, simulatio
       )
 
       cards <- lapply(kpis, function(k) {
+        # Check if values are zero or not initialized
+        is_empty <- (k$base == 0 && k$horiz == 0)
+
         delta <- k$horiz - k$base
         pct <- if (k$base > 0) round((delta / k$base) * 100, 1) else 0
         delta_sign <- if (delta >= 0) paste0("+", delta) else paste(delta)
-        pct_sign   <- if (pct >= 0) paste0("+", pct, "%") else paste0(pct, "%")
+        pct_sign   <- if (is_empty) "—" else if (pct >= 0) paste0("+", pct, "%") else paste0(pct, "%")
 
-        # Palette colors for mini-bars
-        c_base <- "#4ECDC4"   # Pacifica
-        c_horiz <- if (k$is_good_up && delta >= 0) "#C7F464" else "#FF6B6B" # Apple Chic vs Cheery Pink
+        # Palette colors for mini-bars (Pacifica for improvement, Cheery Pink for deterioration)
+        c_horiz <- if (k$is_good_up && delta >= 0) "#4ECDC4" else if (!k$is_good_up && delta <= 0) "#4ECDC4" else "#FF6B6B"
+
+        # Calculate horizon width relative to baseline reference at 50%
+        # At baseline (delta = 0), ratio is 1.0 -> width is 50%
+        # If horizon > baseline (ratio > 1.0), bar grows past the 50% tick
+        ratio <- if (k$base > 0) (k$horiz / k$base) else 1
+        horiz_width_pct <- if (is_empty) 0 else min(100, max(4, round(50 * ratio)))
 
         div(
           style = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);",
           div(
             style = "display: flex; justify-content: space-between; font-size: 11px; color: #DCE1E3; margin-bottom: 2px;",
             tags$span(k$title),
-            tags$span(style = paste0("font-weight: 700; color: ", c_horiz, ";"), pct_sign)
+            tags$span(style = paste0("font-weight: 700; color: ", if (is_empty) "#B0BEC5" else c_horiz, ";"), pct_sign)
           ),
           div(
             style = "display: flex; justify-content: space-between; align-items: baseline;",
-            tags$span(style = "font-size: 16px; font-weight: 700; color: white;", format(k$horiz, big.mark = ",")),
-            tags$span(style = "font-size: 11px; color: #B0BEC5;", paste("Base:", format(k$base, big.mark = ","), k$unit))
+            tags$span(style = "font-size: 16px; font-weight: 700; color: white;", if (is_empty) "—" else format(k$horiz, big.mark = ",")),
+            tags$span(style = "font-size: 11px; color: #B0BEC5;", if (is_empty) "Uncalibrated" else paste("Base:", format(k$base, big.mark = ","), k$unit))
           ),
-          # Paired mini-bar chart
+          # Bullet / Target Micro-Visualization Track
           div(
-            style = "display: flex; gap: 4px; height: 6px; width: 100%; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 5px; overflow: hidden;",
-            div(style = paste0("width: 50%; background: ", c_base, "; height: 100%; border-radius: 2px;")),
-            div(style = paste0("width: ", min(100, max(10, 50 * (k$horiz / max(1, k$base)))), "%; background: ", c_horiz, "; height: 100%; border-radius: 2px;"))
+            style = "position: relative; width: 100%; height: 8px; background: rgba(255,255,255,0.12); border-radius: 4px; margin-top: 6px; overflow: visible;",
+            # Horizon Progress Bar
+            div(
+              style = paste0(
+                "position: absolute; left: 0; top: 0; height: 100%; width: ", horiz_width_pct, "%; ",
+                "background: ", c_horiz, "; border-radius: 4px; transition: width 0.3s ease;"
+              )
+            ),
+            # Vertical Baseline Reference Marker (Hairline Tick at 50%)
+            div(
+              style = "position: absolute; left: 50%; top: -3px; width: 2px; height: 14px; background: #FFFFFF; border-radius: 1px; z-index: 5; box-shadow: 0 0 3px rgba(0,0,0,0.5);",
+              title = "Baseline Reference (100%)"
+            )
+          ),
+          div(
+            style = "display: flex; justify-content: space-between; font-size: 9px; color: #90A4AE; margin-top: 4px;",
+            tags$span("0"),
+            tags$span(style = "color: #CFD8DC; font-weight: 600;", "● Baseline"),
+            tags$span(if (is_empty) "" else paste0("+", max(20, round(abs(pct) * 1.5)), "%"))
           )
         )
       })

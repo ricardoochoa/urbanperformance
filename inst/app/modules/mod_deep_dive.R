@@ -20,7 +20,7 @@ deepDiveUI <- function(id) {
           downloadButton(
             ns("btn_download_csv"),
             "Export CSV Matrix",
-            class = "btn-sm",
+            class = "btn-sm btn-outline-secondary",
             style = "color: #556270; border-color: #556270; font-weight: 600;"
           )
         )
@@ -30,7 +30,7 @@ deepDiveUI <- function(id) {
       div(
         style = "background: white; border: 1px solid #DCE1E3; border-radius: 8px; padding: 18px; margin-bottom: 25px;",
         h5(style = "color: #556270; font-weight: 700; margin-top: 0;", "Key Indicator Variations (% Change)"),
-        plotOutput(ns("plot_delta_bars"), height = "260px")
+        plotlyOutput(ns("plot_delta_bars"), height = "320px")
       ),
 
       # Master Data Table (DT)
@@ -148,8 +148,8 @@ deepDiveServer <- function(id, project_state, simulation_results) {
       do.call(rbind, rows)
     })
 
-    # Render Horizontal Delta Bar Chart
-    output$plot_delta_bars <- renderPlot({
+    # Render Horizontal Delta Bar Chart via Plotly
+    output$plot_delta_bars <- renderPlotly({
       df <- matrix_data()
       req(nrow(df) > 0)
 
@@ -158,27 +158,51 @@ deepDiveServer <- function(id, project_state, simulation_results) {
       if (nrow(df_sub) > 12) {
         df_sub <- df_sub[order(abs(df_sub$Pct_Change), decreasing = TRUE)[1:12], ]
       }
-      df_sub$Indicator <- factor(df_sub$Indicator, levels = df_sub$Indicator[order(df_sub$Pct_Change)])
-      df_sub$Color <- ifelse(df_sub$Pct_Change >= 0, "#4ECDC4", "#FF6B6B")
+      df_sub <- df_sub[order(df_sub$Pct_Change), ]
+      df_sub$Indicator <- factor(df_sub$Indicator, levels = df_sub$Indicator)
+      df_sub$BarColor <- ifelse(df_sub$Pct_Change >= 0, "#4ECDC4", "#FF6B6B")
 
-      par(mar = c(4, 14, 2, 2), bg = "white")
-      barplot(
-        height = df_sub$Pct_Change,
-        names.arg = df_sub$Indicator,
-        horiz = TRUE,
-        las = 1,
-        col = df_sub$Color,
-        border = NA,
-        xlab = "Percentage Shift (%)",
-        cex.names = 0.85,
-        cex.axis = 0.85,
-        col.lab = "#556270",
-        col.axis = "#556270"
-      )
-      abline(v = 0, col = "#DCE1E3", lwd = 1.5)
+      plot_ly(
+        data = df_sub,
+        x = ~Pct_Change,
+        y = ~Indicator,
+        type = "bar",
+        orientation = "h",
+        marker = list(
+          color = df_sub$BarColor,
+          line = list(color = "rgba(0,0,0,0.06)", width = 1)
+        ),
+        hoverinfo = "text",
+        text = ~paste0(
+          "<b>", Indicator, "</b> (", Category, ")<br>",
+          "Baseline: ", format(Baseline, big.mark = ","), " ", Units, "<br>",
+          "Horizon: ", format(Horizon, big.mark = ","), " ", Units, "<br>",
+          "Delta: ", ifelse(Abs_Change > 0, "+", ""), Abs_Change, " ", Units, " (",
+          ifelse(Pct_Change > 0, "+", ""), Pct_Change, "%)"
+        )
+      ) %>%
+      layout(
+        xaxis = list(
+          title = list(text = "Percentage Shift (%)", font = list(size = 12, color = "#556270")),
+          zeroline = TRUE,
+          zerolinecolor = "#556270",
+          zerolinewidth = 1.5,
+          gridcolor = "#ECEFF1",
+          tickfont = list(size = 11, color = "#556270")
+        ),
+        yaxis = list(
+          title = "",
+          automargin = TRUE,
+          tickfont = list(size = 11, color = "#556270")
+        ),
+        margin = list(l = 10, r = 20, t = 10, b = 40),
+        paper_bgcolor = "transparent",
+        plot_bgcolor = "transparent"
+      ) %>%
+      config(displayModeBar = FALSE, responsive = TRUE)
     })
 
-    # Render DT Datatable
+    # Render DT Datatable with Right-Aligned Numbers and Bidirectional Formatting
     output$matrix_datatable <- renderDT({
       df <- matrix_data()
       req(nrow(df) > 0)
@@ -189,15 +213,30 @@ deepDiveServer <- function(id, project_state, simulation_results) {
           pageLength = 15,
           autoWidth = TRUE,
           dom = "ftip",
-          order = list(list(0, "asc"))
+          order = list(list(0, "asc")),
+          columnDefs = list(
+            list(className = "dt-right", targets = 3:6),
+            list(className = "dt-center", targets = c(0, 7)),
+            list(className = "dt-left", targets = c(1, 2))
+          )
         ),
         rownames = FALSE,
         class = "display compact hover"
       ) %>%
+        formatRound(columns = c("Baseline", "Horizon", "Abs_Change"), digits = 1) %>%
+        formatString(columns = "Pct_Change", suffix = "%") %>%
         formatStyle(
           "Pct_Change",
-          color = styleInterval(c(0), c("#FF6B6B", "#4ECDC4")),
-          fontWeight = "bold"
+          background = styleInterval(
+            c(0),
+            c("rgba(255, 107, 107, 0.12)", "rgba(78, 205, 196, 0.15)")
+          ),
+          color = styleInterval(
+            c(0),
+            c("#C44D58", "#007A72")
+          ),
+          fontWeight = "700",
+          borderRadius = "4px"
         )
     })
 

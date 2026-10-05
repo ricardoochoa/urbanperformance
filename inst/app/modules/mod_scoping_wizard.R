@@ -36,7 +36,7 @@ scopingWizardUI <- function(id) {
             "Open Workshop View",
             icon = icon("map"),
             class = "btn-sm btn-primary",
-            style = "background-color: #4ECDC4; border-color: #4ECDC4; color: white; font-weight: 600;"
+            style = "background-color: #4ECDC4; border-color: #4ECDC4; color: #212529; font-weight: 700;"
           )
         )
       ),
@@ -59,7 +59,7 @@ scopingWizardUI <- function(id) {
                 tags$span(tags$span(style = "color: #FF6B6B;", "● "), "Cheery Pink (Missing Layer)")
               )
             ),
-            visNetworkOutput(ns("network_graph"), height = "520px")
+            visNetworkOutput(ns("network_graph"), height = "560px")
           )
         ),
 
@@ -223,11 +223,12 @@ scopingWizardServer <- function(id, project_state, active_project_path, parent_s
       req(INDICATOR_SCHEMA$layers, INDICATOR_SCHEMA$indicators)
       st <- project_state()
 
-      # Node lists
+      # Node lists with explicit hierarchical levels
       nodes_df <- data.frame(
         id = character(0),
         label = character(0),
         group = character(0),
+        level = numeric(0),
         color = character(0),
         shape = character(0),
         size = numeric(0),
@@ -240,11 +241,14 @@ scopingWizardServer <- function(id, project_state, active_project_path, parent_s
         from = character(0),
         to = character(0),
         color = character(0),
+        color.highlight = character(0),
+        color.hover = character(0),
         arrows = character(0),
+        dashes = logical(0),
         stringsAsFactors = FALSE
       )
 
-      # 1. Layer Nodes (Left)
+      # 1. Layer Nodes (Left Column: Level 1)
       layer_status_map <- list()
       for (l in INDICATOR_SCHEMA$layers) {
         curr_l <- st$layers[[l$id]]
@@ -252,22 +256,25 @@ scopingWizardServer <- function(id, project_state, active_project_path, parent_s
         layer_status_map[[l$id]] <- status_val
 
         col <- if (identical(status_val, "ready")) "#4ECDC4" else if (identical(status_val, "partial")) "#C7F464" else "#FF6B6B"
-        tooltip <- paste0("<b>", l$label, "</b><br>Status: ", status_val, "<br>Type: ", l$type)
+        # WCAG AA accessible text: dark neutral on light green/teal, white on pink/red
+        text_col <- if (identical(status_val, "missing")) "#FFFFFF" else "#212529"
+        tooltip <- paste0("<b>", l$label, "</b><br>Status: ", toupper(status_val), "<br>Type: ", l$type)
 
         nodes_df <- rbind(nodes_df, data.frame(
           id = l$id,
           label = l$label,
           group = "layer",
+          level = 1,
           color = col,
           shape = "box",
           size = 20,
-          font.color = if (identical(status_val, "partial")) "#333333" else "#ffffff",
+          font.color = text_col,
           title = tooltip,
           stringsAsFactors = FALSE
         ))
       }
 
-      # 2. Indicator Nodes (Right) & Edges
+      # 2. Indicator Nodes (Right Column: Level 2) & Edges
       for (ind in INDICATOR_SCHEMA$indicators) {
         dep_statuses <- sapply(ind$dependencies, function(d) layer_status_map[[d]] %||% "missing")
 
@@ -279,33 +286,67 @@ scopingWizardServer <- function(id, project_state, active_project_path, parent_s
           "#FF6B6B"
         }
 
+        text_col <- if (identical(ind_color, "#FF6B6B")) "#FFFFFF" else "#212529"
+
         nodes_df <- rbind(nodes_df, data.frame(
           id = ind$id,
           label = ind$label,
           group = "indicator",
+          level = 2,
           color = ind_color,
           shape = "ellipse",
           size = 24,
-          font.color = if (identical(ind_color, "#C7F464")) "#333333" else "#ffffff",
+          font.color = text_col,
           title = paste0("<b>", ind$label, "</b><br>Category: ", ind$category),
           stringsAsFactors = FALSE
         ))
 
         for (dep in ind$dependencies) {
+          dep_st <- layer_status_map[[dep]] %||% "missing"
+          is_missing <- identical(dep_st, "missing")
+
           edges_df <- rbind(edges_df, data.frame(
             from = dep,
             to = ind$id,
-            color = "#DCE1E3",
+            color = if (is_missing) "#F5B7B1" else "#DCE1E3",
+            color.highlight = if (is_missing) "#FF6B6B" else "#4ECDC4",
+            color.hover = if (is_missing) "#FF6B6B" else "#4ECDC4",
             arrows = "to",
+            dashes = is_missing,
             stringsAsFactors = FALSE
           ))
         }
       }
 
       visNetwork(nodes_df, edges_df) %>%
-        visOptions(highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE), nodesIdSelection = FALSE) %>%
-        visLayout(randomSeed = 42) %>%
-        visPhysics(solver = "forceAtlas2Based", forceAtlas2Based = list(gravitationalConstant = -40, springLength = 80))
+        visHierarchicalLayout(
+          direction = "LR",
+          levelSeparation = 290,
+          nodeSpacing = 36,
+          sortMethod = "directed"
+        ) %>%
+        visNodes(
+          font = list(face = "Inter, sans-serif", size = 11, bold = TRUE),
+          borderWidth = 1,
+          shadow = list(enabled = TRUE, size = 3)
+        ) %>%
+        visEdges(
+          smooth = list(type = "cubicBezier", forceDirection = "horizontal", roundness = 0.4),
+          arrows = list(to = list(enabled = TRUE, scaleFactor = 0.7)),
+          hoverWidth = 2.5,
+          selectionWidth = 3
+        ) %>%
+        visOptions(
+          highlightNearest = list(enabled = TRUE, degree = 1, hover = TRUE),
+          nodesIdSelection = FALSE
+        ) %>%
+        visInteraction(
+          hoverConnectedEdges = TRUE,
+          zoomView = TRUE,
+          dragView = TRUE,
+          navigationButtons = FALSE
+        ) %>%
+        visPhysics(hierarchicalRepulsion = list(nodeDistance = 45), solver = "hierarchicalRepulsion")
     })
 
     # Debounced autosave observer

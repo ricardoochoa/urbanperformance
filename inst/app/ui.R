@@ -37,19 +37,55 @@ ui <- tagList(
       .nav-link.active {
         border-bottom: 2px solid #4ECDC4 !important;
       }
-      /* Leaflet map full-height adjustments */
+      /* Leaflet map full-height adjustments & loading states */
       .leaflet-container {
         background-color: #F8F9FA;
       }
-      /* Buttons styling */
+      .leaflet.recalculating {
+        opacity: 0.5;
+        transition: opacity 0.25s ease-in-out;
+      }
+      /* Buttons styling with accessible contrast */
       .btn-primary {
         background-color: #4ECDC4 !important;
         border-color: #4ECDC4 !important;
+        color: #212529 !important;
+        font-weight: 600 !important;
       }
       .btn-primary:hover {
         background-color: #3EB7AE !important;
         border-color: #3EB7AE !important;
+        color: #111827 !important;
       }
+      /* Accordion custom styling */
+      .accordion-button:not(.collapsed) {
+        background-color: #F8F9FA;
+        color: #556270;
+        font-weight: 600;
+      }
+      .accordion-button {
+        padding: 0.65rem 0.9rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+      .accordion-body {
+        padding: 0.75rem 0.9rem;
+      }
+    ")),
+    tags$script(HTML("
+      $(document).on('shown.bs.tab', 'a[data-bs-toggle=\"tab\"], button[data-bs-toggle=\"tab\"]', function(e) {
+        window.dispatchEvent(new Event('resize'));
+        setTimeout(function() {
+          if (window.HTMLWidgets) {
+            $('.leaflet').each(function() {
+              var mapObj = HTMLWidgets.find('#' + this.id);
+              if (mapObj && mapObj.getMap) {
+                mapObj.getMap().invalidateSize();
+              }
+            });
+          }
+        }, 150);
+      });
     "))
   ),
 

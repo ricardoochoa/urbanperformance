@@ -9,6 +9,7 @@ suppressPackageStartupMessages({
   library(leaflet.extras2)
   library(visNetwork)
   library(DT)
+  library(plotly)
   library(terra)
   library(sf)
   library(jsonlite)
@@ -16,7 +17,7 @@ suppressPackageStartupMessages({
 })
 
 # ------------------------------------------------------------------------------
-# Color Token Palette
+# Color Token Palette & Accessible Neutrals
 # ------------------------------------------------------------------------------
 COLOR_MIGHTY_SLATE <- "#556270"  # Master brand & typography
 COLOR_PACIFICA     <- "#4ECDC4"  # Positive / Satisfied / Infill
@@ -25,6 +26,8 @@ COLOR_CHEERY_PINK  <- "#FF6B6B"  # Missing data / Warning
 COLOR_GRANDMA      <- "#C44D58"  # High hazard / Risk / Degradation
 COLOR_BG_GRAY      <- "#F8F9FA"  # Grayscale base background
 COLOR_BORDER       <- "#DCE1E3"  # Subtle slate borders
+COLOR_TEXT_DARK    <- "#212529"  # High contrast text (>6:1 on Pacifica & Apple Chic)
+COLOR_TEXT_MUTED   <- "#6C757D"  # Muted secondary text
 
 # ------------------------------------------------------------------------------
 # Load Master Dependency Schema
