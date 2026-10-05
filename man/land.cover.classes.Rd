@@ -5,15 +5,19 @@
 \alias{land.cover.classes}
 \title{Land cover classes}
 \format{
-A data frame with land cover classes and descriptions.
+A data frame with columns:
+\describe{
+  \item{cat}{Integer category identifier}
+  \item{fclass}{Land cover or urban land-use classification description}
+}
 }
 \source{
-Simulated data for the urbanperformance package.
+Simulated data and classification scheme for the urbanperformance package.
 }
 \usage{
 land.cover.classes
 }
 \description{
-A dataset containing land cover classifications.
+A dataset containing regional land cover and urban zoning classifications.
 }
 \keyword{datasets}

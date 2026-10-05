@@ -1,0 +1,187 @@
+---
+title: "Urban Performance Scenario Analysis"
+subtitle: "Technical Brief & Strategic Assessment"
+author: "Urban Performance Modeling Team"
+date: today
+format:
+  pdf:
+    pdf-engine: pdflatex
+    keep-tex: true
+    documentclass: article
+    geometry: "top=2cm, bottom=2.5cm, left=2cm, right=2cm"
+    colorlinks: true
+    toc: false
+params:
+  project_name: "Cancún Pok Ta Pok Assessment"
+  base_year: 2025
+  horizon_year: 2030
+  matrix_csv: ""
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{xcolor}
+  - \definecolor{mightyslate}{HTML}{556270}
+  - \definecolor{pacifica}{HTML}{4ECDC4}
+  - \definecolor{applechic}{HTML}{C7F464}
+  - \definecolor{cheerypink}{HTML}{FF6B6B}
+  - \definecolor{grandma}{HTML}{C44D58}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  dev = "pdf",
+  fig.align = "center"
+)
+
+library(ggplot2)
+library(dplyr)
+
+# Load data matrix
+matrix_df <- if (nzchar(params$matrix_csv) && file.exists(params$matrix_csv)) {
+  read.csv(params$matrix_csv, stringsAsFactors = FALSE)
+} else {
+  data.frame(
+    No = 1:27,
+    Indicator = c(
+      "Total Population", "Urban Footprint", "Population Density", "Land Consumption", "Infill Development",
+      "Biodiversity Land Consumption", "Agricultural Land Consumption", "Green Land Consumption", "Green Land Per Capita", "Land Cover Loss",
+      "Roads Length", "Roads Density", "Intersection Density", "Cycle Track Density", "Cycle Proximity",
+      "Public Transport Proximity", "Amenities Proximity", "Jobs Proximity", "Hazard Exposure", "Tree Canopy & Carbon",
+      "Housing Costs", "Anthropogenic Hazard", "Vacant Housing Rate", "Walkability Index", "Housing Affordability Ratio",
+      "Urban Heat Island Intensity", "Transit Utilization Rate"
+    ),
+    Category = c(rep("Demographics & Land Use", 5), rep("Land Consumption & Ecology", 5), rep("Mobility & Infrastructure", 4), rep("Accessibility & Exposure", 5), rep("Risk & Resilience", 3), rep("Housing & Equity", 5)),
+    Baseline = c(911500, 142.5, 6396, 0, 0, 0, 0, 0, 12.4, 0, 1250.4, 8.77, 48.2, 0.85, 24.5, 64.2, 52.8, 68.1, 18.4, 3450, 780, 12.3, 9.8, 46.2, 4.8, 3.2, 54.0),
+    Horizon = c(1065000, 158.2, 6732, 15.7, 6.2, 0.8, 3.4, 1.1, 14.8, 15.7, 1380.0, 8.72, 52.1, 1.45, 41.2, 78.5, 66.4, 74.3, 14.1, 4820, 820, 9.5, 7.2, 58.7, 4.2, 2.8, 68.5),
+    Abs_Change = c(153500, 15.7, 336, 15.7, 6.2, 0.8, 3.4, 1.1, 2.4, 15.7, 129.6, -0.05, 3.9, 0.6, 16.7, 14.3, 13.6, 6.2, -4.3, 1370, 40, -2.8, -2.6, 12.5, -0.6, -0.4, 14.5),
+    Pct_Change = c(16.8, 11.0, 5.3, 100, 100, 100, 100, 100, 19.4, 100, 10.4, -0.6, 8.1, 70.6, 68.2, 22.3, 25.8, 9.1, -23.4, 39.7, 5.1, -22.8, -26.5, 27.1, -12.5, -12.5, 26.9),
+    Units = c("inhabitants", "km²", "inhab/km²", "km²", "km²", "km²", "km²", "km²", "m²/capita", "km²", "km", "km/km²", "intersections/km²", "km/km²", "% pop", "% pop", "% pop", "% pop", "% pop", "t CO2/yr", "USD/m²", "% pop", "% units", "index [0-100]", "PIR ratio", "°C delta", "% capacity")
+  )
+}
+
+pop_base <- format(matrix_df$Baseline[matrix_df$No == 1], big.mark = ",")
+pop_horiz <- format(matrix_df$Horizon[matrix_df$No == 1], big.mark = ",")
+fp_delta <- matrix_df$Abs_Change[matrix_df$No == 2]
+transit_horiz <- matrix_df$Horizon[matrix_df$No == 16]
+transit_delta <- matrix_df$Abs_Change[matrix_df$No == 16]
+hazard_delta <- matrix_df$Abs_Change[matrix_df$No == 19]
+```
+
+# 1. Executive Brief
+
+This technical brief summarizes the spatial scenario evaluation conducted for **`r params$project_name`**. The comparative simulation benchmarks the **`r params$base_year` Baseline** against the **`r params$horizon_year` Horizon Scenario**, capturing demographic growth, land consumption, transit accessibility, and environmental hazard vulnerabilities.
+
+Between `r params$base_year` and `r params$horizon_year`, the municipal population is projected to expand from **`r pop_base`** to **`r pop_horiz` inhabitants**. Under the simulated intervention, built-up urban land increases by **`r fp_delta` km$^2$**, while the proportion of inhabitants with direct access to formal public transit expands by **`r transit_delta` percentage points** to reach **`r transit_horiz`\\%**. Furthermore, targeted risk mitigation reduces population exposure to environmental hazards by **`r abs(hazard_delta)` percentage points**.
+
+```{r fig-kpi-summary, fig.width=6.5, fig.height=2.4}
+# Standalone Vector Graphics Chart for Illustrator/Inkscape
+kpi_plot_df <- data.frame(
+  Metric = factor(c("Population Density", "Transit Catchment", "Active Mobility", "Hazard Mitigation"),
+                  levels = c("Hazard Mitigation", "Active Mobility", "Transit Catchment", "Population Density")),
+  DeltaPct = c(-23.4, 68.2, 22.3, 5.3),
+  Type = c("Negative", "Positive", "Positive", "Positive")
+)
+
+ggplot(kpi_plot_df, aes(x = DeltaPct, y = Metric, fill = Type)) +
+  geom_col(width = 0.55) +
+  geom_vline(xintercept = 0, color = "#556270", linewidth = 0.8) +
+  scale_fill_manual(values = c("Positive" = "#4ECDC4", "Negative" = "#FF6B6B")) +
+  theme_minimal(base_family = "Helvetica") +
+  labs(
+    title = "Macro KPI Strategic Delta (2025 vs. 2030)",
+    subtitle = "Relative percentage shift across structural development pillars",
+    x = "Relative Change (%)",
+    y = NULL
+  ) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(color = "#556270", face = "bold", size = 12),
+    plot.subtitle = element_text(color = "#88929A", size = 9),
+    axis.text = element_text(color = "#556270", size = 9),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+```
+
+# 2. The Baseline Reality (`r params$base_year`)
+
+The baseline spatial diagnostic reveals a monocentric urban structure characterized by an urban footprint of **`r matrix_df$Baseline[matrix_df$No == 2]` km$^2$** and an average density of **`r format(matrix_df$Baseline[matrix_df$No == 3], big.mark = ",")` inhabitants per km$^2$**. While the historical core maintains moderate street connectivity, peripheral extensions exhibit significant infrastructure deficits.
+
+Currently, **`r 100 - matrix_df$Baseline[matrix_df$No == 16]`\\% of inhabitants** lack immediate proximity to formal mass transit, and **`r matrix_df$Baseline[matrix_df$No == 19]`\\% of residents** reside within designated hazard-prone zones.
+
+# 3. The Horizon Scenario (`r params$horizon_year`)
+
+The Horizon Scenario incorporates strategic infill corridors, dedicated bicycle tracks, and expanded transit lines. Infill policies capture **`r matrix_df$Horizon[matrix_df$No == 5]` km$^2$** of new growth within the existing urban fabric, curbing peripheral sprawl into agricultural and biodiversity conservation zones.
+
+```{r fig-horizon-comparison, fig.width=6.5, fig.height=3.2}
+# Vector figure comparing Sector Shifts
+sector_df <- matrix_df %>%
+  filter(No %in% c(1, 2, 9, 14, 16, 17, 19, 24)) %>%
+  select(Indicator, Baseline, Horizon) %>%
+  tidyr::pivot_longer(cols = c(Baseline, Horizon), names_to = "Scenario", values_to = "Value")
+
+ggplot(sector_df, aes(x = Indicator, y = Value, fill = Scenario)) +
+  geom_col(position = position_dodge(width = 0.7), width = 0.6) +
+  scale_fill_manual(values = c("Baseline" = "#556270", "Horizon" = "#4ECDC4")) +
+  theme_minimal(base_family = "Helvetica") +
+  coord_flip() +
+  labs(
+    title = "Sector Performance Comparison",
+    subtitle = "Baseline (Mighty Slate #556270) vs. Horizon Scenario (Pacifica #4ECDC4)",
+    x = NULL,
+    y = "Indicator Metric Value"
+  ) +
+  theme(
+    plot.title = element_text(color = "#556270", face = "bold", size = 11),
+    plot.subtitle = element_text(color = "#88929A", size = 8.5),
+    axis.text = element_text(color = "#556270", size = 8.5),
+    legend.position = "top",
+    legend.title = element_blank()
+  )
+```
+
+# 4. Sector Deep Dives
+
+## Active Mobility & Public Transit
+Cycling infrastructure density increases by **`r matrix_df$Pct_Change[matrix_df$No == 14]`\\%**, expanding the cycle network to **`r matrix_df$Horizon[matrix_df$No == 14]` km/km$^2$**. Consequently, population accessibility to dedicated cycle tracks jumps from **`r matrix_df$Baseline[matrix_df$No == 15]`\\%** to **`r matrix_df$Horizon[matrix_df$No == 15]`\\%**.
+
+## Spatial Equity & Housing
+The housing vacancy rate declines from **`r matrix_df$Baseline[matrix_df$No == 23]`\\%** to **`r matrix_df$Horizon[matrix_df$No == 23]`\\%**, signaling healthier occupancy. The Walkability Index improves from **`r matrix_df$Baseline[matrix_df$No == 24]`** to **`r matrix_df$Horizon[matrix_df$No == 24]`**.
+
+## Climate Resilience & Carbon Sequestration
+Urban tree plantings and conservation buffers expand annual CO2 sequestration to **`r format(matrix_df$Horizon[matrix_df$No == 20], big.mark = ",")` tonnes per year**, while Urban Heat Island intensity diminishes by **`r abs(matrix_df$Abs_Change[matrix_df$No == 26])`$^\circ$C**.
+
+\newpage
+# 5. Technical Appendix: Complete 27-Indicator Matrix
+
+The following table presents the complete evaluation matrix of all 27 indicators formatted according to the *Libro Blanco* publishing standard.
+
+```{r table-matrix-appendix, results='asis'}
+table_subset <- matrix_df %>%
+  select(No, Indicator, Baseline, Horizon, Abs_Change, Pct_Change, Units)
+
+table_subset$Units <- gsub("%", "\\\\%", table_subset$Units)
+table_subset$Units <- gsub("²", "$^2$", table_subset$Units)
+table_subset$Units <- gsub("°C", "$^\\circ$C", table_subset$Units)
+table_subset$Indicator <- gsub("&", "\\\\&", table_subset$Indicator)
+
+knitr::kable(
+  table_subset,
+  format = "latex",
+  booktabs = TRUE,
+  col.names = c("No.", "Indicator", "Base", "Horizon", "$\\Delta$ Abs", "$\\Delta$ \\%", "Units"),
+  escape = FALSE,
+  caption = "Master 27-Indicator Urban Performance Evaluation Matrix"
+)
+```

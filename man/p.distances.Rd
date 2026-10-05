@@ -5,15 +5,20 @@
 \alias{p.distances}
 \title{Proximity distances}
 \format{
-A numeric vector.
+A data frame with columns:
+\describe{
+  \item{fclass}{Feature classification category}
+  \item{value}{Threshold distance in meters}
+  \item{description}{Operational and regulatory description of threshold}
+}
 }
 \source{
-Simulated data for the urbanperformance package.
+Simulated data and civil protection guidelines for the urbanperformance package.
 }
 \usage{
 p.distances
 }
 \description{
-A dataset containing proximity distance thresholds.
+A dataset containing proximity distance and hazard outreach buffer thresholds.
 }
 \keyword{datasets}

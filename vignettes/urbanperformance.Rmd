@@ -34,16 +34,20 @@ The indicators included in the package are listed in the table below. Note that 
 
 | List of indicators |  |
 | :---- | :---- |
-| 1. Total population | 11. Roads length |
-| 2. Urban footprint | 12. Roads density |
-| 3. Population density | 13. Intersection density |
-| 4. Land consumption | 14. Cycle track density |
-| 5. Infill | 15. Cycle proximity |
-| 6. Biodiversity land consumption | 16. Public transport proximity |
-| 7. Agricultural land consumption | 17. Amenities proximity |
-| 8. Green land consumption | 18. Jobs proximity |
-| 9. Green land per capita | 19. Hazard exposure |
-| 10. Land cover loss |  |
+| 1. Total population | 15. Cycle proximity |
+| 2. Urban footprint | 16. Public transport proximity |
+| 3. Population density | 17. Amenities proximity |
+| 4. Land consumption | 18. Jobs proximity |
+| 5. Infill | 19. Hazard exposure |
+| 6. Biodiversity land consumption | 20. Tree canopy & carbon sequestration |
+| 7. Agricultural land consumption | 21. Housing costs |
+| 8. Green land consumption | 22. Anthropogenic hazard exposure |
+| 9. Green land per capita | 23. Vacant housing rate |
+| 10. Land cover loss | 24. Walkability index |
+| 11. Roads length | 25. Housing affordability ratio |
+| 12. Roads density | 26. Urban heat island intensity |
+| 13. Intersection density | 27. Transit utilization rate |
+| 14. Cycle track density |  |
 
 Similar to the Urban Performance Calculator, the `urbanperformance` package operationalizes the calculation methodology for these indicators. These methodologies are demonstrated in this document through a practical exercise. In essence, `urbanperformance` executes a series of geoprocessing tasks and calculations.
 
@@ -431,6 +435,167 @@ This function calculates the amount of land that was located within the boundari
 infill_area <- infill(population_base, population_horizon)
 
 kable(infill_area, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Tree Canopy Cover and Carbon Sequestration
+
+This function projects tree population growth, public canopy per capita, and metric tonnes of CO2 sequestered using regional species parameters and planting targets.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+# Forestry parameters for regional native species in Cancún
+tree_params_df <- data.frame(
+  species = c("Chacáh", "Jabín", "Chechén", "Ceiba"),
+  canopy_sqm = c(50.2, 60.0, 45.0, 175.0),
+  foliar_co2seq_kg_yr = c(22.5, 25.5, 21.0, 45.0),
+  annual_mortality_rate = c(0.025, 0.020, 0.018, 0.015),
+  years_to_maturity = c(8, 12, 14, 15)
+)
+
+tree_canopy_res <- tree_canopy_carbon(
+  trees_base = NULL,
+  pop = population_base,
+  params = tree_params_df,
+  horizon_years = 10,
+  annual_forestation = 3500,
+  public_space_ratio = 0.45
+)
+
+kable(tree_canopy_res, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Housing Costs
+
+This function estimates the average housing unit cost based on land value, construction cost, and modal socioeconomic deciles across residential blocks.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+# Cost multipliers across socioeconomic deciles
+decile_costs <- data.frame(
+  decile = 1:10,
+  land_cost_sqm_usd = c(45, 60, 85, 300, 350, 400, 450, 800, 1200, 2500),
+  constr_cost_sqm_usd = c(324, 380, 450, 810, 900, 980, 1135, 1350, 1800, 2432),
+  avg_unit_sqm = c(42, 45, 55, 68, 80, 95, 120, 180, 220, 350)
+)
+
+# Simulate residential blocks from AOI
+res_blocks <- suppressWarnings(st_buffer(st_sample(aoi.cun, size = 20), dist = 150))
+res_blocks <- st_sf(id = 1:20, geometry = res_blocks)
+
+# Decile raster
+decile_r <- raster(extent(population_base), res = res(population_base), crs = crs(population_base))
+set.seed(42)
+values(decile_r) <- sample(1:10, ncell(decile_r), replace = TRUE)
+
+hc_res <- housing_costs(res_blocks, decile_r, decile_costs)
+
+kable(hc_res, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Anthropogenic Hazard Exposure
+
+This function calculates population exposed to localized pollution and industrial hazards using outreach buffers with spatial unioning to eliminate double-counting.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+# Sample pollution sources in Cancún
+poll_pts <- st_sf(
+  fclass = c("water_contamination", "industrial_stationary"),
+  geometry = st_sfc(
+    st_point(c(516000, 2335000)),
+    st_point(c(518000, 2338000))
+  ),
+  crs = st_crs(aoi.cun)
+)
+
+hazard_exp <- anthropogenic_hazard(poll_pts, population_base)
+
+kable(hazard_exp, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Vacant Housing Rate
+
+This function calculates the percentage of vacant units across the city to detect speculative vacancies or housing market failures.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+# Total housing units based on population raster
+hu_total <- population_base / 3.5
+hu_vacant <- hu_total * 0.062 # 6.2% simulated frictional/speculative vacancy
+
+vac_res <- vacant_housing(hu_total, hu_vacant)
+
+kable(vac_res, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Walkability Index
+
+This function evaluates pedestrian accessibility by combining intersection connectivity, transit access, and destination diversity across a 500m analysis grid.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+walk_res <- walkability_index(
+  roads = roads.cun,
+  transit_stops = st_cast(st_sample(transport.cun, 30), "POINT"),
+  footprint = buildup_base,
+  amenities = amenities.cun,
+  grid_size_m = 500,
+  weights = c(0.33, 0.33, 0.34)
+)
+
+kable(walk_res, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Housing Affordability Ratio
+
+This function computes the Price-to-Income Ratio (PIR) and classifies housing markets according to UN-Habitat and World Bank standards.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+afford_res <- housing_affordability(
+  housing_cost = hc_res$value[1],
+  income = 972, # Median monthly income (Decile 5)
+  income_period = "monthly"
+)
+
+kable(afford_res, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Urban Heat Island (UHI) Intensity
+
+This function quantifies the thermal differential between urban and natural rural surroundings, strictly excluding water bodies from rural baseline estimation.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+# Simulated Landsat 8 LST raster
+lst_sim <- raster(extent(land_cover), res = res(land_cover), crs = crs(land_cover))
+set.seed(123)
+# Base temperature around 27C, urban pixels elevated to 32C
+values(lst_sim) <- 27.5 + rnorm(ncell(lst_sim), sd = 0.8)
+lst_sim[land_cover == 2] <- lst_sim[land_cover == 2] + 4.5
+
+uhi_res <- uhi_intensity(lst_sim, land_cover, rural_buffer_km = 3, water_class = 3, urban_class = 2)
+
+kable(uhi_res, "latex", booktabs = TRUE) |>
+  kable_styling(latex_options = "HOLD_position")
+```
+
+### Transit Utilization Rate
+
+This function assesses mobility system capacity versus daily demand, tagging routes against municipal transit benchmarks.
+
+```{r, fig.width= 5, fig.height= 6, fig.pos="H"}
+cancun_transit <- data.frame(
+  transit_mode = c("trunk_brt", "standard_bus"),
+  nominal_vehicle_capacity = c(100, 45),
+  crush_vehicle_capacity = c(150, 70),
+  daily_trips = c(120, 80),
+  daily_riders = c(9800, 3200)
+)
+
+transit_res <- transit_utilization(cancun_transit, capacity_type = "both")
+
+kable(transit_res, "latex", booktabs = TRUE) |>
   kable_styling(latex_options = "HOLD_position")
 ```
 

@@ -1,0 +1,365 @@
+{
+  "layers": [
+    {
+      "id": "pop_base",
+      "label": "Population Distribution (Baseline)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Baseline spatial population distribution raster",
+      "required_attributes": []
+    },
+    {
+      "id": "pop_horizon",
+      "label": "Population Distribution (Horizon)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Horizon year projected population distribution raster",
+      "required_attributes": []
+    },
+    {
+      "id": "buildup_base",
+      "label": "Built-up Urban Footprint (Baseline)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Baseline binary or categorical built-up footprint raster",
+      "required_attributes": []
+    },
+    {
+      "id": "buildup_horizon",
+      "label": "Built-up Urban Footprint (Horizon)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Horizon year projected built-up footprint raster",
+      "required_attributes": []
+    },
+    {
+      "id": "landcover_base",
+      "label": "Land Cover Classification (Baseline)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Categorical land use / land cover grid for baseline year",
+      "required_attributes": []
+    },
+    {
+      "id": "landcover_horizon",
+      "label": "Land Cover Classification (Horizon)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Categorical land use / land cover grid for horizon year",
+      "required_attributes": []
+    },
+    {
+      "id": "roads",
+      "label": "Roads Network",
+      "type": "vector",
+      "geom": "linestring",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Street centerline geometries with functional hierarchy",
+      "required_attributes": ["fclass"]
+    },
+    {
+      "id": "cycle_tracks",
+      "label": "Cycle Tracks Network",
+      "type": "vector",
+      "geom": "linestring",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Dedicated and shared cycling infrastructure network",
+      "required_attributes": []
+    },
+    {
+      "id": "transit_stops",
+      "label": "Public Transit Stops & Routes",
+      "type": "vector",
+      "geom": "both",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Bus, BRT, and metro stations, stops, and line centerlines",
+      "required_attributes": ["type"]
+    },
+    {
+      "id": "amenities",
+      "label": "Urban Amenities",
+      "type": "vector",
+      "geom": "point",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Locations of health facilities, schools, markets, and civic services",
+      "required_attributes": ["type"]
+    },
+    {
+      "id": "jobs",
+      "label": "Employment Distribution",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Spatial grid of job counts and commercial density",
+      "required_attributes": []
+    },
+    {
+      "id": "hazard",
+      "label": "Hazard-Prone Areas",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Natural hazard vulnerability zones (flood, hurricane, landslide)",
+      "required_attributes": []
+    },
+    {
+      "id": "biodiversity",
+      "label": "Protected Biodiversity Areas",
+      "type": "vector",
+      "geom": "polygon",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Protected natural reserves and high-value ecological habitats",
+      "required_attributes": []
+    },
+    {
+      "id": "green_areas",
+      "label": "Urban Green Spaces",
+      "type": "vector",
+      "geom": "polygon",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Public parks, urban forests, and communal green open spaces",
+      "required_attributes": []
+    },
+    {
+      "id": "trees",
+      "label": "Urban Tree Inventory",
+      "type": "vector",
+      "geom": "point",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Individual surveyed urban trees for canopy and carbon modeling",
+      "required_attributes": ["species", "is_public"]
+    },
+    {
+      "id": "lst",
+      "label": "Land Surface Temperature (LST)",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Thermal satellite grid (Celsius or Kelvin) for UHI analysis",
+      "required_attributes": []
+    },
+    {
+      "id": "housing",
+      "label": "Housing & Residential Units",
+      "type": "vector",
+      "geom": "polygon",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Cadastral parcels or census blocks with housing statistics",
+      "required_attributes": ["total_units", "vacant_units"]
+    },
+    {
+      "id": "transit_operations",
+      "label": "Transit Operational Data",
+      "type": "vector",
+      "geom": "linestring",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Transit routes with operational trips, vehicle capacity, and ridership",
+      "required_attributes": ["daily_trips", "vehicle_capacity", "daily_riders"]
+    },
+    {
+      "id": "industrial_hazards",
+      "label": "Anthropogenic Pollution Sources",
+      "type": "vector",
+      "geom": "both",
+      "format": [".shp", ".geojson", ".gpkg"],
+      "description": "Industrial facilities, landfills, or hazardous infrastructure points",
+      "required_attributes": ["hazard_type"]
+    },
+    {
+      "id": "income",
+      "label": "Household Income Distribution",
+      "type": "raster",
+      "format": [".tif"],
+      "description": "Median monthly household income surface or census blocks",
+      "required_attributes": []
+    }
+  ],
+  "indicators": [
+    {
+      "id": "tot_pop",
+      "label": "Total Population",
+      "category": "Demographics & Land Use",
+      "dependencies": ["pop_base"],
+      "output_unit": "inhabitants"
+    },
+    {
+      "id": "urban_footprint",
+      "label": "Urban Footprint",
+      "category": "Demographics & Land Use",
+      "dependencies": ["buildup_base"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "population_density",
+      "label": "Population Density",
+      "category": "Demographics & Land Use",
+      "dependencies": ["pop_base", "buildup_base"],
+      "output_unit": "inhab/km2"
+    },
+    {
+      "id": "land_consumption",
+      "label": "Land Consumption",
+      "category": "Demographics & Land Use",
+      "dependencies": ["buildup_base", "buildup_horizon"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "infill",
+      "label": "Infill Development",
+      "category": "Demographics & Land Use",
+      "dependencies": ["pop_base", "pop_horizon", "buildup_base"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "biodiversity_land_consumption",
+      "label": "Biodiversity Land Consumption",
+      "category": "Land Consumption & Ecology",
+      "dependencies": ["buildup_horizon", "biodiversity"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "agricultural_land_consumption",
+      "label": "Agricultural Land Consumption",
+      "category": "Land Consumption & Ecology",
+      "dependencies": ["buildup_horizon", "landcover_base"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "green_land_consumption",
+      "label": "Green Land Consumption",
+      "category": "Land Consumption & Ecology",
+      "dependencies": ["buildup_horizon", "green_areas"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "green_area_pcapita",
+      "label": "Green Land Per Capita",
+      "category": "Land Consumption & Ecology",
+      "dependencies": ["green_areas", "pop_base"],
+      "output_unit": "m2/capita"
+    },
+    {
+      "id": "land_cover_loss",
+      "label": "Land Cover Loss",
+      "category": "Land Consumption & Ecology",
+      "dependencies": ["landcover_base", "landcover_horizon"],
+      "output_unit": "km2"
+    },
+    {
+      "id": "roads_length",
+      "label": "Roads Length",
+      "category": "Mobility & Infrastructure",
+      "dependencies": ["roads"],
+      "output_unit": "km"
+    },
+    {
+      "id": "roads_density",
+      "label": "Roads Density",
+      "category": "Mobility & Infrastructure",
+      "dependencies": ["roads", "buildup_base"],
+      "output_unit": "km/km2"
+    },
+    {
+      "id": "intersection_density",
+      "label": "Intersection Density",
+      "category": "Mobility & Infrastructure",
+      "dependencies": ["roads", "buildup_base"],
+      "output_unit": "intersections/km2"
+    },
+    {
+      "id": "cycle_track_density",
+      "label": "Cycle Track Density",
+      "category": "Mobility & Infrastructure",
+      "dependencies": ["cycle_tracks", "buildup_base"],
+      "output_unit": "km/km2"
+    },
+    {
+      "id": "cycle_proximity",
+      "label": "Cycle Proximity",
+      "category": "Accessibility & Exposure",
+      "dependencies": ["cycle_tracks", "pop_base"],
+      "output_unit": "% pop"
+    },
+    {
+      "id": "public_transport_proximity",
+      "label": "Public Transport Proximity",
+      "category": "Accessibility & Exposure",
+      "dependencies": ["transit_stops", "pop_base"],
+      "output_unit": "% pop"
+    },
+    {
+      "id": "amenities_proximity",
+      "label": "Amenities Proximity",
+      "category": "Accessibility & Exposure",
+      "dependencies": ["amenities", "pop_base"],
+      "output_unit": "% pop"
+    },
+    {
+      "id": "jobs_proximity",
+      "label": "Jobs Proximity",
+      "category": "Accessibility & Exposure",
+      "dependencies": ["jobs", "pop_base"],
+      "output_unit": "% pop"
+    },
+    {
+      "id": "hazard_exposure",
+      "label": "Hazard Exposure",
+      "category": "Risk & Resilience",
+      "dependencies": ["hazard", "pop_base"],
+      "output_unit": "% pop"
+    },
+    {
+      "id": "tree_canopy_carbon",
+      "label": "Tree Canopy & Carbon Sequestration",
+      "category": "Risk & Resilience",
+      "dependencies": ["trees", "pop_base"],
+      "output_unit": "tonnes CO2/yr"
+    },
+    {
+      "id": "housing_costs",
+      "label": "Housing Costs",
+      "category": "Housing & Equity",
+      "dependencies": ["housing"],
+      "output_unit": "USD/m2"
+    },
+    {
+      "id": "anthropogenic_hazard",
+      "label": "Anthropogenic Hazard Exposure",
+      "category": "Risk & Resilience",
+      "dependencies": ["industrial_hazards", "pop_base"],
+      "output_unit": "% pop"
+    },
+    {
+      "id": "vacant_housing",
+      "label": "Vacant Housing Rate",
+      "category": "Housing & Equity",
+      "dependencies": ["housing"],
+      "output_unit": "% units"
+    },
+    {
+      "id": "walkability_index",
+      "label": "Walkability Index",
+      "category": "Mobility & Infrastructure",
+      "dependencies": ["roads", "transit_stops", "amenities", "buildup_base"],
+      "output_unit": "index [0-100]"
+    },
+    {
+      "id": "housing_affordability",
+      "label": "Housing Affordability Ratio",
+      "category": "Housing & Equity",
+      "dependencies": ["housing", "income"],
+      "output_unit": "PIR ratio"
+    },
+    {
+      "id": "uhi_intensity",
+      "label": "Urban Heat Island Intensity",
+      "category": "Risk & Resilience",
+      "dependencies": ["lst", "landcover_base"],
+      "output_unit": "Celsius delta"
+    },
+    {
+      "id": "transit_utilization",
+      "label": "Transit Utilization Rate",
+      "category": "Mobility & Infrastructure",
+      "dependencies": ["transit_operations"],
+      "output_unit": "% capacity"
+    }
+  ]
+}

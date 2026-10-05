@@ -6,4 +6,4 @@
 inst/doc
 *.Rcheck/
 .DS_Store
-tests/
+*.tar.gz

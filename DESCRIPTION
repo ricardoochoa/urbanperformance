@@ -1,7 +1,7 @@
 Package: urbanperformance
 Type: Package
 Title: Urban Performance
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
   c(person(given = "Ricardo",
            family = "Ochoa",
@@ -11,6 +11,9 @@ Authors@R:
            family = "Roman",
            role = c("aut", "ctb"))
   )
+Author: Ricardo Ochoa [aut, cre],
+  Socorro Roman [aut, ctb]
+Maintainer: Ricardo Ochoa <ricardo.ochoa@capsus.mx>
 Description: This package includes calculation methods to estimate Urban Performance indicators. It provides functions to analyze spatial geometries and calculate variables over specific zones.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -19,9 +22,11 @@ RoxygenNote: 7.3.3
 Imports: 
     dplyr,
     raster,
+    terra,
     sf,
     reshape2,
-    sp
+    sp,
+    jsonlite
 Depends: 
     R (>= 4.1.0)
 Suggests: 
@@ -30,6 +35,14 @@ Suggests:
     testthat (>= 3.0.0),
     rasterVis,
     kableExtra,
-    ggplot2
+    ggplot2,
+    shiny,
+    bslib,
+    leaflet,
+    leaflet.extras2,
+    visNetwork,
+    DT,
+    clipr,
+    quarto
 VignetteBuilder: knitr
 Config/testthat/edition: 3
